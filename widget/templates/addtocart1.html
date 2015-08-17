@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="buildfire" >
+<head>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../../../styles/bootstrap.css">
+    <link rel="stylesheet" href="../../../../styles/siteIcons.css">
+    <link rel="stylesheet" href="../../../../styles/appStyle.css">
+    <link rel="stylesheet" href="../../../../styles/helper.css">
+    
+    <!-- jQuery & Owl Carousel -->
+	<script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>    
+	<script src="../../../../scripts/owlCarousel/owlCarousel.js"></script>
+    <link rel="stylesheet" href="../../../../scripts/owlCarousel/owlCarousel.css">
+
+    <!-- Meta -->
+	<meta charset="utf-8">
+</head>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		var slides = $('.plugin-slider .plugin-slide').length;
+		
+		// Slider needs at least 2 slides or you'll get an error.
+		if(slides > 1){
+			$('.plugin-slider').owlCarousel({
+				loop:true,
+				nav:false,
+				items:1
+			});	
+		}
+	})
+</script>
+<div class="holder padding-zero has-bottom">
+	<div class="ecommerce-plugin">
+		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
+			<div class="plugin-slider has-info-bar-double text-center">
+				<div class="plugin-slide">
+					<img src="http://www.placehold.it/1280x720.jpg">
+				</div>
+				<div class="plugin-slide">
+					<img src="http://www.placehold.it/1280x720.jpg">
+				</div>
+				<div class="plugin-slide">
+					<img src="http://www.placehold.it/1280x720.jpg">
+				</div>
+			</div>
+			<div class="info-bar padding-top-five padding-bottom-five bg-primary">
+				<div class="col-xs-10 pull-left">
+					<p class="margin-zero">Item Title Goes Here</p>
+					<p class="margin-zero">$45,763</p>
+				</div>
+				<div class="col-xs-2 pull-right right-icon">
+					<a class="padded-icon pull-right border-radius-three text-center" style="background:#fff;">
+						<span class="icon icon-cart-plus"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="padded">
+			<div class="item clearfix row">
+				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+					<span>Quantity</span>
+				</div>
+				<div class="main col-xs-9 pull-right">
+					<input type="text" class="form-control" placeholder="1">
+				</div>
+			</div>
+			<hr class="none">
+			<div class="item clearfix row">
+				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+					<span>Variable 1</span>
+				</div>
+				<div class="main col-xs-9 pull-right">
+					<div class="dropdown" dropdown>
+						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
+							<span class="pull-left">Color</span>
+					  		<span class="chevron icon-chevron-down pull-right"></span>
+						</button>					
+						<ul class="dropdown-menu extended" role="menu">
+							<li><a tabindex="-1">Color 1</a></li>
+							<li><a tabindex="-1">Color 2</a></li>
+							<li><a tabindex="-1">Color 3</a></li>
+	                    </ul>
+					</div>
+				</div>
+			</div>
+			<hr class="none">
+			<div class="item clearfix row">
+				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+					<span>Variable 2</span>
+				</div>
+				<div class="main col-xs-9 pull-right">
+					<div class="dropdown" dropdown>
+						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
+							<span class="pull-left">Size</span>
+					  		<span class="chevron icon-chevron-down pull-right"></span>
+						</button>					
+						<ul class="dropdown-menu extended" role="menu">
+							<li><a tabindex="-1">Size 1</a></li>
+							<li><a tabindex="-1">Size 2</a></li>
+							<li><a tabindex="-1">Size 3</a></li>
+	                    </ul>
+					</div>
+				</div>
+			</div>
+			<hr class="none">
+			<div class="item clearfix row">
+				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+					<span>Variable 3</span>
+				</div>
+				<div class="main col-xs-9 pull-right">
+					<input type="text" class="form-control" placeholder="Etc">
+				</div>
+			</div>
+			<hr class="none">
+			<div class="item clearfix row">
+				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+					<span>Variable 4</span>
+				</div>
+				<div class="main col-xs-9 pull-right">
+					<input type="text" class="form-control" placeholder="Etc">
+				</div>
+			</div>
+		</div>
+		<div class="bottom fixed-bottom border-top-grey clearfix">
+			<div class="col-xs-6 pull-left text-center">
+				<a class="text-primary default-background-hover transition-third">Cancel</a>
+			</div>
+			<div class="col-xs-6 pull-right text-center border-left-grey">
+				<a class="text-primary default-background-hover transition-third">Proceed</a>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
