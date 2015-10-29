@@ -1,252 +1,31 @@
 <!DOCTYPE html>
-<html ng-app="ecommercePlugin">
+<html ng-app="ecommercePluginContent">
 <head lang="en">
-	<!-- CSS -->
-    <link href="../../../../styles/helper.css" rel="stylesheet">
-    <link href="../../../../styles/siteIcons.css" rel="stylesheet">
-    
-	<!-- JS -->
-    <script src="../../../../scripts/buildfire.js"></script>
-    <script src="../../../../scripts/angular/angular.min.js"></script>
-    <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
-    <script src="../../../../scripts/tinymce/tinymce.min.js"></script>
-    <script src="../../../../scripts/tinymce/ui-tinymce.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../../../../styles/helper.css">
+	<link rel="stylesheet" type="text/css"
+		  href="../../../../styles/siteIcons.css">
+	<link href="assets/css/styles.css" rel="stylesheet">
 
-    <meta charset="UTF-8">
+	<script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
+	<script src="../../../../scripts/sortable.min.js"></script>
+	<script src="../../../../scripts/angular/angular.min.js"></script>
+	<script src="../../../../scripts/angular/angular-route.min.js"></script>
+	<script src="../../../../scripts/buildfire.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	<script src="assets/js/sortable.js"></script>
+	<script src="../../../../scripts/buildfire/components/carousel/carousel.js"></script>
+	<script src="../../../../scripts/tinymce/tinymce.min.js"></script>
+	<script src="../../../../scripts/tinymce/ui-tinymce.js"></script>
+	<script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
+	<script src="app.js"></script>
+	<script src="enums.js"></script>
+	<script src="app.services.js"></script>
+	<script src="controllers/content.home.controller.js"></script>
 </head>
-<body ng-controller="ecommercePluginCtrl">
-	
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			<span>Image Carousel</span>
-		</div>
-		<div class="main col-md-9 pull-right">
-			<div class="clearfix">
-				<a class="btn btn-success pull-left" onclick="alert('Open Media Library');">Add Image</a>
-			</div>
-			<div class="carousel-items draggable-list-view margin-top-twenty border-radius-four border-grey">
-				<div class="d-item">
-					<span class="icon icon-menu pull-left"></span>
-					<div class="media-holder pull-left">
-						<img src="http://www.placehold.it/80x50">
-					</div>
-					<div class="copy pull-right">
-						<span class="title ellipsis">Image Title</span>
-						<div class="pull-right">
-							<a class="text-primary text">Add Action</a>											
-							<span class="btn-icon btn-delete-icon btn-danger transition-third"><span>
-						</div>
-					</div>
-				</div>
-				<div class="d-item">
-					<span class="icon icon-menu pull-left"></span>
-					<div class="media-holder pull-left">
-						<img src="http://www.placehold.it/80x50">
-					</div>
-					<div class="copy pull-right">
-						<span class="title ellipsis">Image Title</span>
-						<div class="pull-right">
-							<a class="text-primary text">Add Action</a>											
-							<span class="btn-icon btn-delete-icon btn-danger transition-third"><span>
-						</div>
-					</div>
-				</div>
-				<div class="d-item">
-					<span class="icon icon-menu pull-left"></span>
-					<div class="media-holder pull-left">
-						<img src="http://www.placehold.it/80x50">
-					</div>
-					<div class="copy pull-right">
-						<span class="title ellipsis">Image Title</span>
-						<div class="pull-right">
-							<a class="text-primary text">Add Action</a>											
-							<span class="btn-icon btn-delete-icon btn-danger transition-third"><span>
-						</div>
-					</div>
-				</div>
-				<div class="d-item">
-					<span class="icon icon-menu pull-left"></span>
-					<div class="media-holder pull-left">
-						<img src="http://www.placehold.it/80x50">
-					</div>
-					<div class="copy pull-right">
-						<span class="title ellipsis">Image Title</span>
-						<div class="pull-right">
-							<a class="text-primary text">Add Action</a>											
-							<span class="btn-icon btn-delete-icon btn-danger transition-third"><span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			<span>Text</span>
-		</div>
-	</div>
-	<hr class="none">
-	<div class="item clearfix row">
-		<div class="main col-md-12 pull-right">
-            <textarea id="text" ui-tinymce class="form-control" rows="5" width="100%" ng-model="data.content.text"></textarea>
-		</div>
-	</div>
-	<hr>
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			
-		</div>
-		<div class="main col-md-9 pull-right">
-			<p class="margin-bottom-zero">Don't have a [PROVIDER_NAME] account? Sign up <a href="#" target="_blank">Here</a>.</p>
-		</div>
-	</div>
-	<hr class="none">
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			<span>Field 1</span>
-		</div>
-		<div class="main col-md-9 pull-right">
-			<input type="text" name="field1" class="form-control">
-		</div>
-	</div>
-	<hr class="none">
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			<span>Field 2</span>
-		</div>
-		<div class="main col-md-9 pull-right">
-			<input type="text" name="field2" class="form-control">
-		</div>
-	</div>
-	<hr class="none">
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-			<span>Field 3</span>
-		</div>
-		<div class="main col-md-9 pull-right">
-			<input type="text" name="field3" class="form-control">
-		</div>
-	</div>
-	<hr class="none">
-	<div class="item clearfix row">
-		<div class="labels col-md-3 padding-right-zero pull-left">
-
-		</div>
-		<div class="main col-md-9 pull-right">
-			<div class="alert alert-sm alert-danger text-center">Error message.</div>
-		</div>
-	</div>
-	
-<script>
-    var ecommercePluginApp = angular.module('ecommercePlugin', ['ui.bootstrap', 'ui.tinymce']);
-
-    ecommercePluginApp.controller('ecommercePluginCtrl', ['$scope', function ($scope) {
-
-		/*
-         * Go pull any previously saved data
-         * */
-        buildfire.datastore.get(function (err, result) {
-            if (result) {
-                $scope.data = result.data;
-                $scope.id = result.id;
-                $scope.$digest();
-                if (tmrDelay)clearTimeout(tmrDelay);
-            }
-            /*
-             * watch for changes in data and trigger the saveDataWithDelay function on change
-             * */
-            $scope.$watch('data', saveDataWithDelay, true);
-        });
-
-        /*
-         * Call the datastore to save the data object
-         */
-        var saveData = function (newObj) {
-
-            if (newObj == undefined)return;
-            if ($scope.frmMain.$invalid) {
-                console.warn('invalid data, no save');
-                return;
-            }
-
-            buildfire.datastore.save(newObj, function (err, result) {
-                if (err || !result)
-                    alert(JSON.stringify(err));
-                else
-                    console.log('data saved');
-            });
-        };
-
-        /*
-         * create an artificial delay so api isnt called on every character entered
-         * */
-        var tmrDelay = null;
-        var saveDataWithDelay = function (newObj,oldObj) {
-            if(newObj == oldObj)
-                return;
-            if (tmrDelay)clearTimeout(tmrDelay);
-            tmrDelay = setTimeout(function () {
-                saveData(newObj);
-            }, 500);
-        };
-
-        /*
-         * this is a way you can update only one property without sending the entire object
-         * */
-        $scope.approve = function () {
-            if ($scope.id)
-                buildfire.datastore.update($scope.id, {$set: {"content.approvedOn": new Date()}});
-        };
-
-
-        /*
-         * Open Image Lib
-         */
-        $scope.openImageLib = function () {
-            buildfire.imageLib.showDialog({showIcons: false, multiSelection: false}, function (error, result) {
-                if (result && result.selectedFiles && result.selectedFiles.length > 0) {
-                    $scope.data.content.bgURL = result.selectedFiles[0];
-                    $scope.$apply();
-                }
-            });
-        }
-
-        /*
-         * Open action dialog
-         */
-        $scope.openActionDialog = function () {
-            var actionItem = {
-                title: "build fire",
-                "url": "https://www.facebook.com/buildfireapps",
-                action: "linkToWeb",
-                openIn: "browser",
-                actionName: "Link to Web Content"
-            };
-            var options = {showIcon: true};
-            buildfire.actionItems.showDialog(null, options, function (err, actionItem) {
-                if (err)
-                    console.log(err);
-                else {
-                    debugger;
-                    if (!$scope.data.actionItems)
-                        $scope.data.actionItems = [];
-                    $scope.data.actionItems.push(actionItem);
-                    $scope.$apply();
-                }
-
-            });
-        };
-
-        $scope.resizeImage = function(url){
-            if(!url)
-                return "";
-            else
-                return buildfire.imageLib.resizeImage(url,{width:32});
-        }
-
-    }]);
-    
-</script>
+<body>
+<div>
+	<div  ng-view=""></div>
+</div>
 </body>
 </html>
