@@ -1,7 +1,7 @@
 'use strict';
 
 (function (angular) {
-  angular.module('ecommercePluginContent')
+  angular.module('eCommercePluginContent')
     .constant('TAG_NAMES', {
       SHOPIFY_INFO: 'shopifyInfo'
     })

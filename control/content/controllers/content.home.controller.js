@@ -2,7 +2,7 @@
 
 (function (angular) {
   angular
-    .module('ecommercePluginContent')
+    .module('eCommercePluginContent')
     .controller('ContentHomeCtrl', ['$scope', 'Buildfire', 'DataStore', 'TAG_NAMES', 'STATUS_CODE', '$timeout',
       function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout) {
         /*

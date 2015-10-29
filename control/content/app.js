@@ -1,7 +1,7 @@
 'use strict';
 
 (function (angular) {
-  angular.module('ecommercePluginContent', ['ngRoute', 'ui.tinymce', 'ui.bootstrap', 'ui.sortable'])
+  angular.module('eCommercePluginContent', ['ngRoute', 'ui.tinymce', 'ui.bootstrap', 'ui.sortable'])
     //injected ngRoute for routing
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider

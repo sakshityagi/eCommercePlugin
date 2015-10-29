@@ -1,7 +1,7 @@
 'use strict';
 
 (function (angular, buildfire) {
-  angular.module('ecommercePluginContent')
+  angular.module('eCommercePluginContent')
     .provider('Buildfire', [function () {
       var Buildfire = this;
       Buildfire.$get = function () {
