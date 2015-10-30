@@ -20,6 +20,12 @@
         var ContentHome = this;
         ContentHome.masterData = null;
         ContentHome.data = angular.copy(_data);
+        ContentHome.bodyWYSIWYGOptions = {
+          plugins: 'advlist autolink link image lists charmap print preview',
+          skin: 'lightgray',
+          trusted: true,
+          theme: 'modern'
+        };
 
         // create a new instance of the buildfire carousel editor
         var editor = new Buildfire.components.carousel.editor("#carousel");
