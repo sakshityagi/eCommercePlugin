@@ -22,4 +22,14 @@
       NOT_ITEM_ARRAY: 'Array of Items not provided',
       ITEM_ARRAY_FOUND: 'Array of Items provided'
     })
+    .constant('LAYOUTS', {
+      itemListLayout: [
+        {name: "Item_List_Layout_1"},
+        {name: "Item_List_Layout_2"}
+      ],
+      sectionListLayout: [
+        {name: "Section_List_Layout_1"},
+        {name: "Section_List_Layout_2"}
+      ]
+    });
 })(window.angular);
