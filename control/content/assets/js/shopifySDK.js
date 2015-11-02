@@ -23,38 +23,26 @@ eCommerceSDK.api = {
       if (self._fullLogging && console.log)
         console.info("Call: " + JSON.stringify(serverUrl));
 
-      var p = $.getJSON(serverUrl + "&callback=?", function (result) {
-        if (tmr) clearTimeout(tmr);
+      var p = $.ajax({
+        url: serverUrl,
+        dataType: 'json',
+        timeout: this.apiTimeout,
+        success: function(result) {
+          console.log("Success......");
+          if (tmr) clearTimeout(tmr);
 
-        if (self._fullLogging)
-          console.log("Result: " + JSON.stringify(result));
+          if (self._fullLogging)
+            console.log("Result: " + JSON.stringify(result));
 
-        if (callback) callback(result);
-      }, function (e) {
-
-        if (errorCallback)
-          errorCallback(e);
-        else if (console.error) {
-          console.error(JSON.stringify(e));
-          callback({
-            error: {
-              code: -1,
-              message: "Error communicating with the server"
-            }
-          });
+          if (callback) callback(result);
+        },
+        error: function(e) {
+          if (errorCallback)
+            errorCallback(e);
         }
       });
-
-      tmr = setTimeout(function () {
-        if (p) {
-          p.abort();
-          if (errorCallback)
-            errorCallback({error: {code: 0, message: "timeout"}});
-        }
-      }, this.apiTimeout)
     }
     catch (e) {
-
       if (errorCallback)
         errorCallback(e);
       else if (console.log)
@@ -106,7 +94,7 @@ eCommerceSDK.api = {
       $(f).remove();
       if (callback)
         callback();
-    }
+    };
 
     iframe.onerror = function () {
       $(iframe).remove();
@@ -388,6 +376,10 @@ eCommerceSDK.account.prototype = {
           callback(result.collections);
         else
           callback(null);
+      }
+    }, function () {
+      if (callback) {
+        callback(null);
       }
     });
   },
