@@ -3,8 +3,8 @@
 (function (angular) {
   angular
     .module('eCommercePluginContent')
-    .controller('ContentHomeCtrl', ['$scope', 'Buildfire', 'DataStore', 'TAG_NAMES', 'STATUS_CODE', '$timeout', 'LAYOUTS',
-      function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout, LAYOUTS) {
+    .controller('ContentHomeCtrl', ['$scope', 'Buildfire', 'DataStore', 'TAG_NAMES', 'STATUS_CODE', '$timeout', 'LAYOUTS', 'ECommerceSDK',
+      function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout, LAYOUTS, ECommerceSDK) {
         var _data = {
           "content": {
             "carouselImages": [],
@@ -26,6 +26,8 @@
           trusted: true,
           theme: 'modern'
         };
+        ContentHome.storeVerifySuccess = false;
+        ContentHome.storeVerifyFailure = false;
 
         // create a new instance of the buildfire carousel editor
         var editor = new Buildfire.components.carousel.editor("#carousel");
@@ -56,6 +58,39 @@
           $scope.$digest();
         };
 
+        /*
+         * Method to check if given store name is a valid shopify store name
+         * */
+        ContentHome.verifyStore = function () {
+          var success = function (result) {
+              if (result) {
+                ContentHome.storeVerifySuccess = true;
+                $timeout(function () {
+                  ContentHome.storeVerifySuccess = false;
+                }, 3000);
+                ContentHome.storeVerifyFailure = false;
+                ContentHome.data.content.storeName = ContentHome.storeName;
+              }
+              else {
+                ContentHome.storeVerifyFailure = true;
+                $timeout(function () {
+                  ContentHome.storeVerifyFailure = false;
+                }, 3000);
+                ContentHome.storeVerifySuccess = false;
+              }
+            }
+            , error = function (err) {
+              ContentHome.storeVerifyFailure = true;
+              $timeout(function () {
+                ContentHome.storeVerifyFailure = false;
+              }, 3000);
+              ContentHome.storeVerifySuccess = false;
+              console.error('Error In Fetching Single Video Details', err);
+            };
+          ECommerceSDK.validateStoreName(ContentHome.storeName).then(success, error);
+
+        };
+
         updateMasterItem(_data);
 
         function updateMasterItem(data) {
@@ -79,6 +114,8 @@
                 editor.loadItems([]);
               else
                 editor.loadItems(ContentHome.data.content.carouselImages);
+              if (ContentHome.data.content.storeName)
+                ContentHome.storeName = ContentHome.data.content.storeName;
 
               updateMasterItem(ContentHome.data);
               if (tmrDelay)clearTimeout(tmrDelay);
@@ -112,6 +149,7 @@
          * create an artificial delay so api isnt called on every character entered
          * */
         var tmrDelay = null;
+
         var saveDataWithDelay = function (newObj) {
           if (newObj) {
             if (isUnchanged(newObj)) {

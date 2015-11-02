@@ -30,13 +30,14 @@
     <span>Store Name</span>
   </div>
   <div class="main col-md-9 pull-right">
-    <input type="text" name="field1" class="form-control" ng-model="ContentHome.data.content.storeName">
+    <input type="text" name="field1" class="form-control" ng-model="ContentHome.storeName">
   </div>
 </div>
 <hr class="none">
 <div class="col-md-4 pull-right">
   <button class="btn btn-primary pull-right stretch"
-          ng-disabled="!ContentHome.data.content.storeName">Done
+          ng-disabled="!ContentHome.storeName"
+          ng-click="ContentHome.verifyStore()">Done
   </button>
 </div>
 <br>
@@ -44,8 +45,13 @@
 <div class="item clearfix row">
   <div class="labels col-md-3 padding-right-zero pull-left">
   </div>
-  <div class="main col-md-9 pull-right">
-    <div class="alert alert-sm alert-danger text-center">Error message.</div>
+  <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifySuccess">
+    <div class="alert alert-sm alert-success text-center">Store name
+      verified</div>
+  </div>
+  <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifyFailure">
+    <div class="alert alert-sm alert-danger text-center">Please enter
+      valid store name</div>
   </div>
 </div>
 	
