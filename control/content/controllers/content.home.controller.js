@@ -91,6 +91,16 @@
 
         };
 
+        /*
+         * Method to remove store name in case user clears the field
+         * */
+
+        ContentHome.clearData = function () {
+          if (!ContentHome.storeName) {
+            ContentHome.data.content.storeName = null;
+          }
+        };
+
         updateMasterItem(_data);
 
         function updateMasterItem(data) {

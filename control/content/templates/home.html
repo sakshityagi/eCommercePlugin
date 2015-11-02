@@ -30,7 +30,8 @@
     <span>Store Name</span>
   </div>
   <div class="main col-md-9 pull-right">
-    <input type="text" name="field1" class="form-control" ng-model="ContentHome.storeName">
+    <input type="text" name="field1" class="form-control"
+           ng-model="ContentHome.storeName" ng-change="ContentHome.clearData()">
   </div>
 </div>
 <hr class="none">
@@ -47,11 +48,13 @@
   </div>
   <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifySuccess">
     <div class="alert alert-sm alert-success text-center">Store name
-      verified</div>
+      verified
+    </div>
   </div>
   <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifyFailure">
     <div class="alert alert-sm alert-danger text-center">Please enter
-      valid store name</div>
+      valid store name
+    </div>
   </div>
 </div>
 	
