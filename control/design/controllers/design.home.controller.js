@@ -31,7 +31,20 @@
         function isUnchanged(data) {
           return angular.equals(data, DesignHome.masterData);
         }
+        var background = new buildfire.components.images.thumbnail("#background");
+        background.onChange = function (url) {
+          DesignHome.data.design.itemDetailsBgImage = url;
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
 
+        background.onDelete = function (url) {
+          DesignHome.data.design.itemDetailsBgImage = "";
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
         var init = function () {
           var success = function (result) {
               DesignHome.data = result.data;
@@ -45,6 +58,9 @@
                 DesignHome.data.design.itemListLayout = DesignHome.layouts.itemListLayout[0].name;
               }
               updateMasterItem(DesignHome.data);
+                if (DesignHome.data.design.itemDetailsBgImage) {
+                  background.loadbackground(DesignHome.data.design.itemDetailsBgImage);
+                }
               if (tmrDelay)clearTimeout(tmrDelay);
             }
             , error = function (err) {
@@ -85,7 +101,7 @@
               clearTimeout(tmrDelay);
             }
             tmrDelay = setTimeout(function () {
-              saveData(JSON.parse(angular.toJson(newObj)), TAG_NAMES.YOUTUBE_INFO);
+              saveData(JSON.parse(angular.toJson(newObj)), TAG_NAMES.SHOPIFY_INFO);
             }, 500);
           }
         };
