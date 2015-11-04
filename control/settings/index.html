@@ -5,56 +5,21 @@
   <link href="../../../../styles/helper.css" rel="stylesheet">
   <link href="../../../../styles/siteIcons.css" rel="stylesheet">
 
+
   <!-- JS -->
+  <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
   <script src="../../../../scripts/buildfire.js"></script>
   <script src="../../../../scripts/angular/angular.min.js"></script>
+  <script src="../../../../scripts/angular/angular-route.min.js"></script>
   <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
   <script src="app.js"></script>
-
+  <script src="controllers/settings.home.controller.js"></script>
+  <script src="enums.js"></script>
+  <link href="assets/css/settings.css">
 
   <meta charset="UTF-8">
 </head>
-<body ng-controller="SettingsCtrl">
-
-<div class="item row clearfix">
-  <div class="labels col-md-3 padding-right-zero pull-left">
-    <span>Currency Symbol</span>
-  </div>
-  <div class="main col-md-9 pull-right">
-    <div class="dropdown" dropdown>
-      <button class="btn btn-default text-left dropdown-toggle"
-              data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-        <span class="pull-left">$ - USD, AUD, NZD, CAD, Peso, Real, etc.</span>
-        <span class="chevron icon-chevron-down pull-right"></span>
-      </button>
-      <ul class="dropdown-menu extended" role="menu">
-        <li>
-          <a href="" tabindex="-1">&euro; - Euro</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">&#165; - Yuan and Yen</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">DM - Duetsche Mark</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">&#8355; - Franc</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">&#163; - Pound</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">&#8356; - Lira</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">&#x20bd; - Rouble</a>
-        </li>
-        <li>
-          <a href="" tabindex="-1">SFr - Switz Franc</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<body style="height:100%">
+<div class="content" ng-view=""></div>
 </body>
 </html>
