@@ -22,7 +22,17 @@
         DesignHome.layouts = LAYOUTS;
         DesignHome.data = angular.copy(_data);
 
-        updateMasterItem(_data);
+        /*On section list layout click event*/
+        DesignHome.changeSectionListLayout = function (layoutName) {
+          DesignHome.data.design.sectionListLayout = layoutName;
+          if (tmrDelay)clearTimeout(tmrDelay);
+        };
+
+        /*On item list layout click event*/
+        DesignHome.changeItemListLayout = function (layoutName) {
+          DesignHome.data.design.itemListLayout = layoutName;
+          if (tmrDelay)clearTimeout(tmrDelay);
+        };
 
         function updateMasterItem(data) {
           DesignHome.masterData = angular.copy(data);
@@ -31,7 +41,9 @@
         function isUnchanged(data) {
           return angular.equals(data, DesignHome.masterData);
         }
+
         var background = new buildfire.components.images.thumbnail("#background");
+
         background.onChange = function (url) {
           DesignHome.data.design.itemDetailsBgImage = url;
           if (!$scope.$$phase && !$scope.$root.$$phase) {
@@ -45,6 +57,7 @@
             $scope.$apply();
           }
         };
+
         var init = function () {
           var success = function (result) {
               DesignHome.data = result.data;
@@ -58,9 +71,9 @@
                 DesignHome.data.design.itemListLayout = DesignHome.layouts.itemListLayout[0].name;
               }
               updateMasterItem(DesignHome.data);
-                if (DesignHome.data.design.itemDetailsBgImage) {
-                  background.loadbackground(DesignHome.data.design.itemDetailsBgImage);
-                }
+              if (DesignHome.data.design.itemDetailsBgImage) {
+                background.loadbackground(DesignHome.data.design.itemDetailsBgImage);
+              }
               if (tmrDelay)clearTimeout(tmrDelay);
             }
             , error = function (err) {
@@ -112,6 +125,8 @@
         $scope.$watch(function () {
           return DesignHome.data;
         }, saveDataWithDelay, true);
+
+        updateMasterItem(_data);
 
         init();
       }]);
