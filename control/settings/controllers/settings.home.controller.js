@@ -15,10 +15,6 @@
                     symbol: "&#165;"
                 },
                 {
-                    name:"Yuan and Yen",
-                    sysmbol:"&#165;"
-                },
-                {
                     name:"Duetsche Mark",
                     symbol:"DM"
                 },
