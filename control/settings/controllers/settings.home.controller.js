@@ -5,7 +5,7 @@
         .controller('SettingsCtrl', ['$scope','TAG_NAMES',
             function ($scope,TAG_NAMES) {
                 var SettingsHome = this;
-                SettingsHome.data = null
+                SettingsHome.data = null;
                 SettingsHome.currency=[{
                 name:"Euro",
                     symbol: "&euro;"
@@ -41,19 +41,21 @@
                 {
                     name:"Switz Franc",
                     symbol:"SFr"
-                }]
+                }];
 
                 var _data = {
                     "content": {
                         "carouselImages": [],
                         "description": '<p>&nbsp;<br></p>',
-                        "storeName": "",
-                        currency:""
+                        "storeName": ""
                     },
                     "design": {
                         "sectionListLayout": "",
                         "itemListLayout": "",
                         "itemDetailsBgImage": ""
+                    },
+                    "settings":{
+                        currency:""
                     }
                 };
                 SettingsHome.masterData=[];
@@ -72,15 +74,17 @@
                             console.error('Error while getting data', err);
                         else {
                             SettingsHome.data = data.data;
-                            console.log("Settings",SettingsHome.data)
+                            $scope.$apply();
                             updateMasterItem(SettingsHome.data);
                             if (tmrDelay)clearTimeout(tmrDelay);
                         }
                     });
                 };
                 SettingsHome.changeCurrency = function(currency){
-                    SettingsHome.data.content.currency = currency;
-                }
+                    if(!SettingsHome.data.settings)
+                        SettingsHome.data.settings = {};
+                    SettingsHome.data.settings.currency = currency;
+                };
                 var saveData = function (newObj, tag) {
                     if (typeof newObj === 'undefined') {
                         return;
