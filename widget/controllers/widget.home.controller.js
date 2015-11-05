@@ -3,11 +3,19 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK) {
+    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce) {
         var WidgetHome = this;
         WidgetHome.data = null;
         WidgetHome.sections = null;
+        WidgetHome.safeHtml = function (html) {
+          if (html)
+            return $sce.trustAsHtml(html);
+        };
+
+        WidgetHome.showDescription = function (description) {
+          return !((description == '<p>&nbsp;<br></p>') || (description == '<p><br data-mce-bogus="1"></p>'));
+        };
 
 
         var getSections = function (storeName) {

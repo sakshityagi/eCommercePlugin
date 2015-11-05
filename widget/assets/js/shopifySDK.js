@@ -348,7 +348,6 @@ eCommerceSDK.account.prototype = {
   // GET collections.json returns the collections in JSON.
   // ---------------------------------------------------------
   getCollections: function (options, callback) {
-    console.log("+++++++++++++++++++++++++++++", this.accountName);
     var params = [];
 
     if (!options) {
@@ -379,7 +378,6 @@ eCommerceSDK.account.prototype = {
           callback(null);
       }
     }, function () {
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       if (callback) {
         callback(null);
       }

@@ -7,12 +7,12 @@
         .when('/', {
           template: '<div></div>'
         })
-        .when('/items', {
+        .when('/items/:handle', {
           templateUrl: 'templates/items.html',
           controllerAs: 'WidgetItems',
           controller: 'WidgetItemsCtrl'
         })
-        .when('/item/:id', {
+        .when('/item/:handle', {
           templateUrl: 'templates/Item_Details.html',
           controllerAs: 'WidgetSingle',
           controller: 'WidgetSingleCtrl'
