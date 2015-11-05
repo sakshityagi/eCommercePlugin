@@ -6,6 +6,14 @@ describe('Unit: eCommercePlugin widget app', function () {
       route = _$route_;
       rootScope = _$rootScope_;
     }));
-
+    describe('Home route', function () {
+      beforeEach(inject(
+          function ($httpBackend) {
+            $httpBackend.expectGET('templates/home.html')
+                .respond(200);
+            $httpBackend.expectGET('/')
+                .respond(200);
+          }));
+    });
     });
 });
