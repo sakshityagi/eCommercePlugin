@@ -22,7 +22,8 @@
 </head>
 <body>
 <div ng-controller="WidgetHomeCtrl as WidgetHome">
-  <div ng-include="'templates/Section_List_Layout_2.html'">
+  <div ng-if="WidgetHome.data.design.sectionListLayout"
+       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
 </div>
 <div ng-view></div>
