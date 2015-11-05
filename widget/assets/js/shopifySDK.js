@@ -22,36 +22,24 @@ eCommerceSDK.api = {
       var tmr = null;
       if (self._fullLogging && console.log)
         console.info("Call: " + JSON.stringify(serverUrl));
+      var p = $.ajax({
+        url: serverUrl,
+        dataType: 'json',
+        timeout: this.apiTimeout,
+        success: function(result) {
+          console.log("Success......");
+          if (tmr) clearTimeout(tmr);
 
-      var p = $.getJSON(serverUrl + "&callback=?", function (result) {
-        if (tmr) clearTimeout(tmr);
+          if (self._fullLogging)
+            console.log("Result: " + JSON.stringify(result));
 
-        if (self._fullLogging)
-          console.log("Result: " + JSON.stringify(result));
-
-        if (callback) callback(result);
-      }, function (e) {
-
-        if (errorCallback)
-          errorCallback(e);
-        else if (console.error) {
-          console.error(JSON.stringify(e));
-          callback({
-            error: {
-              code: -1,
-              message: "Error communicating with the server"
-            }
-          });
+          if (callback) callback(result);
+        },
+        error: function(e) {
+          if (errorCallback)
+            errorCallback(e);
         }
       });
-
-      tmr = setTimeout(function () {
-        if (p) {
-          p.abort();
-          if (errorCallback)
-            errorCallback({error: {code: 0, message: "timeout"}});
-        }
-      }, this.apiTimeout)
     }
     catch (e) {
 
@@ -60,8 +48,8 @@ eCommerceSDK.api = {
       else if (console.log)
         console.error(e.message);
     }
-  },
-  post: function (id, accountName, method, params, callback, errorCallback) {
+  }
+  , post: function (id, accountName, method, params, callback, errorCallback) {
     var serverUrl = this.server.replace("{0}", accountName) + method;
 
     $('#iframeECommerceShopify').remove();
@@ -360,6 +348,7 @@ eCommerceSDK.account.prototype = {
   // GET collections.json returns the collections in JSON.
   // ---------------------------------------------------------
   getCollections: function (options, callback) {
+    console.log("+++++++++++++++++++++++++++++", this.accountName);
     var params = [];
 
     if (!options) {
@@ -388,6 +377,11 @@ eCommerceSDK.account.prototype = {
           callback(result.collections);
         else
           callback(null);
+      }
+    }, function () {
+      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      if (callback) {
+        callback(null);
       }
     });
   },

@@ -1,13 +1,21 @@
 'use strict';
 (function (angular) {
   angular
-    .module('eCommercePluginWidget',['ngRoute'])
+    .module('eCommercePluginWidget', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: 'templates/home.html',
-          controllerAs: 'WidgetHome',
-          controller: 'WidgetHomeCtrl'
+          template: '<div></div>'
+        })
+        .when('/items', {
+          templateUrl: 'templates/items.html',
+          controllerAs: 'WidgetItems',
+          controller: 'WidgetItemsCtrl'
+        })
+        .when('/item/:id', {
+          templateUrl: 'templates/Item_Details.html',
+          controllerAs: 'WidgetSingle',
+          controller: 'WidgetSingleCtrl'
         })
         .otherwise('/');
     }])
