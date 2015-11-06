@@ -1,0 +1,60 @@
+<div id="carousel"></div>
+<hr>
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Text</span>
+  </div>
+</div>
+<hr class="none">
+<div class="item clearfix row">
+  <div class="main col-md-12 pull-right">
+    <textarea id="text" ui-tinymce="ContentHome.bodyWYSIWYGOptions"
+              class="form-control" rows="5" width="100%"
+              ng-model="ContentHome.data.content.description"></textarea>
+  </div>
+</div>
+<hr>
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+
+  </div>
+  <div class="main col-md-9 pull-right">
+    <p class="margin-bottom-zero">Don't have a Shopify account? Sign up
+      <a href="https://www.shopify.in/?ref=buildfire" target="_blank">Here</a>.
+    </p>
+  </div>
+</div>
+<hr class="none">
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Store Name</span>
+  </div>
+  <div class="main col-md-9 pull-right">
+    <input type="text" name="field1" class="form-control"
+           ng-model="ContentHome.storeName" ng-change="ContentHome.clearData()">
+  </div>
+</div>
+<hr class="none">
+<div class="col-md-4 pull-right">
+  <button class="btn btn-primary pull-right stretch"
+          ng-disabled="!ContentHome.storeName"
+          ng-click="ContentHome.verifyStore()">Done
+  </button>
+</div>
+<br>
+<hr class="none">
+<div class="item clearfix row">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+  </div>
+  <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifySuccess">
+    <div class="alert alert-sm alert-success text-center">Store name
+      verified
+    </div>
+  </div>
+  <div class="main col-md-9 pull-right" ng-if="ContentHome.storeVerifyFailure">
+    <div class="alert alert-sm alert-danger text-center">Please enter
+      valid store name
+    </div>
+  </div>
+</div>
+	

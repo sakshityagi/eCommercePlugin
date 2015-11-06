@@ -1,0 +1,46 @@
+<div class="item row clearfix">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Section List Layout Style</span>
+  </div>
+  <div class="main col-md-9 pull-right">
+    <div class="screens clearfix">
+      <div class="screen layouticon pull-left">
+        <a class="border-radius-three default-background-hover text-center"  ng-if="DesignHome.data.design.sectionListLayout.length">
+          <span class="add-icon hidden">+</span>
+          <img ng-src="images/{{DesignHome.data.design.sectionListLayout}}.png">
+        </a>
+
+      </div>
+      <div class="screen layoutgrid pull-right margin-left-zero border-grey border-radius-three">
+        <a ng-repeat="layout in DesignHome.layouts.sectionListLayout"
+           class="layouticon border-radius-three default-background-hover text-center" ng-click="DesignHome.changeSectionListLayout(layout.name)">
+          <img ng-src="images/{{layout.name}}.png">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="item row clearfix">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Item List Layout Style</span>
+  </div>
+  <div class="main col-md-9 pull-right">
+    <div class="screens clearfix">
+      <div class="screen layouticon pull-left">
+        <a class="border-radius-three default-background-hover text-center"  ng-if="DesignHome.data.design.itemListLayout.length">
+          <span class="add-icon hidden">+</span>
+          <img ng-src="images/{{DesignHome.data.design.itemListLayout}}.png">
+        </a>
+
+      </div>
+      <div class="screen layoutgrid pull-right margin-left-zero border-grey border-radius-three">
+        <a ng-repeat="layout in DesignHome.layouts.itemListLayout" class="layouticon border-radius-three default-background-hover text-center" ng-click="DesignHome.changeItemListLayout(layout.name)">
+          <img ng-src="images/{{layout.name}}.png">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div id="background"></div>

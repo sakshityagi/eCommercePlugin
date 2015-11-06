@@ -1,0 +1,37 @@
+<div class="holder padding-zero">
+  <div class="ecommerce-plugin layout3">
+    <div class="media-center-banner plugin-banner clearfix" ng-if="WidgetHome.data">
+      <div id="carousel" ng-if="WidgetHome.data.content.carouselImages.length"
+           build-fire-carousel=""></div>
+      <div class="plugin-slider text-center"
+           ng-if="!WidgetHome.data.content.carouselImages.length">
+        <div class="plugin-slide">
+          <img src="assets/images/16x9.png">
+        </div>
+      </div>
+    </div>
+    <div class="padded padding-bottom-zero">
+      <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
+         ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
+    </div>
+    <div class="">
+      <div class="list-layout">
+        <div class="list-item" ng-repeat="section in WidgetHome.sections">
+          <div class="list-item-media text-left overflow-hidden">
+            <div class="list-media-holder square-icon pull-left">
+              <img ng-src="http://www.placehold.it/80x80"
+                   ng-if="!section.image.src">
+              <img ng-src="{{section.image.src}}" ng-if="section.image.src">
+            </div>
+            <div
+                class="list-item-copy text-left padding-left-ten padding-right-ten">
+              <p
+                  class="ellipsis margin-zero text-primary margin-top-fifteen">
+                <a class="text-primary">{{section.title}}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
