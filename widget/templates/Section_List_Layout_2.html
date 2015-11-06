@@ -1,9 +1,12 @@
 <div class="holder padding-zero">
   <div class="ecommerce-plugin layout3">
-    <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-      <div class="plugin-slider text-center">
+    <div class="media-center-banner plugin-banner clearfix">
+      <div id="carousel" ng-if="WidgetHome.data.content.carouselImages.length"
+           build-fire-carousel=""></div>
+      <div class="plugin-slider text-center"
+           ng-if="!WidgetHome.data.content.carouselImages.length">
         <div class="plugin-slide">
-          <img src="http://www.placehold.it/1280x720.jpg">
+          <img src="assets/images/16x9.png">
         </div>
       </div>
     </div>

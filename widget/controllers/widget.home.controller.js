@@ -3,11 +3,13 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce) {
+    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope) {
         var WidgetHome = this;
         WidgetHome.data = null;
         WidgetHome.sections = null;
+        //create new instance of buildfire carousel viewer
+        WidgetHome.view = null;
         WidgetHome.safeHtml = function (html) {
           if (html)
             return $sce.trustAsHtml(html);
@@ -50,6 +52,43 @@
             };
           DataStore.get(TAG_NAMES.SHOPIFY_INFO).then(success, error);
         };
+
+        var onUpdateCallback = function (event) {
+          setTimeout(function () {
+            if (event && event.tag) {
+              switch (event.tag) {
+                case TAG_NAMES.SHOPIFY_INFO:
+                  WidgetHome.data = event.data;
+                  if (!WidgetHome.data.design)
+                    WidgetHome.data.design = {};
+                  if (!WidgetHome.data.design.sectionListLayout) {
+                    WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
+                  }
+                  break;
+              }
+              $scope.$digest();
+            }
+          }, 0);
+        };
+
+        /**
+         * DataStore.onUpdate() is bound to listen any changes in datastore
+         */
+        DataStore.onUpdate().then(null, null, onUpdateCallback);
+
+
+        $rootScope.$on("Carousel:LOADED", function () {
+          WidgetHome.view = null;
+          if (!WidgetHome.view) {
+            WidgetHome.view = new buildfire.components.carousel.view("#carousel", [], "WideScreen");
+          }
+          if (WidgetHome.data && WidgetHome.data.content.carouselImages) {
+            WidgetHome.view.loadItems(WidgetHome.data.content.carouselImages, null, "WideScreen");
+          } else {
+            WidgetHome.view.loadItems([]);
+          }
+        });
+
 
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
