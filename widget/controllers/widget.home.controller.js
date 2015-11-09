@@ -19,7 +19,16 @@
           return !((description == '<p>&nbsp;<br></p>') || (description == '<p><br data-mce-bogus="1"></p>'));
         };
 
+        WidgetHome.loadMore = function () {
+          if (WidgetHome.busy) return;
+          WidgetHome.busy = true;
+          if (WidgetHome.data.content.storeName)
+            getSections(WidgetHome.data.content.storeName);
+          else
+            WidgetHome.sections = [];
+        };
 
+        var currentStoreName = "";
         var getSections = function (storeName) {
           var success = function (result) {
               console.log("********************************", result);
@@ -44,8 +53,13 @@
                 WidgetHome.data.content = {};
               if (!WidgetHome.data.settings)
                 WidgetHome.data.settings = {};
-              if (WidgetHome.data.content.storeName)
-                getSections(WidgetHome.data.content.storeName);
+              if (WidgetHome.data.content.storeName) {
+                currentStoreName = WidgetHome.data.content.storeName;
+              }
+              if (!WidgetHome.data.design.sectionListLayout) {
+                WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
+              }
+              getSections(WidgetHome.data.content.storeName);
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -64,6 +78,15 @@
                   if (!WidgetHome.data.design.sectionListLayout) {
                     WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
                   }
+                  if (!WidgetHome.data.content.storeName) {
+                    WidgetHome.sections = [];
+                    currentStoreName = "";
+                    WidgetHome.offset = 0;
+                    WidgetHome.busy = false;
+                  }
+
+                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName)
+                    WidgetHome.loadMore();
                   break;
               }
               $scope.$digest();

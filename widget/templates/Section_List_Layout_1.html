@@ -19,8 +19,7 @@
         <div class="list-item" ng-repeat="section in WidgetHome.sections">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
-              <img ng-src="http://www.placehold.it/80x80"
-                   ng-if="!section.image.src">
+              <img ng-if="!section.image.src" src="assets/images/1x1.png">
               <img ng-src="{{section.image.src}}" ng-if="section.image.src">
             </div>
             <div
