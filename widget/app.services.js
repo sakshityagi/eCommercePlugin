@@ -11,6 +11,7 @@
     }])
     .factory("DataStore", ['Buildfire', '$q', 'STATUS_CODE', 'STATUS_MESSAGES',
       function (Buildfire, $q, STATUS_CODE, STATUS_MESSAGES) {
+        var onUpdateListeners = [];
         return {
           get: function (_tagName) {
             var deferred = $q.defer();
@@ -120,12 +121,33 @@
               }
             });
             return deferred.promise;
+          },
+          onUpdate: function () {
+            var deferred = $q.defer();
+            var onUpdateFn = Buildfire.datastore.onUpdate(function (event) {
+              if (!event) {
+                return deferred.notify(new Error({
+                  code: STATUS_CODE.UNDEFINED_DATA,
+                  message: STATUS_MESSAGES.UNDEFINED_DATA
+                }), true);
+              } else {
+                return deferred.notify(event);
+              }
+            });
+            onUpdateListeners.push(onUpdateFn);
+            return deferred.promise;
+          },
+          clearListener: function () {
+            onUpdateListeners.forEach(function (listner) {
+              listner.clear();
+            });
+            onUpdateListeners = [];
           }
         }
       }])
-    .factory('ECommerceSDK', ['$q', 'STATUS_CODE', 'STATUS_MESSAGES',
-      function ($q, STATUS_CODE, STATUS_MESSAGES) {
-        var getSections = function (storeName) {
+    .factory('ECommerceSDK', ['$q', 'STATUS_CODE', 'STATUS_MESSAGES', 'PAGINATION',
+      function ($q, STATUS_CODE, STATUS_MESSAGES, PAGINATION) {
+        var getSections = function (storeName, pageNumber) {
           var deferred = $q.defer();
           var _url = '';
           if (!storeName) {
@@ -135,7 +157,32 @@
             }));
           } else {
             var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
-            eCommerceSDKObj.getCollections({}, function (collections) {
+            eCommerceSDKObj.getCollections({
+              pageSize: PAGINATION.sectionsCount,
+              pageNumber: pageNumber || 1
+            }, function (collections) {
+              if (collections)
+                deferred.resolve(collections);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
+        var getItems = function (storeName, handle, pageNumber) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.getProducts(handle, {
+              pageSize: PAGINATION.sectionsCount,
+              pageNumber: pageNumber || 1
+            }, function (collections) {
               if (collections)
                 deferred.resolve(collections);
               else
@@ -145,7 +192,16 @@
           return deferred.promise;
         };
         return {
-          getSections: getSections
+          getSections: getSections,
+          getItems: getItems
         };
       }])
+    .factory('Location', [function () {
+      var _location = window.location;
+      return {
+        goTo: function (path) {
+          _location.href = path;
+        }
+      };
+    }])
 })(window.angular, window.buildfire);

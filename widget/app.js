@@ -1,22 +1,47 @@
 'use strict';
-(function (angular) {
+(function (angular,buildfire) {
   angular
-    .module('eCommercePluginWidget', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
+    .module('eCommercePluginWidget', ['ngRoute','infinite-scroll'])
+    .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
+
+      /**
+       * To make href urls safe on mobile
+       */
+      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|cdvfile|file):/);
+
       $routeProvider
         .when('/', {
           template: '<div></div>'
         })
-        .when('/items', {
+        .when('/items/:handle', {
           templateUrl: 'templates/items.html',
           controllerAs: 'WidgetItems',
           controller: 'WidgetItemsCtrl'
         })
-        .when('/item/:id', {
+        .when('/item/:handle', {
           templateUrl: 'templates/Item_Details.html',
           controllerAs: 'WidgetSingle',
           controller: 'WidgetSingleCtrl'
         })
         .otherwise('/');
     }])
-})(window.angular);
+    .directive("buildFireCarousel", ["$rootScope", function ($rootScope) {
+      return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+          $rootScope.$broadcast("Carousel:LOADED");
+        }
+      };
+    }])
+    .run(['Location', '$location','$rootScope', function (Location, $location, $rootScope) {
+      buildfire.navigation.onBackButtonClick = function () {
+        if ($location.path() != "/items") {
+          $rootScope.showHome = true;
+          Location.goTo('#/');
+        }
+        else {
+          buildfire.navigation.navigateHome ();
+        }
+      };
+    }])
+})(window.angular,window.buildfire);

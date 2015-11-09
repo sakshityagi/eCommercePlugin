@@ -348,7 +348,6 @@ eCommerceSDK.account.prototype = {
   // GET collections.json returns the collections in JSON.
   // ---------------------------------------------------------
   getCollections: function (options, callback) {
-    console.log("+++++++++++++++++++++++++++++", this.accountName);
     var params = [];
 
     if (!options) {
@@ -360,7 +359,7 @@ eCommerceSDK.account.prototype = {
       options.pageSize = 20;
       params.push({key: 'limit', value: options.pageSize});
     }
-    if (options.pageIndex)
+    if (options.pageNumber)
       params.push({key: 'page', value: options.pageNumber});
     else {
       if (options.totalItems) {
@@ -379,7 +378,6 @@ eCommerceSDK.account.prototype = {
           callback(null);
       }
     }, function () {
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       if (callback) {
         callback(null);
       }

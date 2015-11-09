@@ -1,89 +1,37 @@
-
 <div class="holder padding-zero">
-	<div class="ecommerce-plugin layout3">
-		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-			<div class="plugin-slider text-center">
-				<div class="plugin-slide">
-					<img src="http://www.placehold.it/1280x720.jpg">
-				</div>
-			</div>
-		</div>
-		<div class="padded padding-bottom-zero">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-		<div class="">
-			<div class="media-layout">
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-				<div class="media-item col-sm-6 padding-zero">
-					<div class="media-holder border-radius-three overflow-hidden">
-						<div class="media-img-holder">
-							<img src="http://www.placehold.it/640x380">
-						</div>
-						<div class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-							<p class="ellipsis margin-zero">Some text will go here. Some text will go here.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="ecommerce-plugin layout3">
+    <div class="media-center-banner plugin-banner clearfix">
+      <div id="carousel" ng-if="WidgetHome.data.content.carouselImages.length"
+           build-fire-carousel=""></div>
+      <div class="plugin-slider text-center"
+           ng-if="!WidgetHome.data.content.carouselImages.length">
+        <div class="plugin-slide">
+          <img src="assets/images/16x9.png">
+        </div>
+      </div>
+    </div>
+    <div class="padded padding-bottom-zero">
+      <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
+         ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
+    </div>
+    <div ng-if="WidgetHome.data">
+      <div class="media-layout" infinite-scroll="WidgetHome.loadMore()"
+           infinite-scroll-distance="1"
+           data-infinite-container=".infinite-scroll-parent"
+           infinite-scroll-disabled="WidgetHome.busy">
+        <div class="media-item col-sm-6 padding-zero" ng-repeat="section in WidgetHome.sections">
+          <div class="media-holder border-radius-three overflow-hidden">
+            <div class="media-img-holder">
+              <img ng-if="!section.image.src" src="assets/images/239x100.png">
+            </div>
+            <div
+                class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
+              <p class="ellipsis margin-zero" ng-href="#/items/{{section.handle}}">{{section
+                .title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
