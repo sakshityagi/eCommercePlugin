@@ -5,6 +5,7 @@
     .module('eCommercePluginWidget')
     .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire',
       function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire) {
+        $rootScope.showHome = true;
         var WidgetHome = this;
         WidgetHome.data = null;
         WidgetHome.sections = [];

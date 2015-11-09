@@ -169,8 +169,39 @@
           }
           return deferred.promise;
         };
+        var getItems = function (storeName, handle, pageNumber) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.getProducts(handle, {
+              pageSize: PAGINATION.sectionsCount,
+              pageNumber: pageNumber || 1
+            }, function (collections) {
+              if (collections)
+                deferred.resolve(collections);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
         return {
-          getSections: getSections
+          getSections: getSections,
+          getItems: getItems
         };
       }])
+    .factory('Location', [function () {
+      var _location = window.location;
+      return {
+        goTo: function (path) {
+          _location.href = path;
+        }
+      };
+    }])
 })(window.angular, window.buildfire);

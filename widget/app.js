@@ -1,5 +1,5 @@
 'use strict';
-(function (angular) {
+(function (angular,buildfire) {
   angular
     .module('eCommercePluginWidget', ['ngRoute','infinite-scroll'])
     .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
@@ -33,4 +33,15 @@
         }
       };
     }])
-})(window.angular);
+    .run(['Location', '$location','$rootScope', function (Location, $location, $rootScope) {
+      buildfire.navigation.onBackButtonClick = function () {
+        if ($location.path() != "/items") {
+          $rootScope.showHome = true;
+          Location.goTo('#/');
+        }
+        else {
+          buildfire.navigation.navigateHome ();
+        }
+      };
+    }])
+})(window.angular,window.buildfire);

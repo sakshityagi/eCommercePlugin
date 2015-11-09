@@ -33,6 +33,7 @@
       ]
     })
     .constant('PAGINATION', {
-      sectionsCount: 7
+      sectionsCount: 7,
+      itemsCount: 7
     });
 })(window.angular);

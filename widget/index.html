@@ -24,15 +24,17 @@
   <script src="enums.js"></script>
   <script src="app.services.js"></script>
   <script src="controllers/widget.home.controller.js"></script>
+  <script src="controllers/widget.items.controller.js"></script>
 
 
   <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body class="body-scroll">
-<div ng-controller="WidgetHomeCtrl as WidgetHome" class="infinite-scroll-parent">
+<div ng-controller="WidgetHomeCtrl as WidgetHome"
+     class="infinite-scroll-parent">
   <div ng-if="WidgetHome.data.design.sectionListLayout"
-       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
+       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'"  ng-show="showHome">
   </div>
 </div>
 <div ng-view></div>
