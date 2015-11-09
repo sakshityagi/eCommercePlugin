@@ -1,7 +1,7 @@
 'use strict';
 (function (angular) {
   angular
-    .module('eCommercePluginWidget', ['ngRoute'])
+    .module('eCommercePluginWidget', ['ngRoute','infinite-scroll'])
     .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
 
       /**

@@ -14,8 +14,11 @@
       <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
          ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
     </div>
-    <div class="">
-      <div class="list-layout">
+    <div ng-if="WidgetHome.data">
+      <div class="list-layout" infinite-scroll="WidgetHome.loadMore()"
+           infinite-scroll-distance="1"
+           data-infinite-container=".infinite-scroll-parent"
+           infinite-scroll-disabled="WidgetHome.busy">
         <div class="list-item" ng-repeat="section in WidgetHome.sections">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">

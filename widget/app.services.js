@@ -145,9 +145,9 @@
           }
         }
       }])
-    .factory('ECommerceSDK', ['$q', 'STATUS_CODE', 'STATUS_MESSAGES',
-      function ($q, STATUS_CODE, STATUS_MESSAGES) {
-        var getSections = function (storeName) {
+    .factory('ECommerceSDK', ['$q', 'STATUS_CODE', 'STATUS_MESSAGES', 'PAGINATION',
+      function ($q, STATUS_CODE, STATUS_MESSAGES, PAGINATION) {
+        var getSections = function (storeName, pageNumber) {
           var deferred = $q.defer();
           var _url = '';
           if (!storeName) {
@@ -157,7 +157,10 @@
             }));
           } else {
             var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
-            eCommerceSDKObj.getCollections({}, function (collections) {
+            eCommerceSDKObj.getCollections({
+              pageSize: PAGINATION.sectionsCount,
+              pageNumber: pageNumber || 1
+            }, function (collections) {
               if (collections)
                 deferred.resolve(collections);
               else

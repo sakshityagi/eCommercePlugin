@@ -359,7 +359,7 @@ eCommerceSDK.account.prototype = {
       options.pageSize = 20;
       params.push({key: 'limit', value: options.pageSize});
     }
-    if (options.pageIndex)
+    if (options.pageNumber)
       params.push({key: 'page', value: options.pageNumber});
     else {
       if (options.totalItems) {

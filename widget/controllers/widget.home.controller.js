@@ -3,11 +3,13 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope) {
+    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire) {
         var WidgetHome = this;
         WidgetHome.data = null;
-        WidgetHome.sections = null;
+        WidgetHome.sections = [];
+        WidgetHome.busy = false;
+        WidgetHome.pageNumber = 1;
         //create new instance of buildfire carousel viewer
         WidgetHome.view = null;
         WidgetHome.safeHtml = function (html) {
@@ -30,14 +32,21 @@
 
         var currentStoreName = "";
         var getSections = function (storeName) {
+          Buildfire.spinner.show();
           var success = function (result) {
+              Buildfire.spinner.hide();
               console.log("********************************", result);
-              WidgetHome.sections = result;
+              WidgetHome.sections = WidgetHome.sections.length ? WidgetHome.sections.concat(result) : result;
+              WidgetHome.pageNumber = WidgetHome.pageNumber + 1;
+              if (result.length == PAGINATION.sectionsCount) {
+                WidgetHome.busy = false;
+              }
             }
             , error = function (err) {
+              Buildfire.spinner.hide();
               console.error('Error In Fetching Single Video Details', err);
             };
-          ECommerceSDK.getSections(storeName).then(success, error);
+          ECommerceSDK.getSections(storeName, WidgetHome.pageNumber).then(success, error);
         };
 
         /*
@@ -59,7 +68,6 @@
               if (!WidgetHome.data.design.sectionListLayout) {
                 WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
               }
-              getSections(WidgetHome.data.content.storeName);
             }
             , error = function (err) {
               console.error('Error while getting data', err);

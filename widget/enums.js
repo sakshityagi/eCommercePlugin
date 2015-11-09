@@ -31,5 +31,8 @@
         {name: "Section_List_Layout_1"},
         {name: "Section_List_Layout_2"}
       ]
+    })
+    .constant('PAGINATION', {
+      sectionsCount: 7
     });
 })(window.angular);
