@@ -25,11 +25,12 @@
 
         WidgetItems.loadMore = function () {
           if (WidgetItems.busy) return;
-          WidgetItems.busy = true;
-          if (WidgetItems.data.content.storeName && $routeParams.handle)
+         // WidgetItems.busy = true;
+          if (WidgetItems.data && $routeParams.handle) {
             getItems(WidgetItems.data.content.storeName, $routeParams.handle);
-          else
-            WidgetItems.items = [];
+          }
+          else{
+            WidgetItems.items = [];}
         };
 
         var currentStoreName = "";
@@ -70,6 +71,7 @@
               if (!WidgetItems.data.design.sectionListLayout) {
                 WidgetItems.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
               }
+                WidgetItems.loadMore();
             }
             , error = function (err) {
               console.error('Error while getting data', err);
