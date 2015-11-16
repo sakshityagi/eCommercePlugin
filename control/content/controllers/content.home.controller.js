@@ -85,7 +85,7 @@
                 ContentHome.storeVerifyFailure = false;
               }, 3000);
               ContentHome.storeVerifySuccess = false;
-              console.error('Error In Fetching Single Video Details', err);
+              console.error('Error In Fetching store details', err);
             };
           ECommerceSDK.validateStoreName(ContentHome.storeName).then(success, error);
 

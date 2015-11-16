@@ -3,11 +3,14 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope) {
+    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire) {
+        $rootScope.showCategories = true;
         var WidgetHome = this;
         WidgetHome.data = null;
-        WidgetHome.sections = null;
+        WidgetHome.sections = [];
+        WidgetHome.busy = false;
+        WidgetHome.pageNumber = 1;
         //create new instance of buildfire carousel viewer
         WidgetHome.view = null;
         WidgetHome.safeHtml = function (html) {
@@ -19,16 +22,32 @@
           return !((description == '<p>&nbsp;<br></p>') || (description == '<p><br data-mce-bogus="1"></p>'));
         };
 
+        WidgetHome.loadMore = function () {
+          if (WidgetHome.busy) return;
+          WidgetHome.busy = true;
+          if (WidgetHome.data.content.storeName)
+            getSections(WidgetHome.data.content.storeName);
+          else
+            WidgetHome.sections = [];
+        };
 
+        var currentStoreName = "";
         var getSections = function (storeName) {
+          Buildfire.spinner.show();
           var success = function (result) {
+              Buildfire.spinner.hide();
               console.log("********************************", result);
-              WidgetHome.sections = result;
+              WidgetHome.sections = WidgetHome.sections.length ? WidgetHome.sections.concat(result) : result;
+              WidgetHome.pageNumber = WidgetHome.pageNumber + 1;
+              if (result.length == PAGINATION.sectionsCount) {
+                WidgetHome.busy = false;
+              }
             }
             , error = function (err) {
+              Buildfire.spinner.hide();
               console.error('Error In Fetching Single Video Details', err);
             };
-          ECommerceSDK.getSections(storeName).then(success, error);
+          ECommerceSDK.getSections(storeName, WidgetHome.pageNumber).then(success, error);
         };
 
         /*
@@ -44,8 +63,12 @@
                 WidgetHome.data.content = {};
               if (!WidgetHome.data.settings)
                 WidgetHome.data.settings = {};
-              if (WidgetHome.data.content.storeName)
-                getSections(WidgetHome.data.content.storeName);
+              if (WidgetHome.data.content.storeName) {
+                currentStoreName = WidgetHome.data.content.storeName;
+              }
+              if (!WidgetHome.data.design.sectionListLayout) {
+                WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
+              }
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -64,6 +87,15 @@
                   if (!WidgetHome.data.design.sectionListLayout) {
                     WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
                   }
+                  if (!WidgetHome.data.content.storeName) {
+                    WidgetHome.sections = [];
+                    currentStoreName = "";
+                    WidgetHome.offset = 0;
+                    WidgetHome.busy = false;
+                  }
+
+                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName)
+                    WidgetHome.loadMore();
                   break;
               }
               $scope.$digest();
@@ -92,6 +124,10 @@
 
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
+        });
+
+        $rootScope.$on("ROUTE_CHANGED", function (e) {
+          DataStore.onUpdate().then(null, null, onUpdateCallback);
         });
 
         init();

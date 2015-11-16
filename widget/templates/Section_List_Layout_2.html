@@ -14,16 +14,20 @@
       <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
          ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
     </div>
-    <div class="">
-      <div class="media-layout">
+    <div ng-if="WidgetHome.data">
+      <div class="media-layout" infinite-scroll="WidgetHome.loadMore()"
+           infinite-scroll-distance="1"
+           data-infinite-container=".infinite-scroll-parent"
+           infinite-scroll-disabled="WidgetHome.busy">
         <div class="media-item col-sm-6 padding-zero" ng-repeat="section in WidgetHome.sections">
           <div class="media-holder border-radius-three overflow-hidden">
             <div class="media-img-holder">
-              <img src="http://www.placehold.it/640x380">
+              <img ng-if="!section.image.src" src="assets/images/239x100.png">
             </div>
             <div
                 class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-              <p class="ellipsis margin-zero">{{section.title}}</p>
+              <p class="ellipsis margin-zero" ng-href="#/items/{{section.handle}}">{{section
+                .title}}</p>
             </div>
           </div>
         </div>

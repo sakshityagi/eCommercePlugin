@@ -14,20 +14,22 @@
       <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
          ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
     </div>
-    <div class="">
-      <div class="list-layout">
+    <div ng-if="WidgetHome.data">
+      <div class="list-layout" infinite-scroll="WidgetHome.loadMore()"
+           infinite-scroll-distance="1"
+           data-infinite-container=".infinite-scroll-parent"
+           infinite-scroll-disabled="WidgetHome.busy">
         <div class="list-item" ng-repeat="section in WidgetHome.sections">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
-              <img ng-src="http://www.placehold.it/80x80"
-                   ng-if="!section.image.src">
+              <img ng-if="!section.image.src" src="assets/images/1x1.png">
               <img ng-src="{{section.image.src}}" ng-if="section.image.src">
             </div>
             <div
                 class="list-item-copy text-left padding-left-ten padding-right-ten">
               <p
                   class="ellipsis margin-zero text-primary margin-top-fifteen">
-                <a class="text-primary">{{section.title}}</a></p>
+                <a class="text-primary" ng-href="#/items/{{section.handle}}">{{section.title}}</a></p>
             </div>
           </div>
         </div>
