@@ -32,11 +32,12 @@
 </head>
 <body class="body-scroll">
 <div ng-controller="WidgetHomeCtrl as WidgetHome"
-     class="slide infinite-scroll-parent">
+     class="slide content infinite-scroll-parent">
   <div ng-if="WidgetHome.data.design.sectionListLayout"
-       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'"  ng-show="showHome">
+       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
 </div>
-<div ng-view></div>
+<div ng-view="" class="slide content" ng-hide="showCategories">
+</div>
 </body>
 </html>

@@ -1,2 +1,3 @@
-<div ng-include="'templates/Item_List_Layout_1.html'">
+<div ng-if="WidgetItems.data.design.itemListLayout"
+     ng-include="'templates/' + WidgetItems.data.design.itemListLayout + '.html'">
 </div>

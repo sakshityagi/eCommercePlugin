@@ -36,7 +36,7 @@
     .run(['Location', '$location','$rootScope', function (Location, $location, $rootScope) {
       buildfire.navigation.onBackButtonClick = function () {
         if ($location.path() != "/items") {
-          $rootScope.showHome = true;
+          $rootScope.showCategories = true;
           Location.goTo('#/');
         }
         else {

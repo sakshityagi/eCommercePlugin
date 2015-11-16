@@ -1,73 +1,27 @@
 
 <div class="holder padding-zero">
-	<div class="ecommerce-plugin layout3">
-		<div class="">
-			<div class="list-layout has-cart">
-				<div class="list-item">
-					<div class="list-item-media text-left overflow-hidden">
-						<div class="list-media-holder square-icon pull-left">
-							<img src="http://www.placehold.it/100x100">
+	<div class="ecommerce-plugin layout1">
+		<div class="margin-top-ten">
+			<div class="media-layout" ng-if="WidgetItems.items">
+				<div class="media-item col-xs-6 padding-zero" ng-repeat="item in WidgetItems.items">
+					<div class="media-holder">
+						<div class="media-img-holder">
+							<img ng-hide="item.images[0].src" src="assets/images/1x1.png">
+							<img ng-show="item.images[0].src" ng-src="{{item.images[0].src|getImageUrl:400:400}}">
 						</div>
-						<div class="list-item-copy text-left padding-left-ten padding-right-ten">
-							<p class="ellipsis margin-bottom-zero margin-top-five text-primary"><a class="text-primary">This is the Item Title This is the Item Title</a></p>
-							<p class="margin-bottom-zero">$46,543.50</p>
-						</div>
-						<div class="add-to-cart bg-primary border-radius-three text-center">
-							<a class="icon icon-cart-plus" style="color:#fff;"></a>
-						</div>
-					</div>
-				</div>
-				<div class="list-item">
-					<div class="list-item-media text-left overflow-hidden">
-						<div class="list-media-holder square-icon pull-left">
-							<img src="http://www.placehold.it/100x100">
-						</div>
-						<div class="list-item-copy text-left padding-left-ten padding-right-ten">
-							<p class="ellipsis margin-bottom-zero margin-top-five text-primary"><a class="text-primary">This is the Item Title This is the Item Title</a></p>
-							<p class="margin-bottom-zero">$46,543.50</p>
-						</div>
-						<div class="add-to-cart bg-primary border-radius-three text-center">
-							<a class="icon icon-cart-plus" style="color:#fff;"></a>
+						<div class="info-bar bg-primary padding-left-ten text-left padding-right-ten">
+							<div class="col-xs-8 padding-zero pull-left">
+								<p class="ellipsis margin-bottom-zero margin-top-five">{{item.variants[0].price |currency:[WidgetItems.data.settings.currency.symbol]}}</p>
+							</div>
+							<div class="col-xs-4 padding-zero pull-right">
+								<div class="add-to-cart default-background border-radius-three pull-right text-center">
+									<a class="icon icon-cart-plus"></a>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="list-item">
-					<div class="list-item-media text-left overflow-hidden">
-						<div class="list-item-copy text-left padding-left-ten padding-right-ten">
-							<p class="ellipsis margin-bottom-zero margin-top-five text-primary"><a class="text-primary">This is the Item Title This is the Item Title</a></p>
-							<p class="margin-bottom-five">$46,543.50</p>
-						</div>
-						<div class="add-to-cart bg-primary border-radius-three text-center">
-							<a class="icon icon-cart-plus" style="color:#fff;"></a>
-						</div>
-					</div>
-				</div>
-				<div class="list-item">
-					<div class="list-item-media text-left overflow-hidden">
-						<div class="list-media-holder square-icon pull-left">
-							<img src="http://www.placehold.it/100x100">
-						</div>
-						<div class="list-item-copy text-left padding-left-ten padding-right-ten">
-							<p class="ellipsis margin-bottom-zero margin-top-five text-primary"><a class="text-primary">This is the Item Title This is the Item Title</a></p>
-							<p class="margin-bottom-zero">$46,543.50</p>
-						</div>
-						<div class="add-to-cart bg-primary border-radius-three text-center">
-							<a class="icon icon-cart-plus" style="color:#fff;"></a>
-						</div>
-					</div>
-				</div>
-				<div class="list-item">
-					<div class="list-item-media text-left overflow-hidden">
-						<div class="list-media-holder square-icon pull-left">
-							<img src="http://www.placehold.it/100x100">
-						</div>
-						<div class="list-item-copy text-left padding-left-ten padding-right-ten">
-							<p class="ellipsis margin-bottom-zero margin-top-five text-primary"><a class="text-primary">This is the Item Title This is the Item Title</a></p>
-							<p class="margin-bottom-zero">$46,543.50</p>
-						</div>
-						<div class="add-to-cart bg-primary border-radius-three text-center">
-							<a class="icon icon-cart-plus" style="color:#fff;"></a>
-						</div>
+					<div class="media-copy default-background">
+						<p class="ellipsis text-primary margin-zero">{{item.title}}</p>
 					</div>
 				</div>
 			</div>
