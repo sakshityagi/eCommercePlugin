@@ -1,7 +1,7 @@
 'use strict';
 (function (angular,buildfire) {
   angular
-    .module('eCommercePluginWidget', ['ngRoute','infinite-scroll'])
+    .module('eCommercePluginWidget', ['ngRoute','infinite-scroll','ngAnimate'])
     .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
 
       /**
