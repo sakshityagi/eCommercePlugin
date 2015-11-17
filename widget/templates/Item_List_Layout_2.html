@@ -1,29 +1,23 @@
-<div class="holder padding-zero">
+<div class="holder padding-zero has-bottom clearfix">
   <div class="ecommerce-plugin layout1">
     <div class="margin-top-ten">
       <div class="media-layout" ng-if="WidgetItems.items">
-        <div infinite-scroll="WidgetItems.loadMore()"
-             infinite-scroll-distance="1"
-             data-infinite-container=".infinite-scroll-parent"
-             infinite-scroll-disabled="WidgetItems.busy">
-          <div class="media-item col-xs-6 padding-zero"
-               ng-repeat="item in WidgetItems.items">
+        <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
+          <div class="media-item col-xs-6 padding-zero" ng-repeat="item in WidgetItems.items">
             <div class="media-holder">
               <div class="media-img-holder">
                 <img ng-hide="item.images[0].src" src="assets/images/1x1.png">
-                <img ng-show="item.images[0].src"
-                     ng-src="{{item.images[0].src|getImageUrl:400:400}}">
+                <img ng-show="item.images[0].src" ng-src="{{item.images[0].src|getImageUrl:400:400}}">
               </div>
-              <div
-                  class="info-bar bg-primary padding-left-ten text-left padding-right-ten">
+              <div class="info-bar bg-primary padding-left-ten text-left padding-right-ten">
                 <div class="col-xs-8 padding-zero pull-left">
                   <p class="ellipsis margin-bottom-zero margin-top-five">
                     {{item.variants[0].price
-                    |currency:[WidgetItems.data.settings.currency.symbol]}}</p>
+                    |currency:[WidgetItems.data.settings.currency.symbol]}}
+				  </p>
                 </div>
                 <div class="col-xs-4 padding-zero pull-right">
-                  <div
-                      class="add-to-cart default-background border-radius-three pull-right text-center">
+                  <div class="add-to-cart default-background border-radius-three pull-right text-center">
                     <a class="icon icon-cart-plus"></a>
                   </div>
                 </div>
@@ -36,5 +30,13 @@
         </div>
       </div>
     </div>
+	<div class="bottom fixed-bottom border-top-grey clearfix">
+		<div class="col-xs-6 pull-left text-center">
+			<a class="text-primary default-background-hover transition-third">List</a>
+		</div>
+		<div class="col-xs-6 pull-right text-center border-left-grey">
+			<a class="text-primary bg-primary whiteTheme transition-third">Grid</a>
+		</div>
+	</div>
   </div>
 </div>
