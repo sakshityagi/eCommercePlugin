@@ -100,6 +100,9 @@
                   if (!WidgetHome.data.design.sectionListLayout) {
                     WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
                   }
+                  if (!WidgetHome.data.design.itemListLayout) {
+                    WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
+                  }
                   if (!WidgetHome.data.content.storeName) {
                     WidgetHome.sections = [];
                     currentStoreName = "";

@@ -9,6 +9,11 @@
         WidgetSingle.data = null;
         WidgetSingle.item = null;
 
+        WidgetSingle.safeHtml = function (html) {
+          if (html)
+            return $sce.trustAsHtml(html);
+        };
+
         var currentView = ViewStack.getCurrentView();
 
         var currentStoreName = "";
