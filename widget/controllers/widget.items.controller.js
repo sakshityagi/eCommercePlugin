@@ -3,18 +3,24 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetItemsCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', '$routeParams',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, $routeParams) {
+    .controller('WidgetItemsCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, ViewStack) {
         var WidgetItems = this;
         WidgetItems.data = null;
         WidgetItems.items = [];
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
+
+        var currentView = ViewStack.getCurrentView();
+
         WidgetItems.loadMore = function () {
+          console.log("loading some more...");
           if (WidgetItems.busy) return;
           WidgetItems.busy = true;
-          if (WidgetItems.data && $routeParams.handle) {
-            getItems(WidgetItems.data.content.storeName, $routeParams.handle);
+          console.log(WidgetItems.data, currentView.params);
+          if (WidgetItems.data && currentView.params.handle) {
+
+            getItems(WidgetItems.data.content.storeName, currentView.params.handle);
           }
           else {
             WidgetItems.items = [];
@@ -25,7 +31,6 @@
         var getItems = function (storeName, handle) {
           Buildfire.spinner.show();
           var success = function (result) {
-              $rootScope.showCategories = false;
               Buildfire.spinner.hide();
               console.log("...........................", result);
               WidgetItems.items = WidgetItems.items.length ? WidgetItems.items.concat(result) : result;
@@ -35,7 +40,6 @@
               }
             }
             , error = function (err) {
-              $rootScope.showCategories = false;
               Buildfire.spinner.hide();
               console.error('Error In Fetching Single Video Details', err);
             };
@@ -48,6 +52,7 @@
 
         var init = function () {
           var success = function (result) {
+              console.log("djnfdsjknfkjdsnbsfkgnbkj---", result);
               WidgetItems.data = result.data;
               if (!WidgetItems.data.design)
                 WidgetItems.data.design = {};
@@ -61,7 +66,6 @@
               if (!WidgetItems.data.design.itemListLayout) {
                 WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-              $rootScope.showCategories = false;
             }
             , error = function (err) {
               console.error('Error while getting data', err);

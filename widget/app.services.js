@@ -9,7 +9,7 @@
       };
       return Buildfire;
     }])
-    .factory("DataStore", ['Buildfire', '$q', 'STATUS_CODE', 'STATUS_MESSAGES',
+    .factory('DataStore', ['Buildfire', '$q', 'STATUS_CODE', 'STATUS_MESSAGES',
       function (Buildfire, $q, STATUS_CODE, STATUS_MESSAGES) {
         var onUpdateListeners = [];
         return {
@@ -182,9 +182,28 @@
             eCommerceSDKObj.getProducts(handle, {
               pageSize: PAGINATION.sectionsCount,
               pageNumber: pageNumber || 1
-            }, function (collections) {
-              if (collections)
-                deferred.resolve(collections);
+            }, function (products) {
+              if (products)
+                deferred.resolve(products);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
+        var getProduct = function (storeName, handle) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.getProduct(handle, {}, function (product) {
+              if (product)
+                deferred.resolve(product);
               else
                 deferred.resolve(null);
             });
@@ -193,7 +212,8 @@
         };
         return {
           getSections: getSections,
-          getItems: getItems
+          getItems: getItems,
+          getProduct: getProduct
         };
       }])
     .factory('Location', [function () {
@@ -201,6 +221,27 @@
       return {
         goTo: function (path) {
           _location.href = path;
+        }
+      };
+    }])
+    .factory('ViewStack', ['$rootScope', function ($rootScope) {
+      var views = [];
+      return {
+        push: function (view) {
+          views.push(view);
+          $rootScope.$broadcast('VIEW_CHANGED', 'PUSH', view);
+          return view;
+        },
+        pop: function () {
+          var view = views.pop();
+          $rootScope.$broadcast('VIEW_CHANGED', 'POP', view);
+          return view;
+        },
+        hasViews: function() {
+          return !!views.length;
+        },
+        getCurrentView: function() {
+          return views.length && views[views.length - 1] || {};
         }
       };
     }])

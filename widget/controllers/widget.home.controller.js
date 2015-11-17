@@ -3,9 +3,8 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire',
-      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire) {
-        $rootScope.showCategories = true;
+    .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
+      function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, ViewStack) {
         var WidgetHome = this;
         WidgetHome.data = null;
         WidgetHome.sections = [];
@@ -31,7 +30,18 @@
             WidgetHome.sections = [];
         };
 
+        WidgetHome.showItems = function (handle) {
+          if (WidgetHome.data.design.itemListLayout)
+            ViewStack.push({
+              template: WidgetHome.data.design.itemListLayout,
+              params: {
+                handle:  handle
+              }
+            });
+        };
+
         var currentStoreName = "";
+
         var getSections = function (storeName) {
           Buildfire.spinner.show();
           var success = function (result) {
@@ -68,6 +78,9 @@
               }
               if (!WidgetHome.data.design.sectionListLayout) {
                 WidgetHome.data.design.sectionListLayout = LAYOUTS.sectionListLayout[0].name;
+              }
+              if (!WidgetHome.data.design.itemListLayout) {
+                WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
             }
             , error = function (err) {

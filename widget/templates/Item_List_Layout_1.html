@@ -1,5 +1,5 @@
-<div class="holder padding-zero has-bottom clearfix">
-  <div class="ecommerce-plugin layout3">
+<div class="holder padding-zero has-bottom clearfix" ng-controller="WidgetItemsCtrl as WidgetItems">
+  <div class="ecommerce-plugin layout3" ng-if="WidgetItems.data">
     <div class="">
       <div class="list-layout has-cart" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
