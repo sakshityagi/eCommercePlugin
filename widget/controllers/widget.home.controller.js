@@ -55,7 +55,7 @@
             }
             , error = function (err) {
               Buildfire.spinner.hide();
-              console.error('Error In Fetching Single Video Details', err);
+              console.error('Error In Fetching category list', err);
             };
           ECommerceSDK.getSections(storeName, WidgetHome.pageNumber).then(success, error);
         };

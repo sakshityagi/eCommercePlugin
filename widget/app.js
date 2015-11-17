@@ -2,7 +2,7 @@
 (function (angular, buildfire) {
   angular
     .module('eCommercePluginWidget', ['infinite-scroll', 'ngAnimate'])
-    .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
+    .config(['$compileProvider', function ($compileProvider) {
 
       /**
        * To make href urls safe on mobile

@@ -19,7 +19,6 @@
           WidgetItems.busy = true;
           console.log(WidgetItems.data, currentView.params);
           if (WidgetItems.data && currentView.params.handle) {
-
             getItems(WidgetItems.data.content.storeName, currentView.params.handle);
           }
           else {
@@ -27,7 +26,17 @@
           }
         };
 
+        WidgetItems.showItem = function (handle) {
+          ViewStack.push({
+            template : 'Item_Details',
+            params: {
+              handle: handle
+            }
+          });
+        };
+
         var currentStoreName = "";
+
         var getItems = function (storeName, handle) {
           Buildfire.spinner.show();
           var success = function (result) {
@@ -41,7 +50,7 @@
             }
             , error = function (err) {
               Buildfire.spinner.hide();
-              console.error('Error In Fetching Single Video Details', err);
+              console.error('Error In Fetching items list', err);
             };
           ECommerceSDK.getItems(storeName, handle, WidgetItems.pageNumber).then(success, error);
         };
@@ -91,7 +100,7 @@
                     WidgetItems.busy = false;
                   }
 
-                  if (WidgetItems.data.content.storeName && currentStoreName != WidgetItems.data.content.storeName){
+                  if (WidgetItems.data.content.storeName && currentStoreName != WidgetItems.data.content.storeName) {
                     WidgetItems.items = [];
                     WidgetItems.busy = false;
                     WidgetItems.pageNumber = 1;
@@ -112,7 +121,6 @@
 
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
-          $rootScope.$broadcast('ROUTE_CHANGED');
         });
 
         init();

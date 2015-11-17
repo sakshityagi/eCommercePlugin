@@ -1,4 +1,5 @@
-<div class="holder padding-zero has-bottom clearfix" ng-controller="WidgetItemsCtrl as WidgetItems">
+<div class="holder padding-zero has-bottom clearfix content slide"
+     ng-controller="WidgetItemsCtrl as WidgetItems">
   <div class="ecommerce-plugin layout3" ng-if="WidgetItems.data">
     <div class="">
       <div class="list-layout has-cart" ng-if="WidgetItems.items">
@@ -11,7 +12,8 @@
               </div>
               <div class="list-item-copy text-left padding-left-ten padding-right-ten">
                 <p class="ellipsis margin-bottom-zero margin-top-five text-primary">
-                  <a class="text-primary">{{item.title}}</a>
+                  <a class="text-primary" href="javascript:void(0);" ng-click="WidgetItems.showItem(item.handle)">
+                    {{item.title}}</a>
 			    </p>
                 <p class="margin-bottom-zero">
 				  {{item.variants[0].price |currency:[WidgetItems.data.settings.currency.symbol]}}
