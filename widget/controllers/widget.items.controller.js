@@ -82,12 +82,36 @@
           DataStore.get(TAG_NAMES.SHOPIFY_INFO).then(success, error);
         };
 
+          WidgetItems.changeItemView = function(itemLayout){
+          if(itemLayout=='itemLayoutOne') {
+            WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
+           }
+            else {
+
+            WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[1].name;
+           }
+            saveData(WidgetItems.data,TAG_NAMES.SHOPIFY_INFO)
+        }
+        var saveData = function (newObj, tag) {
+          if (typeof newObj === 'undefined') {
+            return;
+          }
+          var success = function (result) {
+                console.info('Saved data result: ', result);
+              }
+              , error = function (err) {
+                console.error('Error while saving data : ', err);
+              };
+          DataStore.save(newObj, tag).then(success, error);
+        };
         var onUpdateCallback = function (event) {
           setTimeout(function () {
             if (event && event.tag) {
               switch (event.tag) {
                 case TAG_NAMES.SHOPIFY_INFO:
                   WidgetItems.data = event.data;
+                    console.log("WidgetItems.data.design.itemListLayout",WidgetItems.data.design.itemListLayout
+                    )
                   if (!WidgetItems.data.design)
                     WidgetItems.data.design = {};
                   if (!WidgetItems.data.design.itemListLayout) {

@@ -33,9 +33,9 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
-<body class="body-scroll" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover;">
+<body class="body-scroll">
 <div ng-controller="WidgetHomeCtrl as WidgetHome"
-     class="slide content infinite-scroll-parent">
+     class="slide content infinite-scroll-parent" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover;">
   <div ng-if="WidgetHome.data.design.sectionListLayout"
        ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
