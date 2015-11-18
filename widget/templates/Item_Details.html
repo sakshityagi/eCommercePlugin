@@ -1,35 +1,29 @@
-
 <div class="holder padding-zero has-bottom content slide"
      ng-controller="WidgetSingleCtrl as WidgetSingle">
-	<div class="ecommerce-plugin" ng-if="WidgetSingle.data">
-		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-			<div class="plugin-slider has-info-bar-double text-center">
-				<div class="plugin-slide">
+  <div class="ecommerce-plugin" ng-if="WidgetSingle.data">
+    <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
+      <div class="plugin-slider has-info-bar-double text-center">
+        <div class="plugin-slide">
           <img src="assets/images/16x9.png">
-				</div>
-			</div>
-			<div class="info-bar padding-top-five padding-bottom-five bg-primary">
-				<div class="col-xs-10 pull-left">
-					<p class="margin-zero">{{WidgetSingle.item.title}}</p>
-					<p class="margin-zero">{{WidgetSingle.item.variants[0].price |currency:[WidgetSingle.data.settings.currency.symbol]}}</p>
-				</div>
-				<div class="col-xs-2 pull-right right-icon">
-					<a class="padded-icon pull-right border-radius-three text-center" style="background:#fff;">
-						<span class="icon icon-cart-plus"></span>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="padded">
-			<p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html)"></p>
-		</div>
-		<div class="bottom fixed-bottom border-top-grey clearfix">
-			<div class="col-xs-6 pull-left text-center">
-				<a class="text-primary default-background-hover transition-third">Cancel</a>
-			</div>
-			<div class="col-xs-6 pull-right text-center border-left-grey">
-				<a class="text-primary default-background-hover transition-third">Proceed</a>
-			</div>
-		</div>
-	</div>
+        </div>
+      </div>
+      <div class="info-bar padding-top-five padding-bottom-five bg-primary">
+        <div class="col-xs-10 pull-left">
+          <p class="margin-zero">{{WidgetSingle.item.title}}</p>
+
+          <p class="margin-zero">{{WidgetSingle.item.variants[0].price
+            |currency:[WidgetSingle.data.settings.currency.symbol]}}</p>
+        </div>
+        <div class="col-xs-2 pull-right right-icon">
+          <a class="padded-icon pull-right border-radius-three text-center"
+             style="background:#fff;">
+            <span class="icon icon-cart-plus"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="padded">
+      <p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html)"></p>
+    </div>
+  </div>
 </div>
