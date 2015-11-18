@@ -22,7 +22,7 @@
         };
         $rootScope.deviceHeight = window.innerHeight;
         $rootScope.deviceWidth = window.innerWidth;
-        $rootScope.backgroundImage="";
+        $rootScope.backgroundImage = "";
         WidgetHome.loadMore = function () {
           if (WidgetHome.busy) return;
           WidgetHome.busy = true;
@@ -37,7 +37,7 @@
             ViewStack.push({
               template: WidgetHome.data.design.itemListLayout,
               params: {
-                handle:  handle
+                handle: handle
               }
             });
         };
@@ -84,13 +84,12 @@
               if (!WidgetHome.data.design.itemListLayout) {
                 WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-                console.log("WidgetHome.data.design.backgroundImage",WidgetHome.data.design.itemDetailsBgImage)
-                if(!WidgetHome.data.design.itemDetailsBgImage){
-                  $rootScope.backgroundImage="";
-                }else
-                {
-                  $rootScope.backgroundImage=WidgetHome.data.design.itemDetailsBgImage;
-                }
+              console.log("WidgetHome.data.design.backgroundImage", WidgetHome.data.design.itemDetailsBgImage)
+              if (!WidgetHome.data.design.itemDetailsBgImage) {
+                $rootScope.backgroundImage = "";
+              } else {
+                $rootScope.backgroundImage = WidgetHome.data.design.itemDetailsBgImage;
+              }
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -115,18 +114,20 @@
                   if (!WidgetHome.data.content.storeName) {
                     WidgetHome.sections = [];
                     currentStoreName = "";
-                    WidgetHome.offset = 0;
                     WidgetHome.busy = false;
                   }
-                  if(!WidgetHome.data.design.itemDetailsBgImage){
-                    $rootScope.backgroundImage="";
-                  }else
-                  {
-                    $rootScope.backgroundImage=WidgetHome.data.design.itemDetailsBgImage;
+                  if (!WidgetHome.data.design.itemDetailsBgImage) {
+                    $rootScope.backgroundImage = "";
+                  } else {
+                    $rootScope.backgroundImage = WidgetHome.data.design.itemDetailsBgImage;
+                  }
+                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName){
+                    WidgetHome.sections = [];
+                    WidgetHome.busy = false;
+                    WidgetHome.pageNumber = 1;
+                    WidgetHome.loadMore();
                   }
 
-                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName)
-                    WidgetHome.loadMore();
                   break;
               }
               $scope.$digest();
@@ -173,8 +174,14 @@
           DataStore.clearListener();
         });
 
-        $rootScope.$on("ROUTE_CHANGED", function (e) {
-          DataStore.onUpdate().then(null, null, onUpdateCallback);
+        $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
+          if (type === 'POPALL') {
+            WidgetHome.data.content.storeName = null;
+            WidgetHome.sections = [];
+            WidgetHome.busy = false;
+            WidgetHome.pageNumber = 1;
+            $scope.$digest();
+          }
         });
 
         init();
