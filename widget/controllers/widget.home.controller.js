@@ -20,7 +20,9 @@
         WidgetHome.showDescription = function (description) {
           return !((description == '<p>&nbsp;<br></p>') || (description == '<p><br data-mce-bogus="1"></p>'));
         };
-
+        $rootScope.deviceHeight = window.innerHeight;
+        $rootScope.deviceWidth = window.innerWidth;
+        $rootScope.backgroundImage="";
         WidgetHome.loadMore = function () {
           if (WidgetHome.busy) return;
           WidgetHome.busy = true;
@@ -82,6 +84,13 @@
               if (!WidgetHome.data.design.itemListLayout) {
                 WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
+                console.log("WidgetHome.data.design.backgroundImage",WidgetHome.data.design.itemDetailsBgImage)
+                if(!WidgetHome.data.design.itemDetailsBgImage){
+                  $rootScope.backgroundImage="";
+                }else
+                {
+                  $rootScope.backgroundImage=WidgetHome.data.design.itemDetailsBgImage;
+                }
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -108,6 +117,12 @@
                     currentStoreName = "";
                     WidgetHome.offset = 0;
                     WidgetHome.busy = false;
+                  }
+                  if(!WidgetHome.data.design.itemDetailsBgImage){
+                    $rootScope.backgroundImage="";
+                  }else
+                  {
+                    $rootScope.backgroundImage=WidgetHome.data.design.itemDetailsBgImage;
                   }
 
                   if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName)
@@ -137,7 +152,22 @@
           }
         });
 
-
+        /*crop image on the basis of width heights*/
+        WidgetHome.cropImage = function (url, settings) {
+          var options = {};
+          if (!url) {
+            return "";
+          }
+          else {
+            if (settings.height) {
+              options.height = settings.height;
+            }
+            if (settings.width) {
+              options.width = settings.width;
+            }
+            return Buildfire.imageLib.cropImage(url, options);
+          }
+        };
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
         });
