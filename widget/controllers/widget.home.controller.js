@@ -182,6 +182,9 @@
             WidgetHome.pageNumber = 1;
             $scope.$digest();
           }
+          if (type === 'POP') {
+            DataStore.onUpdate().then(null, null, onUpdateCallback);
+          }
         });
 
         init();
