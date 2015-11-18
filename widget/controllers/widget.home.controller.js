@@ -130,6 +130,7 @@
                   break;
               }
               $scope.$digest();
+              $rootScope.$digest();
             }
           }, 0);
         };
