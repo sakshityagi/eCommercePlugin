@@ -80,6 +80,8 @@
                     WidgetSingle.item = null;
                     getProduct(WidgetSingle.data.content.storeName, currentView.params.handle);
                   }
+                  if (!WidgetSingle.data.content.storeName)
+                    ViewStack.popAllViews();
                   break;
               }
               $scope.$digest();
@@ -98,5 +100,7 @@
         });
 
         init();
+
+
       }]);
 })(window.angular);

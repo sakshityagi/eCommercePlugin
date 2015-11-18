@@ -59,6 +59,13 @@
                 $(elem).find('#' + view.template).remove();
                 views--;
               }
+              else if (type === 'POPALL') {
+                console.log(view);
+                angular.forEach(view, function (value, key) {
+                  $(elem).find('#' + value.template).remove();
+                });
+                views = 0;
+              }
               manageDisplay();
             });
 
@@ -73,16 +80,15 @@
           }
         };
       }]).filter('cropImage', [function () {
-        return function (url, width, height, noDefault) {
-          if(noDefault)
-          {
-            if(!url)
-              return '';
-          }
-          return buildfire.imageLib.cropImage(url, {
-            width: width,
-            height: height
-          });
-        };
-      }]);
+      return function (url, width, height, noDefault) {
+        if (noDefault) {
+          if (!url)
+            return '';
+        }
+        return buildfire.imageLib.cropImage(url, {
+          width: width,
+          height: height
+        });
+      };
+    }]);
 })(window.angular, window.buildfire);
