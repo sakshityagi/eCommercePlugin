@@ -101,7 +101,7 @@
                 var tmrDelay = null;
                 SettingsHome.convertHtml=function(html){
                     return $sce.trustAsHtml(html)
-                }
+                };
                 var saveDataWithDelay = function (newObj) {
                     if (newObj) {
                         if (isUnchanged(newObj)) {
