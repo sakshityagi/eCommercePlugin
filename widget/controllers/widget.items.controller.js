@@ -58,6 +58,9 @@
         /*
          * Fetch user's data from datastore
          */
+        WidgetItems.convertHtml=function(html){
+          return $sce.trustAsHtml(html)
+        };
 
         var init = function () {
           var success = function (result) {
@@ -83,7 +86,7 @@
         };
 
         WidgetItems.changeItemView = function (itemLayout) {
-          if (itemLayout == 'itemLayoutOne') {
+          if (itemLayout == 'itemLayoutList') {
             WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
           }
           else {
@@ -116,8 +119,6 @@
               switch (event.tag) {
                 case TAG_NAMES.SHOPIFY_INFO:
                   WidgetItems.data = event.data;
-                    console.log("WidgetItems.data.design.itemListLayout",WidgetItems.data.design.itemListLayout
-                    )
                    if (!WidgetItems.data.design)
                     WidgetItems.data.design = {};
                   if (!WidgetItems.data.design.itemListLayout) {
