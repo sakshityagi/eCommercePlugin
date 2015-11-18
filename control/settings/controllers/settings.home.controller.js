@@ -2,13 +2,17 @@
 (function (angular) {
     angular
         .module('eCommercePluginSettings')
-        .controller('SettingsCtrl', ['$scope','TAG_NAMES',
-            function ($scope,TAG_NAMES) {
+        .controller('SettingsCtrl', ['$scope','TAG_NAMES','$sce',
+            function ($scope,TAG_NAMES,$sce) {
                 var SettingsHome = this;
                 SettingsHome.data = null;
                 SettingsHome.currency=[{
+                    name:"USD, AUD, NZD, CAD, Peso, Real, etc. ",
+                    symbol: '&#36;'
+                },
+                {
                 name:"Euro",
-                    symbol: "&euro;"
+                    symbol: '&#128;'
                 },
                 {
                     name:"Yuan and Yen",
@@ -32,7 +36,7 @@
                 },
                 {
                     name:"Rouble",
-                    symbol:"&#x20bd;"
+                    symbol:'<del>P</del>'
                 },
                 {
                     name:"Switz Franc",
@@ -95,7 +99,9 @@
                     });
                 };
                 var tmrDelay = null;
-
+                SettingsHome.convertHtml=function(html){
+                    return $sce.trustAsHtml(html)
+                }
                 var saveDataWithDelay = function (newObj) {
                     if (newObj) {
                         if (isUnchanged(newObj)) {
