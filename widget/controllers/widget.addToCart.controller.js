@@ -8,6 +8,9 @@
 
                var WidgetAddToCart = this;
                 WidgetAddToCart.listeners = {};
+                WidgetAddToCart.currentAddedItemInCart={
+                    Variant:null
+                    }
                 var currentView = ViewStack.getCurrentView();
                 console.log("currentView",currentView)
                 var currentStoreName = "";
@@ -90,6 +93,18 @@
                  */
                 DataStore.onUpdate().then(null, null, onUpdateCallback);
 
+                WidgetAddToCart.selectVariant = function(variant){
+                    WidgetAddToCart.currentAddedItemInCart.Variant = variant;
+                    console.log("WidgetAddToCart.currentAddedItemInCart.Variant",WidgetAddToCart.currentAddedItemInCart.Variant)
+                  }
+
+                WidgetAddToCart.proceedToCart = function()
+                {
+                    ViewStack.pop();
+                    ViewStack.push({
+                        template: 'Add_To_Cart_2'
+                    });
+                }
                 $scope.$on("$destroy", function () {
                     for (var i in WidgetAddToCart.listeners) {
                         if(WidgetAddToCart.listeners.hasOwnProperty(i)) {
