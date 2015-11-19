@@ -39,6 +39,17 @@
          * Fetch user's data from datastore
          */
 
+        console.log("currentView.params.handle",currentView.params.handle)
+        WidgetSingle.addToCart = function(handle){
+          console.log("aaaaaaaaaaaaaaaaaa")
+          ViewStack.pop();
+          ViewStack.push({
+            template: 'Add_To_Cart_1',
+            params: {
+              handle: handle
+            }
+          });
+        }
         var init = function () {
           var success = function (result) {
               WidgetSingle.data = result.data;

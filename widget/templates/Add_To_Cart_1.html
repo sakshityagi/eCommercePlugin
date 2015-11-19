@@ -1,21 +1,19 @@
-<div class="holder padding-zero has-bottom">
+<div class="holder padding-zero has-bottom content slide"
+	 ng-controller="WidgetaddToCartCtrl as WidgetAddToCart">
 	<div class="ecommerce-plugin">
 		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-			<div class="plugin-slider has-info-bar-double text-center">
+			<div id="carousel3" ng-if="WidgetAddToCart.item.images.length"
+				 build-fire-carousel3=""></div>
+			<div class="plugin-slider has-info-bar-double text-center" ng-if="!WidgetAddToCart.item.images.length">
 				<div class="plugin-slide">
-					<img src="http://www.placehold.it/1280x720.jpg">
-				</div>
-				<div class="plugin-slide">
-					<img src="http://www.placehold.it/1280x720.jpg">
-				</div>
-				<div class="plugin-slide">
-					<img src="http://www.placehold.it/1280x720.jpg">
+					<img src="assets/images/16x9.png">
 				</div>
 			</div>
 			<div class="info-bar padding-top-five padding-bottom-five bg-primary">
 				<div class="col-xs-10 pull-left">
-					<p class="margin-zero">Item Title Goes Here</p>
-					<p class="margin-zero">$45,763</p>
+					<p class="margin-zero">{{WidgetAddToCart.item.title}}</p>
+					<p class="margin-zero">	 <span ng-bind-html="WidgetAddToCart.safeHtml(WidgetAddToCart.data.settings.currency.symbol||'$')"></span>&nbsp; {{WidgetAddToCart.item.variants[0].price}}
+					</p>
 				</div>
 				<div class="col-xs-2 pull-right right-icon">
 					<a class="padded-icon pull-right border-radius-three text-center" style="background:#fff;">
@@ -97,6 +95,7 @@
 			<div class="col-xs-6 pull-right text-center border-left-grey">
 				<a class="text-primary default-background-hover transition-third">Proceed</a>
 			</div>
+
 		</div>
 	</div>
 </div>

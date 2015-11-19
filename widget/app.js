@@ -1,7 +1,7 @@
 'use strict';
 (function (angular, buildfire) {
   angular
-    .module('eCommercePluginWidget', ['infinite-scroll', 'ngAnimate'])
+    .module('eCommercePluginWidget', ['infinite-scroll', 'ngAnimate', 'ui.bootstrap'])
     .config(['$compileProvider', function ($compileProvider) {
 
       /**
@@ -26,6 +26,14 @@
         }
       };
     }])
+      .directive("buildFireCarousel3", ["$rootScope", function ($rootScope) {
+        return {
+          restrict: 'A',
+          link: function (scope, elem, attrs) {
+            $rootScope.$broadcast("Carousel3:LOADED");
+          }
+        };
+      }])
     .run(['ViewStack', function (ViewStack) {
       buildfire.navigation.onBackButtonClick = function () {
         if (ViewStack.hasViews()) {
