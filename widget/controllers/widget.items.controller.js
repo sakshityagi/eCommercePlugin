@@ -65,7 +65,7 @@
 
         var init = function () {
           var success = function (result) {
-              console.log("djnfdsjknfkjdsnbsfkgnbkj---", result);
+              console.log("--------------------", result);
               WidgetItems.data = result.data;
               if (!WidgetItems.data.design)
                 WidgetItems.data.design = {};
