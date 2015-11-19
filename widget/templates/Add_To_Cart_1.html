@@ -28,7 +28,7 @@
 					<span>Quantity</span>
 				</div>
 				<div class="main col-xs-9 pull-right">
-					<input type="number" class="form-control" placeholder="1">
+					<input type="number" class="form-control" placeholder="1" ng-model="WidgetAddToCart.quantity">
 				</div>
 			</div>
 			<hr class="none">
@@ -39,7 +39,7 @@
 				<div class="main col-xs-9 pull-right">
 					<div class="dropdown" dropdown>
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">{{WidgetAddToCart.currentAddedItemInCart.Variant.title||"Select Variant"}}</span>
+							<span class="pull-left">{{WidgetAddToCart.currentAddedItemInCart.Variant.title||WidgetAddToCart.item.variants[0].title}}</span>
 					  		<span class="chevron icon-chevron-down pull-right"></span>
 						</button>
 						<ul class="dropdown-menu extended" role="menu">

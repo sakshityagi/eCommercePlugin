@@ -8,12 +8,16 @@
 
         var WidgetAddToCart = this;
         WidgetAddToCart.listeners = {};
+        WidgetAddToCart.quantity=1;
         WidgetAddToCart.currentAddedItemInCart = {
           Variant: null
         };
+
+        $rootScope.addedToCart = null;
         var currentView = ViewStack.getCurrentView();
         console.log("currentView", currentView);
         var currentStoreName = "";
+
 
         WidgetAddToCart.safeHtml = function (html) {
           if (html)
@@ -95,10 +99,14 @@
 
         WidgetAddToCart.selectVariant = function (variant) {
           WidgetAddToCart.currentAddedItemInCart.Variant = variant;
-          console.log("WidgetAddToCart.currentAddedItemInCart.Variant", WidgetAddToCart.currentAddedItemInCart.Variant)
         };
 
         WidgetAddToCart.proceedToCart = function (handle) {
+            $rootScope.addedToCart = {
+                variantId: WidgetAddToCart.currentAddedItemInCart.Variant.id,
+                title: WidgetAddToCart.currentAddedItemInCart.Variant.title,
+                quantity: WidgetAddToCart.quantity
+            }
           ViewStack.push({
             template: 'Add_To_Cart_2',
             params: {
@@ -107,11 +115,6 @@
           });
         };
 
-        WidgetAddToCart.addProductToCart = function () {
-          ViewStack.push({
-            template: 'Shopping_Cart'
-          });
-        };
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetAddToCart.listeners) {
