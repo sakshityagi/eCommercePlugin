@@ -1,4 +1,5 @@
-<div class="holder padding-zero has-bottom slide content">
+<div class="holder padding-zero has-bottom slide content"
+	 ng-controller="WidgetaddToCartCtrl as WidgetAddToCart">
 	<div class="ecommerce-plugin">
 		<div class="padded">
 			<div class="item clearfix row">
@@ -17,54 +18,52 @@
 				<div class="main col-xs-9 pull-right">
 					<div class="dropdown" dropdown>
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">Color</span>
-					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
+							<span class="pull-left">{{WidgetAddToCart.currentAddedItemInCart.Variant.title||"Select Variant"}}</span>
+							<span class="chevron icon-chevron-down pull-right"></span>
+						</button>
 						<ul class="dropdown-menu extended" role="menu">
-							<li><a tabindex="-1">Color 1</a></li>
-							<li><a tabindex="-1">Color 2</a></li>
-							<li><a tabindex="-1">Color 3</a></li>
-	                    </ul>
+							<li ng-repeat="variant in WidgetAddToCart.item.variants" ><a tabindex="-1" ng-click="WidgetAddToCart.selectVariant(variant)">{{variant.title}}</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
 			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 2</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<div class="dropdown" dropdown>
-						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">Size</span>
-					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
-						<ul class="dropdown-menu extended" role="menu">
-							<li><a tabindex="-1">Size 1</a></li>
-							<li><a tabindex="-1">Size 2</a></li>
-							<li><a tabindex="-1">Size 3</a></li>
-	                    </ul>
-					</div>
-				</div>
-			</div>
-			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 3</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="Etc">
-				</div>
-			</div>
-			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 4</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="Etc">
-				</div>
-			</div>
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 2</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<div class="dropdown" dropdown>-->
+						<!--<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">-->
+							<!--<span class="pull-left">Size</span>-->
+					  		<!--<span class="chevron icon-chevron-down pull-right"></span>-->
+						<!--</button>					-->
+						<!--<ul class="dropdown-menu extended" role="menu">-->
+							<!--<li><a tabindex="-1">Size 1</a></li>-->
+							<!--<li><a tabindex="-1">Size 2</a></li>-->
+							<!--<li><a tabindex="-1">Size 3</a></li>-->
+	                    <!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<hr class="none">-->
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 3</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<input type="text" class="form-control" placeholder="Etc">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<hr class="none">-->
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 4</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<input type="text" class="form-control" placeholder="Etc">-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<div class="bottom fixed-bottom border-top-grey clearfix">
 			<div class="col-xs-6 pull-left text-center">

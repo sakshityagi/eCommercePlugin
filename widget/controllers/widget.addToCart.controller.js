@@ -98,11 +98,13 @@
                     console.log("WidgetAddToCart.currentAddedItemInCart.Variant",WidgetAddToCart.currentAddedItemInCart.Variant)
                   }
 
-                WidgetAddToCart.proceedToCart = function()
+                WidgetAddToCart.proceedToCart = function(handle)
                 {
-                    ViewStack.pop();
                     ViewStack.push({
-                        template: 'Add_To_Cart_2'
+                        template: 'Add_To_Cart_2',
+                        params: {
+                            handle: handle
+                        }
                     });
                 }
                 $scope.$on("$destroy", function () {
