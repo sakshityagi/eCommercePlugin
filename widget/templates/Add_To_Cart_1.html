@@ -12,7 +12,7 @@
 			<div class="info-bar padding-top-five padding-bottom-five bg-primary">
 				<div class="col-xs-10 pull-left">
 					<p class="margin-zero">{{WidgetAddToCart.item.title}}</p>
-					<p class="margin-zero">	 <span ng-bind-html="WidgetAddToCart.safeHtml(WidgetAddToCart.data.settings.currency.symbol||'$')"></span>&nbsp; {{WidgetAddToCart.item.variants[0].price}}
+					<p class="margin-zero">	 <span ng-bind-html="WidgetAddToCart.safeHtml(WidgetAddToCart.data.settings.currency.symbol||'$')"></span>&nbsp; {{WidgetAddToCart.currentAddedItemInCart.Variant.price||WidgetAddToCart.item.variants[0].price}}
 					</p>
 				</div>
 				<div class="col-xs-2 pull-right right-icon">
@@ -28,29 +28,27 @@
 					<span>Quantity</span>
 				</div>
 				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="1">
+					<input type="number" class="form-control" placeholder="1">
 				</div>
 			</div>
 			<hr class="none">
 			<div class="item clearfix row">
 				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 1</span>
+					<span>Variant</span>
 				</div>
 				<div class="main col-xs-9 pull-right">
 					<div class="dropdown" dropdown>
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">Color</span>
+							<span class="pull-left">{{WidgetAddToCart.currentAddedItemInCart.Variant.title||"Select Variant"}}</span>
 					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
+						</button>
 						<ul class="dropdown-menu extended" role="menu">
-							<li><a tabindex="-1">Color 1</a></li>
-							<li><a tabindex="-1">Color 2</a></li>
-							<li><a tabindex="-1">Color 3</a></li>
+							<li ng-repeat="variant in WidgetAddToCart.item.variants" ><a tabindex="-1" ng-click="WidgetAddToCart.selectVariant(variant)">{{variant.title}}</a></li>
 	                    </ul>
 					</div>
 				</div>
 			</div>
-			<hr class="none">
+			<!--<hr class="none">
 			<div class="item clearfix row">
 				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
 					<span>Variable 2</span>
@@ -60,7 +58,7 @@
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
 							<span class="pull-left">Size</span>
 					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
+						</button>
 						<ul class="dropdown-menu extended" role="menu">
 							<li><a tabindex="-1">Size 1</a></li>
 							<li><a tabindex="-1">Size 2</a></li>
@@ -86,14 +84,14 @@
 				<div class="main col-xs-9 pull-right">
 					<input type="text" class="form-control" placeholder="Etc">
 				</div>
-			</div>
+			</div>-->
 		</div>
 		<div class="bottom fixed-bottom border-top-grey clearfix">
 			<div class="col-xs-6 pull-left text-center">
 				<a class="text-primary default-background-hover transition-third">Cancel</a>
 			</div>
 			<div class="col-xs-6 pull-right text-center border-left-grey">
-				<a class="text-primary default-background-hover transition-third">Proceed</a>
+				<a class="text-primary default-background-hover transition-third" ng-click="WidgetAddToCart.proceedToCart()">Proceed</a>
 			</div>
 
 		</div>
