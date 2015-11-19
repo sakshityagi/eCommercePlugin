@@ -6,6 +6,7 @@
     .controller('WidgetItemsCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
       function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, ViewStack) {
         var WidgetItems = this;
+        WidgetItems.listeners = {};
         WidgetItems.data = null;
         WidgetItems.items = [];
         WidgetItems.busy = false;
@@ -58,7 +59,7 @@
         /*
          * Fetch user's data from datastore
          */
-        WidgetItems.convertHtml=function(html){
+        WidgetItems.convertHtml = function (html) {
           return $sce.trustAsHtml(html)
         };
 
@@ -91,26 +92,26 @@
           }
           else {
             WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[1].name;
-           }
-            saveData(WidgetItems.data,TAG_NAMES.SHOPIFY_INFO);
+          }
+          saveData(WidgetItems.data, TAG_NAMES.SHOPIFY_INFO);
           ViewStack.pop();
           ViewStack.push({
-              template : WidgetItems.data.design.itemListLayout,
-              params: {
-                handle: currentView.params.handle
-              }
-            });
-         }
+            template: WidgetItems.data.design.itemListLayout,
+            params: {
+              handle: currentView.params.handle
+            }
+          });
+        }
         var saveData = function (newObj, tag) {
           if (typeof newObj === 'undefined') {
             return;
           }
           var success = function (result) {
-                console.info('Saved data result: ', result);
-              }
-              , error = function (err) {
-                console.error('Error while saving data : ', err);
-              };
+              console.info('Saved data result: ', result);
+            }
+            , error = function (err) {
+              console.error('Error while saving data : ', err);
+            };
           DataStore.save(newObj, tag).then(success, error);
         };
         var onUpdateCallback = function (event) {
@@ -119,7 +120,7 @@
               switch (event.tag) {
                 case TAG_NAMES.SHOPIFY_INFO:
                   WidgetItems.data = event.data;
-                   if (!WidgetItems.data.design)
+                  if (!WidgetItems.data.design)
                     WidgetItems.data.design = {};
                   if (!WidgetItems.data.design.itemListLayout) {
                     WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
@@ -152,12 +153,24 @@
 
 
         $scope.$on("$destroy", function () {
+          console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>destroyed");
+          for (var i in WidgetItems.listeners) {
+            if(WidgetItems.listeners.hasOwnProperty(i)) {
+              WidgetItems.listeners[i]();
+            }
+          }
           DataStore.clearListener();
         });
 
-        $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
+        WidgetItems.listeners['CHANGED'] = $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
           if (type === 'POP') {
             DataStore.onUpdate().then(null, null, onUpdateCallback);
+          }
+        });
+        WidgetItems.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
+          console.log("ITEMS:", view.template, WidgetItems.data.design.itemListLayout);
+          if(view.template === WidgetItems.data.design.itemListLayout) {
+            $scope.$destroy();
           }
         });
 

@@ -233,6 +233,7 @@
           return view;
         },
         pop: function () {
+          $rootScope.$broadcast('BEFORE_POP', views[views.length -1]);
           var view = views.pop();
           $rootScope.$broadcast('VIEW_CHANGED', 'POP', view);
           return view;

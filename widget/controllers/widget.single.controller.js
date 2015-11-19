@@ -6,8 +6,11 @@
     .controller('WidgetSingleCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'Buildfire', 'ViewStack',
       function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, Buildfire, ViewStack) {
         var WidgetSingle = this;
+        WidgetSingle.listeners = {};
         WidgetSingle.data = null;
         WidgetSingle.item = null;
+        //create new instance of buildfire carousel viewer
+        WidgetSingle.view = null;
 
         WidgetSingle.safeHtml = function (html) {
           if (html)
@@ -94,13 +97,38 @@
          */
         DataStore.onUpdate().then(null, null, onUpdateCallback);
 
-
         $scope.$on("$destroy", function () {
+          for (var i in WidgetSingle.listeners) {
+            if(WidgetSingle.listeners.hasOwnProperty(i)) {
+              WidgetSingle.listeners[i]();
+            }
+          }
           DataStore.clearListener();
         });
 
+        WidgetSingle.listeners['CAROUSEL_LOADED'] = $rootScope.$on("Carousel:LOADED", function () {
+          WidgetSingle.view = null;
+          if (!WidgetSingle.view) {
+            WidgetSingle.view = new buildfire.components.carousel.view("#carousel2", [], "WideScreen");
+          }
+          if (WidgetSingle.item && WidgetSingle.item.images) {
+            var imageArray = WidgetSingle.item.images.map(function (item) {
+              return {iconUrl: item.src, title : ""};
+            });
+            console.log(")))))))))))))))))))))))))", imageArray);
+            WidgetSingle.view.loadItems(imageArray, null, "WideScreen");
+          } else {
+            WidgetSingle.view.loadItems([]);
+          }
+        });
+
+        WidgetSingle.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
+          console.log("SINGLE:", view.template, 'Item_Details');
+          if(view.template === 'Item_Details') {
+            $scope.$destroy();
+          }
+        });
+
         init();
-
-
       }]);
 })(window.angular);

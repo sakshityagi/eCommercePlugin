@@ -2,7 +2,9 @@
      ng-controller="WidgetSingleCtrl as WidgetSingle">
   <div class="ecommerce-plugin" ng-if="WidgetSingle.data">
     <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-      <div class="plugin-slider has-info-bar-double text-center">
+      <div id="carousel2" ng-if="WidgetSingle.item.images.length"
+           build-fire-carousel=""></div>
+      <div class="plugin-slider has-info-bar-double text-center" ng-if="!WidgetSingle.item.images.length">
         <div class="plugin-slide">
           <img src="assets/images/16x9.png">
         </div>
