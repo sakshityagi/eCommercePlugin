@@ -21,6 +21,8 @@
 
         var currentStoreName = "";
 
+        var currentCurrency = "";
+
         var getProduct = function (storeName, handle) {
           Buildfire.spinner.show();
           var success = function (result) {
@@ -54,6 +56,8 @@
               if (!WidgetSingle.data.design.itemListLayout) {
                 WidgetSingle.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
+              if (WidgetSingle.data.settings.currency)
+                currentCurrency = WidgetSingle.data.settings.currency;
               if (WidgetSingle.data.content.storeName && currentView.params.handle)
                 getProduct(WidgetSingle.data.content.storeName, currentView.params.handle);
             }
@@ -78,7 +82,10 @@
                     WidgetSingle.item = null;
                     currentStoreName = "";
                   }
-
+                  if (WidgetSingle.data.settings.currency && currentCurrency && currentCurrency != WidgetSingle.data.settings.currency) {
+                    currentCurrency = WidgetSingle.data.settings.currency;
+                    $rootScope.$broadcast('CURRENCY_CHANGED', WidgetSingle.data.settings.currency);
+                  }
                   if (WidgetSingle.data.content.storeName && currentStoreName != WidgetSingle.data.content.storeName) {
                     WidgetSingle.item = null;
                     getProduct(WidgetSingle.data.content.storeName, currentView.params.handle);
@@ -99,7 +106,7 @@
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetSingle.listeners) {
-            if(WidgetSingle.listeners.hasOwnProperty(i)) {
+            if (WidgetSingle.listeners.hasOwnProperty(i)) {
               WidgetSingle.listeners[i]();
             }
           }
@@ -113,7 +120,7 @@
           }
           if (WidgetSingle.item && WidgetSingle.item.images) {
             var imageArray = WidgetSingle.item.images.map(function (item) {
-              return {iconUrl: item.src, title : ""};
+              return {iconUrl: item.src, title: ""};
             });
             console.log(")))))))))))))))))))))))))", imageArray);
             WidgetSingle.view.loadItems(imageArray, null, "WideScreen");
@@ -124,7 +131,7 @@
 
         WidgetSingle.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
           console.log("SINGLE:", view.template, 'Item_Details');
-          if(view.template === 'Item_Details') {
+          if (view.template === 'Item_Details') {
             $scope.$destroy();
           }
         });

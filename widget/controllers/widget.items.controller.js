@@ -56,12 +56,13 @@
           ECommerceSDK.getItems(storeName, handle, WidgetItems.pageNumber).then(success, error);
         };
 
-        /*
-         * Fetch user's data from datastore
-         */
         WidgetItems.convertHtml = function (html) {
           return $sce.trustAsHtml(html)
         };
+
+        /*
+         * Fetch user's data from datastore
+         */
 
         var init = function () {
           var success = function (result) {
@@ -101,7 +102,7 @@
               handle: currentView.params.handle
             }
           });
-        }
+        };
         var saveData = function (newObj, tag) {
           if (typeof newObj === 'undefined') {
             return;
@@ -155,7 +156,7 @@
         $scope.$on("$destroy", function () {
           console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>destroyed");
           for (var i in WidgetItems.listeners) {
-            if(WidgetItems.listeners.hasOwnProperty(i)) {
+            if (WidgetItems.listeners.hasOwnProperty(i)) {
               WidgetItems.listeners[i]();
             }
           }
@@ -169,9 +170,16 @@
         });
         WidgetItems.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
           console.log("ITEMS:", view.template, WidgetItems.data.design.itemListLayout);
-          if(view.template === WidgetItems.data.design.itemListLayout) {
+          if (view.template === WidgetItems.data.design.itemListLayout) {
             $scope.$destroy();
           }
+        });
+
+        WidgetItems.listeners['CURRENCY'] = $rootScope.$on("CURRENCY_CHANGED", function (e, currency) {
+          if (!WidgetItems.data.settings)
+            WidgetItems.data.settings = {};
+          WidgetItems.data.settings.currency = currency;
+          $scope.$digest();
         });
 
         init();
