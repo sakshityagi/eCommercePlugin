@@ -13,8 +13,7 @@
         <div class="col-xs-10 pull-left">
           <p class="margin-zero">{{WidgetSingle.item.title}}</p>
 
-          <p class="margin-zero">{{WidgetSingle.item.variants[0].price
-            |currency:[WidgetSingle.data.settings.currency.symbol]}}</p>
+          <p class="margin-zero"><span ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.data.settings.currency.symbol ||'$')"></span>&nbsp; {{WidgetSingle.item.variants[0].price}}</p>
         </div>
         <div class="col-xs-2 pull-right right-icon">
           <a class="padded-icon pull-right border-radius-three text-center"

@@ -29,17 +29,19 @@
   <div class="labels col-md-3 padding-right-zero pull-left">
     <span>Store Name</span>
   </div>
-  <div class="main col-md-9 pull-right">
-    <input type="text" name="field1" class="form-control"
-           ng-model="ContentHome.storeName" ng-change="ContentHome.clearData()">
+  <div class="main pull-right col-md-9 padding-left-zero row">
+    <div class="pull-left col-md-8 padding-zero">
+      <input type="text" class="form-control"
+             placeholder="Enter your store name"
+             ng-model="ContentHome.storeName"
+             ng-change="ContentHome.clearData()">
+    </div>
+    <div class="col-md-4 pull-right">
+      <button class="btn btn-primary pull-right stretch"
+              ng-disabled="!ContentHome.storeName" ng-click="ContentHome.verifyStore()">
+        Done</button>
+    </div>
   </div>
-</div>
-<hr class="none">
-<div class="col-md-4 pull-right">
-  <button class="btn btn-primary pull-right stretch"
-          ng-disabled="!ContentHome.storeName"
-          ng-click="ContentHome.verifyStore()">Done
-  </button>
 </div>
 <br>
 <hr class="none">
