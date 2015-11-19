@@ -15,10 +15,10 @@
 
           <p class="margin-zero"><span ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.data.settings.currency.symbol ||'$')"></span>&nbsp; {{WidgetSingle.item.variants[0].price}}</p>
         </div>
-        <div class="col-xs-2 pull-right right-icon">
+        <div class="col-xs-2 pull-right right-icon" ng-click="WidgetSingle.addToCart(WidgetSingle.item.handle)">
           <a class="padded-icon pull-right border-radius-three text-center"
              style="background:#fff;">
-            <span class="icon icon-cart-plus" ng-click="WidgetSingle.addToCart(WidgetSingle.item.handle)"></span>
+            <span class="icon icon-cart-plus"></span>
           </a>
         </div>
       </div>
