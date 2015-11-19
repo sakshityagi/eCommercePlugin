@@ -3,12 +3,12 @@
 (function (angular) {
   angular
     .module('eCommercePluginWidget')
-    .controller('WidgetaddToCartCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
+    .controller('WidgetAddToCartCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
       function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, ViewStack) {
 
         var WidgetAddToCart = this;
         WidgetAddToCart.listeners = {};
-        WidgetAddToCart.quantity=1;
+        WidgetAddToCart.quantity = 1;
         WidgetAddToCart.currentAddedItemInCart = {
           Variant: null
         };
@@ -30,6 +30,14 @@
               Buildfire.spinner.hide();
               console.log("===============================", result);
               WidgetAddToCart.item = result;
+              if (WidgetAddToCart.item.variants.length) {
+                WidgetAddToCart.currentAddedItemInCart = {
+                  Variant: {
+                    title: WidgetAddToCart.item.variants[0].title,
+                    id: WidgetAddToCart.item.variants[0].id
+                  }
+                };
+              }
               console.log("WidgetAddToCart", WidgetAddToCart)
             }
             , error = function (err) {
@@ -102,11 +110,12 @@
         };
 
         WidgetAddToCart.proceedToCart = function (handle) {
-            $rootScope.addedToCart = {
-                variantId: WidgetAddToCart.currentAddedItemInCart.Variant.id,
-                title: WidgetAddToCart.currentAddedItemInCart.Variant.title,
-                quantity: WidgetAddToCart.quantity
-            }
+          console.log("****************", WidgetAddToCart.currentAddedItemInCart);
+          $rootScope.addedToCart = {
+            variantId: WidgetAddToCart.currentAddedItemInCart.Variant.id,
+            title: WidgetAddToCart.currentAddedItemInCart.Variant.title,
+            quantity: WidgetAddToCart.quantity
+          };
           ViewStack.push({
             template: 'Add_To_Cart_2',
             params: {

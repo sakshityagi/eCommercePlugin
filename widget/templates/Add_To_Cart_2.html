@@ -1,5 +1,5 @@
 <div class="holder padding-zero has-bottom slide content"
-	 ng-controller="WidgetaddToCartFinalCtrl as WidgetaddToCartFinal">
+	 ng-controller="WidgetAddToCartFinalCtrl as WidgetAddToCartFinal">
 	<div class="ecommerce-plugin">
 		<div class="padded">
 			<div class="item clearfix row">
@@ -18,11 +18,11 @@
 				<div class="main col-xs-9 pull-right">
 					<div class="dropdown" dropdown>
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">{{WidgetaddToCartFinal.currentAddedItemInCart.Variant.title||addedToCart.title}}</span>
+							<span class="pull-left">{{WidgetAddToCartFinal.currentAddedItemInCart.Variant.title||addedToCart.title}}</span>
 							<span class="chevron icon-chevron-down pull-right"></span>
 						</button>
 						<ul class="dropdown-menu extended" role="menu">
-							<li ng-repeat="variant in WidgetaddToCartFinal.item.variants" ><a tabindex="-1" ng-click="WidgetaddToCartFinal.updateVariant(variant)">{{variant.title}}</a></li>
+							<li ng-repeat="variant in WidgetAddToCartFinal.item.variants" ><a tabindex="-1" ng-click="WidgetAddToCartFinal.updateVariant(variant)">{{variant.title}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 			</div>
 			<div class="col-xs-6 pull-right text-center border-left-grey">
 				<a class="text-primary default-background-hover transition-third"
-           ng-click="WidgetAddToCart.addProductToCart()"
+           ng-click="WidgetAddToCartFinal.addProductToCart()"
             >Add to Cart</a>
 			</div>
 		</div>
