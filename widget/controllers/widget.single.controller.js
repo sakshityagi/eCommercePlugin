@@ -106,7 +106,7 @@
           DataStore.clearListener();
         });
 
-        WidgetSingle.listeners['CAROUSEL_LOADED'] = $rootScope.$on("Carousel:LOADED", function () {
+        WidgetSingle.listeners['CAROUSEL_LOADED'] = $rootScope.$on("Carousel2:LOADED", function () {
           WidgetSingle.view = null;
           if (!WidgetSingle.view) {
             WidgetSingle.view = new buildfire.components.carousel.view("#carousel2", [], "WideScreen");
