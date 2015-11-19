@@ -1,4 +1,4 @@
-<div class="holder padding-zero">
+<div class="holder padding-zero content slide">
   <div class="ecommerce-plugin layout3">
     <div class="media-center-banner plugin-banner clearfix">
       <div id="carousel" ng-if="WidgetHome.data.content.carouselImages.length"
@@ -19,15 +19,19 @@
            infinite-scroll-distance="1"
            data-infinite-container=".infinite-scroll-parent"
            infinite-scroll-disabled="WidgetHome.busy">
-        <div class="media-item col-sm-6 padding-zero" ng-repeat="section in WidgetHome.sections">
+        <div class="media-item col-sm-6 padding-zero"
+             ng-repeat="section in WidgetHome.sections">
           <div class="media-holder border-radius-three overflow-hidden">
             <div class="media-img-holder">
               <img ng-if="!section.image.src" src="assets/images/239x100.png">
+              <img ng-src="{{section.image.src}}" ng-if="section.image.src">
             </div>
             <div
-                class="info-bar bg-primary padding-left-ten text-center padding-right-ten">
-              <p class="ellipsis margin-zero" ng-href="#/items/{{section.handle}}">{{section
-                .title}}</p>
+                class="info-bar titleBarBackgroundTheme padding-left-ten text-center padding-right-ten">
+              <p class="ellipsis margin-zero titleBarTextAndIcons"><a class="titleBarTextAndIcons"
+                  href="javascript:void(0);"
+                  ng-click="WidgetHome.showItems(section.handle)">{{section
+                .title}}</a></p>
             </div>
           </div>
         </div>

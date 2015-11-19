@@ -1,29 +1,14 @@
 'use strict';
-(function (angular,buildfire) {
+(function (angular, buildfire) {
   angular
-    .module('eCommercePluginWidget', ['ngRoute','infinite-scroll','ngAnimate'])
-    .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
+    .module('eCommercePluginWidget', ['infinite-scroll', 'ngAnimate'])
+    .config(['$compileProvider', function ($compileProvider) {
 
       /**
        * To make href urls safe on mobile
        */
       $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|cdvfile|file):/);
 
-      $routeProvider
-        .when('/', {
-          template: '<div></div>'
-        })
-        .when('/items/:handle', {
-          templateUrl: 'templates/items.html',
-          controllerAs: 'WidgetItems',
-          controller: 'WidgetItemsCtrl'
-        })
-        .when('/item/:handle', {
-          templateUrl: 'templates/Item_Details.html',
-          controllerAs: 'WidgetSingle',
-          controller: 'WidgetSingleCtrl'
-        })
-        .otherwise('/');
     }])
     .directive("buildFireCarousel", ["$rootScope", function ($rootScope) {
       return {
@@ -33,28 +18,85 @@
         }
       };
     }])
-    .run(['Location', '$location','$rootScope', function (Location, $location, $rootScope) {
-      buildfire.navigation.onBackButtonClick = function () {
-        if ($location.path() != "/items") {
-          $rootScope.showCategories = true;
-          Location.goTo('#/');
+    .directive("buildFireCarousel2", ["$rootScope", function ($rootScope) {
+      return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+          $rootScope.$broadcast("Carousel2:LOADED");
         }
-        else {
-          buildfire.navigation.navigateHome ();
+      };
+    }])
+    .run(['ViewStack', function (ViewStack) {
+      buildfire.navigation.onBackButtonClick = function () {
+        if (ViewStack.hasViews()) {
+          ViewStack.pop();
+        } else {
+          buildfire.navigation.navigateHome();
         }
       };
     }]).filter('getImageUrl', ['Buildfire', function (Buildfire) {
-        return function (url, width, height, type) {
-          if (type == 'resize')
-            return Buildfire.imageLib.resizeImage(url, {
-              width: width,
-              height: height
+      return function (url, width, height, type) {
+        if (type == 'resize')
+          return Buildfire.imageLib.resizeImage(url, {
+            width: width,
+            height: height
+          });
+        else
+          return Buildfire.imageLib.cropImage(url, {
+            width: width,
+            height: height
+          });
+      }
+    }])
+    .directive("viewSwitcher", ["ViewStack", "$rootScope", '$compile', "$templateCache",
+      function (ViewStack, $rootScope, $compile, $templateCache) {
+        return {
+          restrict: 'AE',
+          link: function (scope, elem, attrs) {
+            var views = 0;
+            manageDisplay();
+            $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
+              if (type === 'PUSH') {
+                var newScope = $rootScope.$new();
+                var _newView = '<div id="' + view.template + '" ng-include="\'' + "templates/" + view.template + ".html" + '\'"></div>';
+                var parTpl = $compile(_newView)(newScope);
+                $(elem).append(parTpl);
+                views++;
+
+              } else if (type === 'POP') {
+                $(elem).find('#' + view.template).remove();
+                views--;
+              }
+              else if (type === 'POPALL') {
+                console.log(view);
+                angular.forEach(view, function (value, key) {
+                  $(elem).find('#' + value.template).remove();
+                });
+                views = 0;
+              }
+              manageDisplay();
             });
-          else
-            return Buildfire.imageLib.cropImage(url, {
-              width: width,
-              height: height
-            });
+
+            function manageDisplay() {
+              if (views) {
+                $(elem).removeClass("ng-hide");
+              } else {
+                $(elem).addClass("ng-hide");
+              }
+            }
+
+          }
+        };
+      }]).filter('cropImage', [function () {
+      return function (url, width, height, noDefault) {
+        if (noDefault) {
+          if (!url)
+            return '';
         }
-      }])
-})(window.angular,window.buildfire);
+        return buildfire.imageLib.cropImage(url, {
+          width: width,
+          height: height
+        });
+      };
+    }]);
+})(window.angular, window.buildfire);
