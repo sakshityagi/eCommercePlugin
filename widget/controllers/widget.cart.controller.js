@@ -45,8 +45,8 @@
               if (!WidgetCart.data.design.itemListLayout) {
                 WidgetCart.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-              if (WidgetCart.data.content.storeName && currentView.params.handle)
-                getProduct(WidgetCart.data.content.storeName, currentView.params.handle);
+              if (WidgetCart.data.content.storeName)
+                getCart(WidgetCart.data.content.storeName);
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -90,7 +90,7 @@
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetCart.listeners) {
-            if(WidgetCart.listeners.hasOwnProperty(i)) {
+            if (WidgetCart.listeners.hasOwnProperty(i)) {
               WidgetCart.listeners[i]();
             }
           }
@@ -98,8 +98,7 @@
         });
 
         WidgetCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("SINGLE:", view.template, 'Add_To_Cart_1');
-          if(view.template === 'Shopping_Cart') {
+          if (view.template === 'Shopping_Cart') {
             $scope.$destroy();
           }
         });
