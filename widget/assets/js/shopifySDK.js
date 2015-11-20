@@ -301,8 +301,7 @@ eCommerceSDK.account.prototype = {
 
     var params = [];
     params.push({key: 'id', value: variant_id});
-    params.push({key: 'quantity', value: 0});
-
+    params.push({key: 'quantity', value:quantity|| 0});
     eCommerceSDK.api.post(1, this.accountName, 'cart/change.js', params, function (result) {
       if (callback) {
         callback(result);

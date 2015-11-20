@@ -109,16 +109,16 @@
          */
         DataStore.onUpdate().then(null, null, onUpdateCallback);
 
-        WidgetCart.updateCart = function(variantId, variant, quantity, handle){
+        WidgetCart.updateCart = function(item){
           $rootScope.cartItemToUpdate={
-            variantId : variantId,
-            variant: variant,
-            quantity:quantity
+            variantId : item.variant_id,
+            variant: item.variant_title,
+            quantity:item.quantity
           }
           ViewStack.push({
             template: 'Update_Cart_Item',
             params: {
-              handle: handle
+              handle: item.handle
             }
           });
         }
