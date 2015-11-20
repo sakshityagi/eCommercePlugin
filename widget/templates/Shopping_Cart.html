@@ -15,7 +15,7 @@
               <p class="ellipsis margin-zero">{{item.product_title}}</p>
 
               <p class="ellipsis margin-zero">Qty: {{item.quantity}}, {{item.variant_title}}</p>
-              <a class="text-primary">Edit Item</a>
+              <a class="text-primary" ng-click="WidgetCart.updateCart(item.id, item.variant_title, item.quantity, item.handle)">Edit Item</a>
               <a class="text-danger margin-left-fifteen">Delete</a>
             </div>
           </div>

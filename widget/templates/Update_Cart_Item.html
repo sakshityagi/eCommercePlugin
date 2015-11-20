@@ -1,0 +1,43 @@
+<div class="holder padding-zero has-bottom slide content"
+     ng-controller="WidgetUpdateCartCtrl as WidgetUpdateCart">
+    <div class="ecommerce-plugin">
+        <div class="padded">
+            <div class="item clearfix row">
+                <div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+                    <span>Quantity</span>
+                </div>
+                <div class="main col-xs-9 pull-right">
+                    <input type="text" class="form-control" placeholder="1" ng-model="cartItemToUpdate.quantity">
+                </div>
+            </div>
+            <hr class="none">
+            <div class="item clearfix row">
+                <div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
+                    <span>Variant</span>
+                </div>
+                <div class="main col-xs-9 pull-right">
+                    <div class="dropdown" dropdown>
+                        <button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
+                            <span class="pull-left">{{WidgetUpdateCart.currentAddedItemInCart.Variant.title||cartItemToUpdate.variant}}</span>
+                            <span class="chevron icon-chevron-down pull-right"></span>
+                        </button>
+                        <ul class="dropdown-menu extended" role="menu">
+                            <li ng-repeat="variant in WidgetUpdateCart.item.variants" ><a tabindex="-1" ng-click="WidgetUpdateCart.updateVariant(variant)">{{variant.title}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="none">
+        </div>
+        <div class="bottom fixed-bottom border-top-grey clearfix">
+            <div class="col-xs-6 pull-left text-center">
+                <a class="text-primary default-background-hover transition-third">Cancel</a>
+            </div>
+            <div class="col-xs-6 pull-right text-center border-left-grey">
+                <a class="text-primary default-background-hover transition-third"
+                   ng-click="WidgetUpdateCart.addProductToCart()"
+                        >Update Cart</a>
+            </div>
+        </div>
+    </div>
+</div>

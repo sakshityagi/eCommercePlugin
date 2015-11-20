@@ -10,7 +10,7 @@
         WidgetCart.listeners = {};
         var currentView = ViewStack.getCurrentView();
         var currentStoreName = "";
-
+        $rootScope.cartItemToUpdate={};
         WidgetCart.safeHtml = function (html) {
           if (html)
             return $sce.trustAsHtml(html);
@@ -87,6 +87,20 @@
          * DataStore.onUpdate() is bound to listen any changes in datastore
          */
         DataStore.onUpdate().then(null, null, onUpdateCallback);
+
+        WidgetCart.updateCart = function(variantId, variant, quantity, handle){
+          $rootScope.cartItemToUpdate={
+            variantId : variantId,
+            variant: variant,
+            quantity:quantity
+          }
+          ViewStack.push({
+            template: 'Update_Cart_Item',
+            params: {
+              handle: handle
+            }
+          });
+        }
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetCart.listeners) {
