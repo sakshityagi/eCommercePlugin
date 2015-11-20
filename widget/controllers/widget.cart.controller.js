@@ -16,6 +16,27 @@
             return $sce.trustAsHtml(html);
         };
 
+        WidgetCart.removeItemFromCart = function (item) {
+          var success = function (result) {
+            var index = WidgetCart.cart.items.indexOf(item);
+            if (index != -1) {
+              WidgetCart.cart.items.splice(index, 1);
+            }
+            if (WidgetCart.cart.item_count) {
+              WidgetCart.cart.item_count = WidgetCart.cart.item_count - item.quantity;
+            }
+            if (WidgetCart.cart.total_price) {
+              WidgetCart.cart.total_price = WidgetCart.cart.total_price - (item.quantity * item.price);
+            }
+          };
+
+          var error = function (error) {
+            console.log("Error removing item from cart:", error);
+          };
+
+          ECommerceSDK.updateCartItem(WidgetCart.data.content.storeName, item.variant_id, 0).then(success, error);
+        };
+
         var getCart = function (storeName) {
           Buildfire.spinner.show();
           var success = function (result) {
