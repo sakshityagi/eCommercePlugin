@@ -24,7 +24,7 @@ eCommerceSDK.api = {
         console.info("Call: " + JSON.stringify(serverUrl));
       var p = $.ajax({
         url: serverUrl,
-        dataType: 'json',
+        dataType: 'jsonp',
         timeout: this.apiTimeout,
         success: function(result) {
           console.log("Success......");
