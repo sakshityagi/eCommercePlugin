@@ -94,6 +94,7 @@
                 WidgetUpdateCart.updateVariant = function (variant) {
                     WidgetUpdateCart.currentAddedItemInCart.Variant = {
                         variantId:variant.id,
+                        variantNewId:variant.id,
                         title:variant.title,
                         quantity:$rootScope.cartItemToUpdate.quantity
                     };
@@ -102,10 +103,23 @@
                 };
 
 
-                WidgetUpdateCart.addProductToCart = function () {
+                WidgetUpdateCart.updateProductToCart = function () {
+
                     var success = function (result) {
                         console.log("****************************Success************", result);
-                        ViewStack.pop();
+                        if(WidgetUpdateCart.currentAddedItemInCart.Variant.quantity==0){
+                            var success = function (result) {
+                                console.log("****************************Success************", result);
+                            };
+                            var error = function (error) {
+                                console.log("****************************Error************", error);
+                            };
+                            ECommerceSDK.addItemInCart(WidgetUpdateCart.data.content.storeName,
+                                WidgetUpdateCart.currentAddedItemInCart.Variant.variantNewId,
+                                $rootScope.cartItemToUpdate.quantity)
+                                .then(success, error);
+                        }
+
                         ViewStack.push({
                             template: 'Shopping_Cart'
                         });
@@ -116,7 +130,12 @@
                     };
                     console.log(">>>>>>>>>>>>>>>>>>>>>,",WidgetUpdateCart.data.content.storeName,
                         WidgetUpdateCart.currentAddedItemInCart.Variant.variantId,
-                        WidgetUpdateCart.currentAddedItemInCart.Variant.quantity)
+                        WidgetUpdateCart.currentAddedItemInCart.Variant.quantity);
+                    if(WidgetUpdateCart.currentAddedItemInCart.Variant.variantId!=$rootScope.cartItemToUpdate.variantId){
+                        WidgetUpdateCart.currentAddedItemInCart.Variant.quantity = 0;
+                        WidgetUpdateCart.currentAddedItemInCart.Variant.variantId=$rootScope.cartItemToUpdate.variantId;
+                    }
+
                     ECommerceSDK.updateCartItem(WidgetUpdateCart.data.content.storeName,
                         WidgetUpdateCart.currentAddedItemInCart.Variant.variantId,
                         WidgetUpdateCart.currentAddedItemInCart.Variant.quantity)

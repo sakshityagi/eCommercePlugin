@@ -1,4 +1,4 @@
-<div class="holder padding-zero has-bottom slide content"
+<div class="holder padding-zero has-bottom slide content" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
      ng-controller="WidgetUpdateCartCtrl as WidgetUpdateCart">
     <div class="ecommerce-plugin">
         <div class="padded">
@@ -35,7 +35,7 @@
             </div>
             <div class="col-xs-6 pull-right text-center border-left-grey">
                 <a class="text-primary default-background-hover transition-third"
-                   ng-click="WidgetUpdateCart.addProductToCart()"
+                   ng-click="WidgetUpdateCart.updateProductToCart()"
                         >Update Cart</a>
             </div>
         </div>
