@@ -267,13 +267,33 @@
           }
           return deferred.promise;
         };
+        var checkoutCart = function (storeName) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.checkout(function (redirectUrl) {
+              if (redirectUrl)
+                deferred.resolve(redirectUrl);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
         return {
           getSections: getSections,
           getItems: getItems,
           getProduct: getProduct,
           getCart: getCart,
           addItemInCart: addItemInCart,
-          updateCartItem: updateCartItem
+          updateCartItem: updateCartItem,
+          checkoutCart: checkoutCart
         };
       }])
     .factory('Location', [function () {

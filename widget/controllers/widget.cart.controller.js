@@ -10,7 +10,7 @@
         WidgetCart.listeners = {};
         var currentView = ViewStack.getCurrentView();
         var currentStoreName = "";
-        $rootScope.cartItemToUpdate={};
+        $rootScope.cartItemToUpdate = {};
         WidgetCart.safeHtml = function (html) {
           if (html)
             return $sce.trustAsHtml(html);
@@ -46,7 +46,7 @@
             }
             , error = function (err) {
               Buildfire.spinner.hide();
-              console.error('Error In Fetching Single product Details', err);
+              console.error('Error In Fetching cart details', err);
             };
           ECommerceSDK.getCart(storeName).then(success, error);
         };
@@ -109,19 +109,32 @@
          */
         DataStore.onUpdate().then(null, null, onUpdateCallback);
 
-        WidgetCart.updateCart = function(variantId, variant, quantity, handle){
-          $rootScope.cartItemToUpdate={
-            variantId : variantId,
+        WidgetCart.updateCart = function (variantId, variant, quantity, handle) {
+          $rootScope.cartItemToUpdate = {
+            variantId: variantId,
             variant: variant,
-            quantity:quantity
-          }
+            quantity: quantity
+          };
           ViewStack.push({
             template: 'Update_Cart_Item',
             params: {
               handle: handle
             }
           });
-        }
+        };
+
+        WidgetCart.checkoutCart = function () {
+          Buildfire.spinner.show();
+          var success = function (result) {
+              Buildfire.spinner.hide();
+              console.log("#########################################", result);
+            }
+            , error = function (err) {
+              Buildfire.spinner.hide();
+              console.error('Error while cart checkout', JSON.parse(JSON.stringify(err)));
+            };
+          ECommerceSDK.checkoutCart().then(success, error);
+        };
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetCart.listeners) {

@@ -478,19 +478,19 @@ eCommerceSDK.account.prototype = {
   },
 
   checkout: function (callback) {
+    console.log(">>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<shop");
     var self = this;
     this.getCart(null, function (result) {
       if (result) {
         var token = result.token;
         if (callback) callback(eCommerceSDK.api.server.replace('{0}', self.accountName) + 'cart');
-
-        //eCommerceSDK.api.get(1, self.accountName, 'admin/shop', [], function (shopResult) {
-        //    if (callback && token && shopResult && shopResult.id) {
-        //        var redirectUrl = 'https://checkout.shopify.com/carts/{id}/{token}';
-        //        redirectUrl = redirectUrl.replace('{id}', shopResult.id).replace('{token}', token);
-        //        callback(redirectUrl);
-        //    }
-        //});
+        eCommerceSDK.api.get(1, self.accountName, 'admin/shop', [], function (shopResult) {
+            if (callback && token && shopResult && shopResult.id) {
+                var redirectUrl = 'https://checkout.shopify.com/carts/{id}/{token}';
+                redirectUrl = redirectUrl.replace('{id}', shopResult.id).replace('{token}', token);
+                callback(redirectUrl);
+            }
+        });
       }
     });
   }
