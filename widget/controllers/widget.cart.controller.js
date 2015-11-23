@@ -109,7 +109,7 @@
             variantId : item.variant_id,
             variant: item.variant_title,
             quantity:item.quantity
-          }
+          };
           ViewStack.push({
             template: 'Update_Cart_Item',
             params: {

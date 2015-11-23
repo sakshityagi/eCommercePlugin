@@ -169,7 +169,6 @@
           }
         });
         WidgetItems.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("ITEMS:", view.template, WidgetItems.data.design.itemListLayout);
           if (view.template === WidgetItems.data.design.itemListLayout) {
             $scope.$destroy();
           }

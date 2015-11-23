@@ -148,7 +148,6 @@
         });
 
         WidgetAddToCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("SINGLE:", view.template, 'Add_To_Cart_1');
           if (view.template === 'Add_To_Cart_1') {
             $scope.$destroy();
           }

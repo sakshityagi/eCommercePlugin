@@ -136,7 +136,6 @@
         });
 
         WidgetSingle.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("SINGLE:", view.template, 'Item_Details');
           if (view.template === 'Item_Details') {
             $scope.$destroy();
           }
