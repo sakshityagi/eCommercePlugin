@@ -116,6 +116,11 @@
             .then(success, error);
         };
 
+
+        WidgetAddToCartFinal.cancelClick = function(){
+          ViewStack.pop();
+        };
+
         $scope.$on("$destroy", function () {
           for (var i in WidgetAddToCartFinal.listeners) {
             if (WidgetAddToCartFinal.listeners.hasOwnProperty(i)) {

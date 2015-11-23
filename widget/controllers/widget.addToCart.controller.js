@@ -124,6 +124,9 @@
           });
         };
 
+        WidgetAddToCart.cancelClick = function(){
+          ViewStack.pop();
+        };
 
         $scope.$on("$destroy", function () {
           for (var i in WidgetAddToCart.listeners) {

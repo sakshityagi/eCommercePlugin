@@ -133,7 +133,7 @@
               Buildfire.spinner.hide();
               console.error('Error while cart checkout', JSON.parse(JSON.stringify(err)));
             };
-          ECommerceSDK.checkoutCart().then(success, error);
+          ECommerceSDK.checkoutCart(WidgetCart.data.content.storeName).then(success, error);
         };
 
         $scope.$on("$destroy", function () {

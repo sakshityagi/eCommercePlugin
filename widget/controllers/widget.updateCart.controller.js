@@ -103,7 +103,12 @@
         };
 
 
-        WidgetUpdateCart.updateProductToCart = function () {
+                WidgetUpdateCart.cancelClick = function(){
+                    ViewStack.pop();
+                };
+
+
+                WidgetUpdateCart.updateProductToCart = function () {
 
           var success = function (result) {
             console.log("****************************Success************", result);
