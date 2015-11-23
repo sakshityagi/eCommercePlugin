@@ -7,7 +7,7 @@
                     <span>Quantity</span>
                 </div>
                 <div class="main col-xs-9 pull-right">
-                    <input type="text" class="form-control" placeholder="1" ng-model="cartItemToUpdate.quantity">
+                    <input type="number" class="form-control" placeholder="1" ng-model="cartItemToUpdate.quantity">
                 </div>
             </div>
             <hr class="none">
@@ -31,10 +31,10 @@
         </div>
         <div class="bottom fixed-bottom border-top-grey clearfix">
             <div class="col-xs-6 pull-left text-center">
-                <a class="text-primary default-background-hover transition-third">Cancel</a>
+                <a class="text-primary default-background-hover transition-third" ng-click="WidgetUpdateCart.cancelClick()">Cancel</a>
             </div>
             <div class="col-xs-6 pull-right text-center border-left-grey">
-                <a class="text-primary default-background-hover transition-third"
+                <a class="text-primary bg-primary whiteTheme transition-third"
                    ng-click="WidgetUpdateCart.updateProductToCart()"
                         >Update Cart</a>
             </div>

@@ -103,6 +103,11 @@
                 };
 
 
+                WidgetUpdateCart.cancelClick = function(){
+                    ViewStack.pop();
+                };
+
+
                 WidgetUpdateCart.updateProductToCart = function () {
 
                     var success = function (result) {
@@ -153,7 +158,6 @@
 
 
                 WidgetUpdateCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-                    console.log("SINGLE:", view.template, 'Update_Cart_Item');
                     if (view.template === 'Update_Cart_Item') {
                         $scope.$destroy();
                     }
