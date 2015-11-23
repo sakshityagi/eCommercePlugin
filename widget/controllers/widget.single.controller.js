@@ -92,10 +92,6 @@
                     WidgetSingle.item = null;
                     currentStoreName = "";
                   }
-                  if (WidgetSingle.data.settings.currency && currentCurrency && currentCurrency != WidgetSingle.data.settings.currency) {
-                    currentCurrency = WidgetSingle.data.settings.currency;
-                    $rootScope.$broadcast('CURRENCY_CHANGED', WidgetSingle.data.settings.currency);
-                  }
                   if (WidgetSingle.data.content.storeName && currentStoreName != WidgetSingle.data.content.storeName) {
                     WidgetSingle.item = null;
                     getProduct(WidgetSingle.data.content.storeName, currentView.params.handle);
@@ -143,6 +139,12 @@
           console.log("SINGLE:", view.template, 'Item_Details');
           if (view.template === 'Item_Details') {
             $scope.$destroy();
+          }
+        });
+
+        WidgetSingle.listeners['CHANGED'] = $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
+          if (type === 'POP') {
+            DataStore.onUpdate().then(null, null, onUpdateCallback);
           }
         });
 

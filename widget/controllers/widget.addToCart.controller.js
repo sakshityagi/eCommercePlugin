@@ -155,6 +155,13 @@
             $scope.$destroy();
           }
         });
+
+        WidgetAddToCart.listeners['CHANGED'] = $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
+          if (type === 'POP') {
+            DataStore.onUpdate().then(null, null, onUpdateCallback);
+          }
+        });
+
         init();
       }
     ])

@@ -175,13 +175,6 @@
           }
         });
 
-        WidgetItems.listeners['CURRENCY'] = $rootScope.$on("CURRENCY_CHANGED", function (e, currency) {
-          if (!WidgetItems.data.settings)
-            WidgetItems.data.settings = {};
-          WidgetItems.data.settings.currency = currency;
-          $scope.$digest();
-        });
-
         init();
       }]);
 })(window.angular);

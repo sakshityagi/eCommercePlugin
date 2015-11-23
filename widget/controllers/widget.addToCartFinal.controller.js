@@ -122,7 +122,7 @@
               WidgetAddToCartFinal.listeners[i]();
             }
           }
-          DataStore.clearListener();
+          //DataStore.clearListener();
         });
 
 

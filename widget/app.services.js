@@ -133,7 +133,7 @@
               } else {
                 return deferred.notify(event);
               }
-            });
+            }, true);
             onUpdateListeners.push(onUpdateFn);
             return deferred.promise;
           },
