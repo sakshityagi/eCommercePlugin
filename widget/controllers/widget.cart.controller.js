@@ -90,11 +90,6 @@
                     WidgetCart.item = null;
                     currentStoreName = "";
                   }
-
-                  if (WidgetCart.data.content.storeName && currentStoreName != WidgetCart.data.content.storeName) {
-                    WidgetCart.item = null;
-                    getProduct(WidgetCart.data.content.storeName, currentView.params.handle);
-                  }
                   if (!WidgetCart.data.content.storeName)
                     ViewStack.popAllViews();
                   break;
@@ -146,6 +141,8 @@
         });
 
         WidgetCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
+          console.log("SINGLE:", view.template, 'Shopping_Cart');
+
           if (view.template === 'Shopping_Cart') {
             $scope.$destroy();
           }

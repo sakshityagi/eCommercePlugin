@@ -72,11 +72,6 @@
                     WidgetUpdateCart.item = null;
                     currentStoreName = "";
                   }
-
-                  if (WidgetUpdateCart.data.content.storeName && currentStoreName != WidgetUpdateCart.data.content.storeName) {
-                    WidgetUpdateCart.item = null;
-                    getProduct(WidgetUpdateCart.data.content.storeName, currentView.params.handle);
-                  }
                   if (!WidgetUpdateCart.data.content.storeName)
                     ViewStack.popAllViews();
                   break;
@@ -102,14 +97,12 @@
           console.log("WidgetUpdateCart.currentAddedItemInCart.Variant", WidgetUpdateCart.currentAddedItemInCart.Variant)
         };
 
+          WidgetUpdateCart.cancelClick = function(){
+            ViewStack.pop();
+          };
 
-                WidgetUpdateCart.cancelClick = function(){
-                    ViewStack.pop();
-                };
 
-
-                WidgetUpdateCart.updateProductToCart = function () {
-
+         WidgetUpdateCart.updateProductToCart = function () {
           var success = function (result) {
             console.log("****************************Success************", result);
             if (WidgetUpdateCart.currentAddedItemInCart.Variant.quantity == 0) {
@@ -133,9 +126,7 @@
           var error = function (error) {
             console.log("****************************Error************", error);
           };
-          console.log(">>>>>>>>>>>>>>>>>>>>>,", WidgetUpdateCart.data.content.storeName,
-            WidgetUpdateCart.currentAddedItemInCart.Variant.variantId,
-            WidgetUpdateCart.currentAddedItemInCart.Variant.quantity);
+
           if (WidgetUpdateCart.currentAddedItemInCart.Variant.variantId != $rootScope.cartItemToUpdate.variantId) {
             WidgetUpdateCart.currentAddedItemInCart.Variant.quantity = 0;
             WidgetUpdateCart.currentAddedItemInCart.Variant.variantId = $rootScope.cartItemToUpdate.variantId;
@@ -158,7 +149,7 @@
 
 
         WidgetUpdateCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("SINGLE:", view.template, 'Update_Cart_Item');
+          console.log("SINGLE:", view.template,'update_cart');
           if (view.template === 'Update_Cart_Item') {
             $scope.$destroy();
           }

@@ -74,11 +74,6 @@
                     WidgetAddToCartFinal.item = null;
                     currentStoreName = "";
                   }
-
-                  if (WidgetAddToCartFinal.data.content.storeName && currentStoreName != WidgetAddToCartFinal.data.content.storeName) {
-                    WidgetAddToCartFinal.item = null;
-                    getProduct(WidgetAddToCartFinal.data.content.storeName, currentView.params.handle);
-                  }
                   if (!WidgetAddToCartFinal.data.content.storeName)
                     ViewStack.popAllViews();
                   break;
