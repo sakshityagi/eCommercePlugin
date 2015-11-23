@@ -18,7 +18,7 @@
                 <div class="main col-xs-9 pull-right">
                     <div class="dropdown" dropdown>
                         <button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-                            <span class="pull-left">{{WidgetUpdateCart.currentAddedItemInCart.Variant.title||cartItemToUpdate.variant}}</span>
+                                <span class="pull-left">{{WidgetUpdateCart.currentAddedItemInCart.Variant.title||(cartItemToUpdate.variant||WidgetUpdateCart.item.variants[0].title)}}</span>
                             <span class="chevron icon-chevron-down pull-right"></span>
                         </button>
                         <ul class="dropdown-menu extended" role="menu">
