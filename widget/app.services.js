@@ -133,7 +133,7 @@
               } else {
                 return deferred.notify(event);
               }
-            });
+            }, true);
             onUpdateListeners.push(onUpdateFn);
             return deferred.promise;
           },
@@ -210,10 +210,90 @@
           }
           return deferred.promise;
         };
+        var getCart = function (storeName) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.getCart({}, function (cart) {
+              if (cart)
+                deferred.resolve(cart);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
+        var addItemInCart = function (storeName, variant_id, quantity) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.addItem(variant_id, quantity, {}, function (cart) {
+              if (cart)
+                deferred.resolve(cart);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
+        var updateCartItem = function (storeName, variant_id, quantity) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.changeItem(variant_id, quantity, {}, function (cart) {
+              if (cart)
+                deferred.resolve(cart);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
+        var checkoutCart = function (storeName) {
+          var deferred = $q.defer();
+          var _url = '';
+          if (!storeName) {
+            deferred.reject(new Error({
+              code: STATUS_CODE.UNDEFINED_DATA,
+              message: STATUS_MESSAGES.UNDEFINED_DATA
+            }));
+          } else {
+            var eCommerceSDKObj = new eCommerceSDK.account({accountName: storeName});
+            eCommerceSDKObj.checkout(function (redirectUrl) {
+              if (redirectUrl)
+                deferred.resolve(redirectUrl);
+              else
+                deferred.resolve(null);
+            });
+          }
+          return deferred.promise;
+        };
         return {
           getSections: getSections,
           getItems: getItems,
-          getProduct: getProduct
+          getProduct: getProduct,
+          getCart: getCart,
+          addItemInCart: addItemInCart,
+          updateCartItem: updateCartItem,
+          checkoutCart: checkoutCart
         };
       }])
     .factory('Location', [function () {
@@ -226,26 +306,34 @@
     }])
     .factory('ViewStack', ['$rootScope', function ($rootScope) {
       var views = [];
+      var viewMap = {};
       return {
         push: function (view) {
-          views.push(view);
-          $rootScope.$broadcast('VIEW_CHANGED', 'PUSH', view);
+          if (viewMap[view.template]) {
+            this.pop();
+          }
+          else {
+            viewMap[view.template] = 1;
+            views.push(view);
+            $rootScope.$broadcast('VIEW_CHANGED', 'PUSH', view);
+          }
           return view;
         },
         pop: function () {
-          $rootScope.$broadcast('BEFORE_POP', views[views.length -1]);
+          $rootScope.$broadcast('BEFORE_POP', views[views.length - 1]);
           var view = views.pop();
+          delete viewMap[view.template];
           $rootScope.$broadcast('VIEW_CHANGED', 'POP', view);
           return view;
         },
-        hasViews: function() {
+        hasViews: function () {
           return !!views.length;
         },
-        getCurrentView: function() {
+        getCurrentView: function () {
           return views.length && views[views.length - 1] || {};
         },
-        popAllViews: function() {
-          $rootScope.$broadcast('VIEW_CHANGED', 'POPALL',views);
+        popAllViews: function () {
+          $rootScope.$broadcast('VIEW_CHANGED', 'POPALL', views);
           views = [];
         }
       };

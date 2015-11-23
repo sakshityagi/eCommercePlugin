@@ -127,6 +127,9 @@
                     WidgetHome.pageNumber = 1;
                     WidgetHome.loadMore();
                   }
+                  if (WidgetHome.view) {
+                    WidgetHome.view.loadItems(WidgetHome.data.content.carouselImages);
+                  }
 
                   break;
               }

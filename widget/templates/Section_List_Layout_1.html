@@ -10,9 +10,8 @@
         </div>
       </div>
     </div>
-    <div class="padded padding-bottom-zero">
-      <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'
-         ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)"></p>
+    <div class="padded padding-bottom-zero" ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)">
+      <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'></p>
     </div>
     <div ng-if="WidgetHome.data">
       <div class="list-layout" infinite-scroll="WidgetHome.loadMore()"

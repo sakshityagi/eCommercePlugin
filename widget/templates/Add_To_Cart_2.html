@@ -1,4 +1,5 @@
-<div class="holder padding-zero has-bottom">
+<div class="holder padding-zero has-bottom slide content " back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+	 ng-controller="WidgetAddToCartFinalCtrl as WidgetAddToCartFinal">
 	<div class="ecommerce-plugin">
 		<div class="padded">
 			<div class="item clearfix row">
@@ -6,72 +7,72 @@
 					<span>Quantity</span>
 				</div>
 				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="1">
+					<input type="number" class="form-control" placeholder="1" ng-model="addedToCart.quantity">
 				</div>
 			</div>
 			<hr class="none">
 			<div class="item clearfix row">
 				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 1</span>
+					<span>Variant</span>
 				</div>
 				<div class="main col-xs-9 pull-right">
 					<div class="dropdown" dropdown>
 						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">Color</span>
-					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
+							<span class="pull-left">{{WidgetAddToCartFinal.currentAddedItemInCart.Variant.title||addedToCart.title}}</span>
+							<span class="chevron icon-chevron-down pull-right"></span>
+						</button>
 						<ul class="dropdown-menu extended" role="menu">
-							<li><a tabindex="-1">Color 1</a></li>
-							<li><a tabindex="-1">Color 2</a></li>
-							<li><a tabindex="-1">Color 3</a></li>
-	                    </ul>
+							<li ng-repeat="variant in WidgetAddToCartFinal.item.variants" ><a tabindex="-1" ng-click="WidgetAddToCartFinal.updateVariant(variant)">{{variant.title}}</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
 			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 2</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<div class="dropdown" dropdown>
-						<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">
-							<span class="pull-left">Size</span>
-					  		<span class="chevron icon-chevron-down pull-right"></span>
-						</button>					
-						<ul class="dropdown-menu extended" role="menu">
-							<li><a tabindex="-1">Size 1</a></li>
-							<li><a tabindex="-1">Size 2</a></li>
-							<li><a tabindex="-1">Size 3</a></li>
-	                    </ul>
-					</div>
-				</div>
-			</div>
-			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 3</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="Etc">
-				</div>
-			</div>
-			<hr class="none">
-			<div class="item clearfix row">
-				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
-					<span>Variable 4</span>
-				</div>
-				<div class="main col-xs-9 pull-right">
-					<input type="text" class="form-control" placeholder="Etc">
-				</div>
-			</div>
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 2</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<div class="dropdown" dropdown>-->
+						<!--<button class="btn btn-default text-left dropdown-toggle" data-toggle="dropdown" dropdown-toggle aria-expanded="true">-->
+							<!--<span class="pull-left">Size</span>-->
+					  		<!--<span class="chevron icon-chevron-down pull-right"></span>-->
+						<!--</button>					-->
+						<!--<ul class="dropdown-menu extended" role="menu">-->
+							<!--<li><a tabindex="-1">Size 1</a></li>-->
+							<!--<li><a tabindex="-1">Size 2</a></li>-->
+							<!--<li><a tabindex="-1">Size 3</a></li>-->
+	                    <!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<hr class="none">-->
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 3</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<input type="text" class="form-control" placeholder="Etc">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<hr class="none">-->
+			<!--<div class="item clearfix row">-->
+				<!--<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">-->
+					<!--<span>Variable 4</span>-->
+				<!--</div>-->
+				<!--<div class="main col-xs-9 pull-right">-->
+					<!--<input type="text" class="form-control" placeholder="Etc">-->
+				<!--</div>-->
+			<!--</div>-->
 		</div>
 		<div class="bottom fixed-bottom border-top-grey clearfix">
 			<div class="col-xs-6 pull-left text-center">
-				<a class="text-primary default-background-hover transition-third">Cancel</a>
+				<a class="text-primary default-background-hover transition-third" ng-click="WidgetAddToCartFinal.cancelClick()">Cancel</a>
 			</div>
 			<div class="col-xs-6 pull-right text-center border-left-grey">
-				<a class="text-primary default-background-hover transition-third">Add to Cart</a>
+				<a class="text-primary bg-primary whiteTheme transition-third"
+           ng-click="WidgetAddToCartFinal.addProductToCart()"
+            >Add to Cart</a>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-<div class="holder padding-zero has-bottom content slide"
+<div class="holder padding-zero has-bottom content slide" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
      ng-controller="WidgetSingleCtrl as WidgetSingle">
   <div class="ecommerce-plugin" ng-if="WidgetSingle.data">
     <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
@@ -9,14 +9,13 @@
           <img src="assets/images/16x9.png">
         </div>
       </div>
-      <div class="info-bar padding-top-five padding-bottom-five bg-primary">
+       <div class="info-bar padding-top-five padding-bottom-five bg-primary">
         <div class="col-xs-10 pull-left">
           <p class="margin-zero">{{WidgetSingle.item.title}}</p>
 
-          <p class="margin-zero">{{WidgetSingle.item.variants[0].price
-            |currency:[WidgetSingle.data.settings.currency.symbol]}}</p>
+          <p class="margin-zero"><span ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.data.settings.currency.symbol ||'$')"></span>&nbsp; {{WidgetSingle.item.variants[0].price}}</p>
         </div>
-        <div class="col-xs-2 pull-right right-icon">
+        <div class="col-xs-2 pull-right right-icon" ng-click="WidgetSingle.addToCart(WidgetSingle.item.handle)">
           <a class="padded-icon pull-right border-radius-three text-center"
              style="background:#fff;">
             <span class="icon icon-cart-plus"></span>

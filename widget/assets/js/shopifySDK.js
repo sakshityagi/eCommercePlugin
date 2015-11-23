@@ -24,7 +24,7 @@ eCommerceSDK.api = {
         console.info("Call: " + JSON.stringify(serverUrl));
       var p = $.ajax({
         url: serverUrl,
-        dataType: 'json',
+        dataType: 'jsonp',
         timeout: this.apiTimeout,
         success: function(result) {
           console.log("Success......");
@@ -301,8 +301,7 @@ eCommerceSDK.account.prototype = {
 
     var params = [];
     params.push({key: 'id', value: variant_id});
-    params.push({key: 'quantity', value: 0});
-
+    params.push({key: 'quantity', value:quantity|| 0});
     eCommerceSDK.api.post(1, this.accountName, 'cart/change.js', params, function (result) {
       if (callback) {
         callback(result);
@@ -478,19 +477,19 @@ eCommerceSDK.account.prototype = {
   },
 
   checkout: function (callback) {
+    console.log(">>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<shop");
     var self = this;
     this.getCart(null, function (result) {
       if (result) {
         var token = result.token;
         if (callback) callback(eCommerceSDK.api.server.replace('{0}', self.accountName) + 'cart');
-
-        //eCommerceSDK.api.get(1, self.accountName, 'admin/shop', [], function (shopResult) {
-        //    if (callback && token && shopResult && shopResult.id) {
-        //        var redirectUrl = 'https://checkout.shopify.com/carts/{id}/{token}';
-        //        redirectUrl = redirectUrl.replace('{id}', shopResult.id).replace('{token}', token);
-        //        callback(redirectUrl);
-        //    }
-        //});
+        eCommerceSDK.api.get(1, self.accountName, 'admin/shop', [], function (shopResult) {
+            if (callback && token && shopResult && shopResult.id) {
+                var redirectUrl = 'https://checkout.shopify.com/carts/{id}/{token}';
+                redirectUrl = redirectUrl.replace('{id}', shopResult.id).replace('{token}', token);
+                callback(redirectUrl);
+            }
+        });
       }
     });
   }
