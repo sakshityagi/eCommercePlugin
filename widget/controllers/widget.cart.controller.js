@@ -18,15 +18,15 @@
 
         WidgetCart.removeItemFromCart = function (item) {
           var success = function (result) {
-            var index = WidgetCart.cart.items.indexOf(item);
+            var index = $rootScope.cart.items.indexOf(item);
             if (index != -1) {
-              WidgetCart.cart.items.splice(index, 1);
+              $rootScope.cart.items.splice(index, 1);
             }
-            if (WidgetCart.cart.item_count) {
-              WidgetCart.cart.item_count = WidgetCart.cart.item_count - item.quantity;
+            if ($rootScope.cart.item_count) {
+              $rootScope.cart.item_count = $rootScope.cart.item_count - item.quantity;
             }
-            if (WidgetCart.cart.total_price) {
-              WidgetCart.cart.total_price = WidgetCart.cart.total_price - (item.quantity * item.price);
+            if ($rootScope.cart.total_price) {
+              $rootScope.cart.total_price = $rootScope.cart.total_price - (item.quantity * item.price);
             }
           };
 
@@ -42,7 +42,7 @@
           var success = function (result) {
               Buildfire.spinner.hide();
               console.log("^^^^^^^^^^^^^^^^^^^^^^^", result);
-              WidgetCart.cart = result;
+              $rootScope.cart = result;
             }
             , error = function (err) {
               Buildfire.spinner.hide();
@@ -108,7 +108,8 @@
           $rootScope.cartItemToUpdate={
             variantId : item.variant_id,
             variant: item.variant_title,
-            quantity:item.quantity
+            quantity:item.quantity,
+            data:item
           };
           ViewStack.push({
             template: 'Update_Cart_Item',

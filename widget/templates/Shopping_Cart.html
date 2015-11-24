@@ -3,7 +3,7 @@
   <div class="ecommerce-plugin shopping-cart has-bottom layout3">
     <div class="">
       <div class="list-layout">
-        <div class="list-item" ng-repeat="item in WidgetCart.cart.items">
+        <div class="list-item" ng-repeat="item in cart.items">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
               <img ng-hide="item.image" src="assets/images/1x1.png">
@@ -28,13 +28,13 @@
       <div class="col-xs-4 pull-left text-center">
         <p class="margin-zero">Total Products</p>
 
-        <p class="margin-zero">{{WidgetCart.cart.item_count || 0}}</p>
+        <p class="margin-zero">{{cart.item_count || 0}}</p>
       </div>
       <div class="col-xs-4 pull-left text-center">
         <p class="margin-zero">Total Amounts</p>
 
         <p class="margin-zero"><span
-            ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{WidgetCart.cart.total_price
+            ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{cart.total_price
           || 0}}</p>
       </div>
       <div class="col-xs-4 pull-left text-center">

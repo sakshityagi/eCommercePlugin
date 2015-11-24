@@ -19,6 +19,22 @@
             return $sce.trustAsHtml(html);
         };
 
+        var getCart = function (storeName) {
+          console.log("^^^^^^^^^^^^^^^^^^^^^^lkkklk");
+          Buildfire.spinner.show();
+          var success = function (result) {
+                Buildfire.spinner.hide();
+                console.log("^^^^^^^^^^^^^^^^^^^^^^^vvvvv", result);
+                WidgetUpdateCart.cartUpdated = result;
+                $rootScope.cart=WidgetUpdateCart.cartUpdated;
+              }
+              , error = function (err) {
+                Buildfire.spinner.hide();
+                console.error('Error In Fetching cart details', err);
+              };
+          ECommerceSDK.getCart(storeName).then(success, error);
+        };
+
         var getProduct = function (storeName, handle) {
           Buildfire.spinner.show();
           var success = function (result) {
@@ -108,6 +124,7 @@
             if (WidgetUpdateCart.currentAddedItemInCart.Variant.quantity == 0) {
               var success = function (result) {
                 console.log("****************************Success************", result);
+                getCart(WidgetUpdateCart.data.content.storeName);
               };
               var error = function (error) {
                 console.log("****************************Error************", error);
@@ -116,6 +133,8 @@
                 WidgetUpdateCart.currentAddedItemInCart.Variant.variantNewId,
                 $rootScope.cartItemToUpdate.quantity)
                 .then(success, error);
+            }else {
+              getCart(WidgetUpdateCart.data.content.storeName);
             }
 
             ViewStack.push({
