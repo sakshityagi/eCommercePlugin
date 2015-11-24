@@ -57,5 +57,15 @@ describe('Unit : eCommerce Plugin content.home.controller.js', function () {
             expect(STATUS_CODE).not.toBeUndefined();
         });
     });
+
+    describe('Units: test the method ContentHome.clearData', function () {
+        it('it should pass if ContentHome.clearData is called', function () {
+            ContentHome.storeName = false;
+            ContentHome.data.content.storeName = "test";
+            ContentHome.clearData();
+            expect(ContentHome.data.content.storeName).toBeNull()
+        });
+
+    });
 })
 ;
