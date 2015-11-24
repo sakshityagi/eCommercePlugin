@@ -60,6 +60,17 @@
           return $sce.trustAsHtml(html)
         };
 
+
+        WidgetItems.addToCart = function(handle){
+           ViewStack.push({
+            template: 'Add_To_Cart_1',
+            params: {
+              handle: handle
+            }
+          });
+        };
+
+
         /*
          * Fetch user's data from datastore
          */
