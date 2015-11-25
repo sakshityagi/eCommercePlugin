@@ -23,7 +23,7 @@
           <div class="media-holder border-radius-three overflow-hidden">
             <div class="media-img-holder">
               <img ng-if="!section.image.src" src="assets/images/239x100.png">
-              <img ng-src="{{section.image.src}}" ng-if="section.image.src">
+              <img ng-src="{{section.image.src | getImageUrl : 640 : 380}}" ng-if="section.image.src">
             </div>
             <div
                 class="info-bar titleBarBackgroundTheme padding-left-ten text-center padding-right-ten">
