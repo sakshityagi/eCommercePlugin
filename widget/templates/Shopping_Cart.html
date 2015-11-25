@@ -1,6 +1,6 @@
-<div class="holder padding-zero slide-dummy  z-index-5 content" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+<div class="holder padding-zero has-bottom clearfix"
      ng-controller="WidgetCartCtrl as WidgetCart">
-  <div class="ecommerce-plugin shopping-cart has-bottom layout3">
+  <div class="ecommerce-plugin shopping-cart has-bottom layout3  z-index-6  slide content" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
     <div class="">
       <div class="list-layout">
         <div class="list-item" ng-repeat="item in cart.items">
@@ -24,24 +24,25 @@
         </div>
       </div>
     </div>
-    <div class="bottom fixed-bottom border-top-grey clearfix">
-      <div class="col-xs-4 pull-left text-center">
-        <p class="margin-zero">Total Products</p>
 
-        <p class="margin-zero">{{cart.item_count || 0}}</p>
-      </div>
-      <div class="col-xs-4 pull-left text-center">
-        <p class="margin-zero">Total Amounts</p>
+  </div>
+  <div class="bottom fixed-bottom border-top-grey clearfix" style="z-index: 1006">
+    <div class="col-xs-4 pull-left text-center">
+      <p class="margin-zero">Total Products</p>
 
-        <p class="margin-zero"><span
-            ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{cart.total_price
-          || 0}}</p>
-      </div>
-      <div class="col-xs-4 pull-left text-center">
-        <a class="btn btn-primary" href="javascript:void(0);"
-           ng-click="WidgetCart.checkoutCart()">Continue
-        </a>
-      </div>
+      <p class="margin-zero">{{cart.item_count || 0}}</p>
+    </div>
+    <div class="col-xs-4 pull-left text-center">
+      <p class="margin-zero">Total Amounts</p>
+
+      <p class="margin-zero"><span
+              ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{cart.total_price
+        || 0}}</p>
+    </div>
+    <div class="col-xs-4 pull-left text-center">
+      <a class="btn btn-primary" href="javascript:void(0);"
+         ng-click="WidgetCart.checkoutCart()">Continue
+      </a>
     </div>
   </div>
 </div>
