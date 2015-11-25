@@ -49,3 +49,7 @@
 .z-index-7{
     z-index:1007;
 }
+
+.bottom-zero{
+    bottom: 0px !important;
+}
