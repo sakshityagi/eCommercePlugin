@@ -170,7 +170,7 @@
             if (settings.width) {
               options.width = settings.width;
             }
-            return Buildfire.imageLib.cropImage(url, options);
+            return buildfire.imageLib.cropImage(url, options);
           }
         };
         $scope.$on("$destroy", function () {
