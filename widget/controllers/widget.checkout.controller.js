@@ -15,7 +15,6 @@
           if (url)
             return $sce.trustAsResourceUrl(url);
         };
-
       }
     ])
 })(window.angular);
