@@ -124,6 +124,12 @@
           var success = function (result) {
               Buildfire.spinner.hide();
               console.log("#########################################", result);
+              ViewStack.push({
+                template: 'Checkout',
+                params: {
+                  url: result
+                }
+              });
             }
             , error = function (err) {
               Buildfire.spinner.hide();
