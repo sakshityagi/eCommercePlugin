@@ -67,7 +67,7 @@
               if (type === 'PUSH') {
                 var newScope = $rootScope.$new();
                 newScope.currentItemListLayout = "templates/" + view.template + ".html";
-                var _newView = '<div id="' + view.template + '"><div ng-if="currentItemListLayout" ng-include="currentItemListLayout"></div></div>';
+                var _newView = '<div  id="' + view.template + '" ><div class="slide content" ng-if="currentItemListLayout" ng-include="currentItemListLayout" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover; background-color:white !important"></div></div>';
                 var parTpl = $compile(_newView)(newScope);
 
                 newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function(evt, layout, needDigest) {

@@ -1,6 +1,6 @@
-<div class="holder padding-zero has-bottom clearfix z-index-1 slide no-scroll" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+<div class="holder padding-zero has-bottom sticky-bottom-menu clearfix no-scroll"
      ng-controller="WidgetItemsCtrl as WidgetItems">
-  <div class="ecommerce-plugin layout3 content slide" ng-if="WidgetItems.data" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
+  <div class="ecommerce-plugin layout3" ng-if="WidgetItems.data">
     <div class="">
       <div class="list-layout has-cart" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
