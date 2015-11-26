@@ -1,6 +1,6 @@
-<div class="holder padding-zero has-bottom clearfix z-index-2 slide no-scroll" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+<div class="holder padding-zero has-bottom sticky-bottom-menu clearfix"
      ng-controller="WidgetItemsCtrl as WidgetItems">
-    <div class="ecommerce-plugin layout1  content slide" ng-if="WidgetItems.data" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
+    <div class="ecommerce-plugin layout1" ng-if="WidgetItems.data" >
     <div class="margin-top-ten">
       <div class="media-layout" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()"
