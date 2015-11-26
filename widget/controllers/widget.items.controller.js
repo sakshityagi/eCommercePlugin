@@ -12,6 +12,8 @@
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
 
+        console.log("YOYOYOYOYOOYOYOYOY", $scope.currentItemListLayout);
+
         var currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 

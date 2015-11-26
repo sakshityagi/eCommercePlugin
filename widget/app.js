@@ -66,9 +66,17 @@
             $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
               if (type === 'PUSH') {
                 var newScope = $rootScope.$new();
-                scope.currentItemListLayout = "templates/" + view.template + ".html";
+                newScope.currentItemListLayout = "templates/" + view.template + ".html";
                 var _newView = '<div id="' + view.template + '"><div ng-if="currentItemListLayout" ng-include="currentItemListLayout"></div></div>';
-                var parTpl = $compile(_newView)(scope);
+                var parTpl = $compile(_newView)(newScope);
+
+                newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function(evt, layout, needDigest) {
+                  newScope.currentItemListLayout = "templates/" + layout + ".html";
+                  if(needDigest) {
+                    newScope.$digest();
+                  }
+                });
+
                 $(elem).append(parTpl);
                 views++;
 
