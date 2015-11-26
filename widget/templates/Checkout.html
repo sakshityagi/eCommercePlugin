@@ -1,0 +1,6 @@
+<div class="holder padding-zero has-bottom z-index-7"
+     ng-controller="WidgetCheckoutCtrl as WidgetCheckout">
+  <div class="ecommerce-plugin" ng-if="WidgetCheckout.url">
+    <iframe ng-src="{{WidgetCheckout.safeUrl(WidgetCheckout.url)}}"></iframe>
+  </div>
+</div>
