@@ -1,8 +1,8 @@
 describe('Unit : eCommerce Plugin content.home.controller.js', function () {
-    var ContentHome, scope, $rootScope, $controller, Buildfire, ActionItems, TAG_NAMES, STATUS_CODE, STATUS_MESSAGES, q;
+    var ContentHome, scope, $rootScope, $controller, Buildfire, ActionItems, TAG_NAMES, STATUS_CODE, STATUS_MESSAGES, q, ECommerceSDK, DataStore;
     beforeEach(module('eCommercePluginContent'));
     var editor;
-    beforeEach(inject(function (_$rootScope_, _$q_, _$controller_, _TAG_NAMES_, _STATUS_CODE_, _LAYOUTS_, _STATUS_MESSAGES_) {
+    beforeEach(inject(function (_$rootScope_, _$q_, _$controller_, _TAG_NAMES_, _STATUS_CODE_, _LAYOUTS_, _STATUS_MESSAGES_, _ECommerceSDK_, _DataStore_) {
         $rootScope = _$rootScope_;
         q = _$q_;
         scope = $rootScope.$new();
@@ -10,7 +10,9 @@ describe('Unit : eCommerce Plugin content.home.controller.js', function () {
         TAG_NAMES = _TAG_NAMES_;
         STATUS_CODE = _STATUS_CODE_;
         STATUS_MESSAGES = _STATUS_MESSAGES_;
+        ECommerceSDK = _ECommerceSDK_;
         LAYOUTS = _LAYOUTS_;
+        DataStore = _DataStore_;
         // Utils = __Utils__;
         Buildfire = {
             components: {
@@ -64,6 +66,34 @@ describe('Unit : eCommerce Plugin content.home.controller.js', function () {
             ContentHome.data.content.storeName = "test";
             ContentHome.clearData();
             expect(ContentHome.data.content.storeName).toBeNull()
+        });
+
+    });
+
+    describe('Units: test the method  ContentHome.verifyStore', function () {
+        it('it should pass if  ContentHome.verifyStore is defiled', function () {
+            expect(ContentHome.verifyStore).not.toBeUndefined();
+        });
+        it('it should pass if  ContentHome.verifyStore is called', function () {
+            ContentHome.verifyStore();
+            //spyOn(DataStore, 'get').and.callThrough();
+            spyOn(ECommerceSDK, 'validateStoreName').and.callFake(function() {
+                return {
+                    then: function(callback) { return callback(result); }
+                };
+                ContentHome.storeVerifySuccess = true;
+            });
+        });
+
+    });
+
+    describe('Units: spy the service  DataStore', function () {
+        it('it should pass if  DataStore service called', function () {
+            spyOn(DataStore, 'get').and.callFake(function() {
+                return {
+                    then: function(callback) { return callback(result); }
+                };
+            });
         });
 
     });
