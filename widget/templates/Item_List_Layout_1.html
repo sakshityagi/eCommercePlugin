@@ -7,8 +7,9 @@
           <div class="list-item" ng-repeat="item in WidgetItems.items">
             <div class="list-item-media text-left overflow-hidden">
               <div class="list-media-holder square-icon pull-left">
-                <img ng-hide="item.images[0].src" src="assets/images/1x1.png">
-                <img ng-show="item.images[0].src" ng-src="{{item.images[0].src|getImageUrl:60:60}}">
+                <img ng-hide="item.images[0].src" src="assets/images/1x1.png" ng-click="WidgetItems.showItem(item.handle)">
+                <img ng-show="item.images[0].src"
+                     ng-src="{{item.images[0].src|getImageUrl:60:60}}" ng-click="WidgetItems.showItem(item.handle)">
               </div>
               <div class="list-item-copy text-left padding-left-ten padding-right-ten">
                 <p class="ellipsis margin-bottom-zero margin-top-five text-primary">
