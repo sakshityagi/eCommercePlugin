@@ -16,3 +16,11 @@
 .bottom-zero{
     bottom: 0px !important;
 }
+
+.holder .bottom .extra-links a.grid-layout{
+	left:inherit;
+	right:10px;
+}
+.holder.has-bottom.has-layout-bottom{
+	padding-bottom:94px !important;
+}

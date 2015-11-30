@@ -13,14 +13,12 @@
   <script src="../../../scripts/jquery/jquery-1.11.2.min.js"></script>
   <script src="../../../scripts/buildfire.js"></script>
   <script src="../../../scripts/owlCarousel/owlCarousel.js"></script>
-  <script
-      src="../../../scripts/buildfire/components/carousel/carousel.js"></script>
+  <script src="../../../scripts/buildfire/components/carousel/carousel.js"></script>
   <script src="../../../scripts/angular/angular.min.js"></script>
   <script src="../../../scripts/angular/ui-bootstrap.min.js"></script>
   <script src="../../../scripts/angular/angular-route.min.js"></script>
   <script src="assets/js/shopifySDK.js"></script>
-  <script src="assets/js/ng-infinite-scroll.custom.js"
-          type="application/javascript"></script>
+  <script src="assets/js/ng-infinite-scroll.custom.js" type="application/javascript"></script>
   <script src="app.js"></script>
   <script src="enums.js"></script>
   <script src="app.services.js"></script>
@@ -34,15 +32,11 @@
   <script src="controllers/widget.checkout.controller.js"></script>
   <script src="../../../scripts/angular/angular-animate.min.js"></script>
   <link rel="stylesheet" href="../../../styles/transitionAnimation.css">
-
   <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 <body class="body-scroll slide no-scroll">
-<div ng-controller="WidgetHomeCtrl as WidgetHome"
-     class="slide content infinite-scroll-parent" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
-  <div ng-if="WidgetHome.data.design.sectionListLayout"
-       ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
+<div ng-controller="WidgetHomeCtrl as WidgetHome" class="slide content infinite-scroll-parent" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
+  <div ng-if="WidgetHome.data.design.sectionListLayout" ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
 </div>
 <div view-switcher="">

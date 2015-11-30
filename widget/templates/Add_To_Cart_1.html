@@ -1,9 +1,7 @@
-<div class="holder padding-zero has-bottom z-index-4"
-	 ng-controller="WidgetAddToCartCtrl as WidgetAddToCart">
+<div class="holder padding-zero has-bottom z-index-4" ng-controller="WidgetAddToCartCtrl as WidgetAddToCart">
 	<div class="ecommerce-plugin ">
 		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-			<div id="carousel3" ng-if="WidgetAddToCart.item.images.length"
-				 build-fire-carousel3=""></div>
+			<div id="carousel3" ng-if="WidgetAddToCart.item.images.length" build-fire-carousel3=""></div>
 			<div class="plugin-slider has-info-bar-double text-center" ng-if="!WidgetAddToCart.item.images.length">
 				<div class="plugin-slide">
 					<img src="assets/images/16x9.png">
@@ -48,6 +46,15 @@
 					</div>
 				</div>
 			</div>
+			<hr class="none">
+			<div class="item clearfix row">
+				<div class="col-xs-6 pull-left padding-right-five">
+					<a class="btn btn-danger stretch text-center transition-third" ng-click="WidgetAddToCart.cancelClick()">Cancel</a>
+				</div>
+				<div class="col-xs-6 pull-right padding-left-five">
+					<a class="btn btn-primary stretch text-center transition-third" ng-click="WidgetAddToCart.proceedToCart(WidgetAddToCart.item.handle)">Proceed</a>
+				</div>
+			</div>
 			<!--<hr class="none">
 			<div class="item clearfix row">
 				<div class="labels col-xs-3 padding-right-zero pull-left margin-top-five">
@@ -85,15 +92,6 @@
 					<input type="text" class="form-control" placeholder="Etc">
 				</div>
 			</div>-->
-		</div>
-		<div class="bottom fixed-bottom border-top-grey clearfix bottom-zero">
-			<div class="col-xs-6 pull-left text-center">
-				<a class="text-primary default-background-hover transition-third" ng-click="WidgetAddToCart.cancelClick()">Cancel</a>
-			</div>
-			<div class="col-xs-6 pull-right text-center border-left-grey">
-				<a class="text-primary bg-primary whiteTheme transition-third" ng-click="WidgetAddToCart.proceedToCart(WidgetAddToCart.item.handle)">Proceed</a>
-			</div>
-
 		</div>
 	</div>
 </div>
