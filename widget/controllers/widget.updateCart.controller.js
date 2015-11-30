@@ -23,15 +23,15 @@
           console.log("^^^^^^^^^^^^^^^^^^^^^^lkkklk");
           Buildfire.spinner.show();
           var success = function (result) {
-                Buildfire.spinner.hide();
-                console.log("^^^^^^^^^^^^^^^^^^^^^^^vvvvv", result);
-                WidgetUpdateCart.cartUpdated = result;
-                $rootScope.cart=WidgetUpdateCart.cartUpdated;
-              }
-              , error = function (err) {
-                Buildfire.spinner.hide();
-                console.error('Error In Fetching cart details', err);
-              };
+              Buildfire.spinner.hide();
+              console.log("^^^^^^^^^^^^^^^^^^^^^^^vvvvv", result);
+              WidgetUpdateCart.cartUpdated = result;
+              $rootScope.cart = WidgetUpdateCart.cartUpdated;
+            }
+            , error = function (err) {
+              Buildfire.spinner.hide();
+              console.error('Error In Fetching cart details', err);
+            };
           ECommerceSDK.getCart(storeName).then(success, error);
         };
 
@@ -113,12 +113,18 @@
           console.log("WidgetUpdateCart.currentAddedItemInCart.Variant", WidgetUpdateCart.currentAddedItemInCart.Variant)
         };
 
-          WidgetUpdateCart.cancelClick = function(){
-            ViewStack.pop();
-          };
+        WidgetUpdateCart.cancelClick = function () {
+          ViewStack.pop();
+        };
+
+        WidgetUpdateCart.goToCart = function () {
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
+        };
 
 
-         WidgetUpdateCart.updateProductToCart = function () {
+        WidgetUpdateCart.updateProductToCart = function () {
           var success = function (result) {
             console.log("****************************Success************", result);
             if (WidgetUpdateCart.currentAddedItemInCart.Variant.quantity == 0) {
@@ -133,7 +139,7 @@
                 WidgetUpdateCart.currentAddedItemInCart.Variant.variantNewId,
                 $rootScope.cartItemToUpdate.quantity)
                 .then(success, error);
-            }else {
+            } else {
               getCart(WidgetUpdateCart.data.content.storeName);
             }
 
@@ -168,7 +174,7 @@
 
 
         WidgetUpdateCart.listeners['POP'] = $rootScope.$on('BEFORE_POP', function (e, view) {
-          console.log("SINGLE:", view.template,'update_cart');
+          console.log("SINGLE:", view.template, 'update_cart');
           if (view.template === 'Update_Cart_Item') {
             $scope.$destroy();
           }

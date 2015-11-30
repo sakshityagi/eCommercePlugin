@@ -119,8 +119,14 @@
           });
         };
 
-        WidgetAddToCart.cancelClick = function(){
+        WidgetAddToCart.cancelClick = function () {
           ViewStack.pop();
+        };
+
+        WidgetAddToCart.goToCart = function () {
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
         };
 
         $scope.$on("$destroy", function () {

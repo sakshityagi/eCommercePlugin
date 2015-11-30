@@ -42,6 +42,12 @@
             });
         };
 
+        WidgetHome.goToCart = function () {
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
+        };
+
         var currentStoreName = "";
 
         var getSections = function (storeName) {
@@ -121,7 +127,7 @@
                   } else {
                     $rootScope.backgroundImage = WidgetHome.data.design.itemDetailsBgImage;
                   }
-                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName){
+                  if (WidgetHome.data.content.storeName && currentStoreName != WidgetHome.data.content.storeName) {
                     WidgetHome.sections = [];
                     WidgetHome.busy = false;
                     WidgetHome.pageNumber = 1;

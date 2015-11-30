@@ -116,6 +116,12 @@
           ViewStack.pop();
         };
 
+        WidgetAddToCartFinal.goToCart = function () {
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
+        };
+
         $scope.$on("$destroy", function () {
           for (var i in WidgetAddToCartFinal.listeners) {
             if (WidgetAddToCartFinal.listeners.hasOwnProperty(i)) {

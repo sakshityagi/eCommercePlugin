@@ -12,8 +12,6 @@
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
 
-        console.log("YOYOYOYOYOOYOYOYOY", $scope.currentItemListLayout);
-
         var currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 
@@ -63,13 +61,18 @@
           return $sce.trustAsHtml(html)
         };
 
-
         WidgetItems.addToCart = function (handle) {
           ViewStack.push({
             template: 'Add_To_Cart_1',
             params: {
               handle: handle
             }
+          });
+        };
+
+        WidgetItems.goToCart = function (handle) {
+          ViewStack.push({
+            template: 'Shopping_Cart'
           });
         };
 
@@ -112,7 +115,6 @@
           saveData(WidgetItems.data, TAG_NAMES.SHOPIFY_INFO);
           $rootScope.$broadcast("ITEM_LIST_LAYOUT_CHANGED", WidgetItems.data.design.itemListLayout);
           currentItemListLayout = WidgetItems.data.design.itemListLayout;
-
         };
         var saveData = function (newObj, tag) {
           if (typeof newObj === 'undefined') {
