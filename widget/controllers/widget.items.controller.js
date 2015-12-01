@@ -12,16 +12,16 @@
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
 
-        var currentView = ViewStack.getCurrentView();
+        WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");
           if (WidgetItems.busy) return;
           WidgetItems.busy = true;
-          console.log(WidgetItems.data, currentView.params);
-          if (WidgetItems.data && currentView.params.handle) {
-            getItems(WidgetItems.data.content.storeName, currentView.params.handle);
+
+          if (WidgetItems.data && WidgetItems.currentView.params.handle) {
+            getItems(WidgetItems.data.content.storeName, WidgetItems.currentView.params.handle);
           }
           else {
             WidgetItems.items = [];
