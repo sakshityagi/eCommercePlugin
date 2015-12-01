@@ -41,16 +41,22 @@
          * Fetch user's data from datastore
          */
 
-        console.log("currentView.params.handle",currentView.params.handle)
+        console.log("currentView.params.handle",currentView.params.handle);
         WidgetSingle.addToCart = function(handle){
-          console.log("aaaaaaaaaaaaaaaaaa")
            ViewStack.push({
             template: 'Add_To_Cart_1',
             params: {
               handle: handle
             }
           });
-        }
+        };
+
+        WidgetSingle.goToCart = function(handle){
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
+        };
+
         var init = function () {
           var success = function (result) {
               WidgetSingle.data = result.data;
@@ -128,7 +134,6 @@
             var imageArray = WidgetSingle.item.images.map(function (item) {
               return {iconUrl: item.src, title: ""};
             });
-            console.log(")))))))))))))))))))))))))", imageArray);
             WidgetSingle.view.loadItems(imageArray, null, "WideScreen");
           } else {
             WidgetSingle.view.loadItems([]);

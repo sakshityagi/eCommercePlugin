@@ -1,9 +1,9 @@
-<div class="holder padding-zero slide content" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+<div class="holder padding-zero has-bottom clearfix sticky-bottom-menu"
      ng-controller="WidgetCartCtrl as WidgetCart">
   <div class="ecommerce-plugin shopping-cart has-bottom layout3">
     <div class="">
       <div class="list-layout">
-        <div class="list-item" ng-repeat="item in WidgetCart.cart.items">
+        <div class="list-item" ng-repeat="item in cart.items">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
               <img ng-hide="item.image" src="assets/images/1x1.png">
@@ -24,24 +24,27 @@
         </div>
       </div>
     </div>
-    <div class="bottom fixed-bottom border-top-grey clearfix">
-      <div class="col-xs-4 pull-left text-center">
-        <p class="margin-zero">Total Products</p>
+    <div class="no-event-found padded" ng-if="!cart.items.length">
+      <div class="well text-center">Empty Cart.</div>
+    </div>
+  </div>
+  <div class="bottom fixed-bottom border-top-grey clearfix bottom-zero" style="z-index: 1006">
+    <div class="col-xs-4 pull-left text-center">
+      <p class="margin-zero">Total Products</p>
 
-        <p class="margin-zero">{{WidgetCart.cart.item_count || 0}}</p>
-      </div>
-      <div class="col-xs-4 pull-left text-center">
-        <p class="margin-zero">Total Amounts</p>
+      <p class="margin-zero">{{cart.item_count || 0}}</p>
+    </div>
+    <div class="col-xs-4 pull-left text-center">
+      <p class="margin-zero">Total Amounts</p>
 
-        <p class="margin-zero"><span
-            ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{WidgetCart.cart.total_price
-          || 0}}</p>
-      </div>
-      <div class="col-xs-4 pull-left text-center">
-        <a class="btn btn-primary" href="javascript:void(0);"
-           ng-click="WidgetCart.checkoutCart()">Continue
-        </a>
-      </div>
+      <p class="margin-zero"><span
+              ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>&nbsp;{{cart.total_price
+        || 0}}</p>
+    </div>
+    <div class="col-xs-4 pull-left text-center">
+      <a class="btn btn-primary" href="javascript:void(0);"
+         ng-click="WidgetCart.checkoutCart()">Continue
+      </a>
     </div>
   </div>
 </div>

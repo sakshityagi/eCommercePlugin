@@ -13,6 +13,7 @@
         WidgetItems.pageNumber = 1;
 
         var currentView = ViewStack.getCurrentView();
+        var currentItemListLayout = "";
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");
@@ -60,6 +61,22 @@
           return $sce.trustAsHtml(html)
         };
 
+        WidgetItems.addToCart = function (handle) {
+          ViewStack.push({
+            template: 'Add_To_Cart_1',
+            params: {
+              handle: handle
+            }
+          });
+        };
+
+        WidgetItems.goToCart = function (handle) {
+          ViewStack.push({
+            template: 'Shopping_Cart'
+          });
+        };
+
+
         /*
          * Fetch user's data from datastore
          */
@@ -80,6 +97,7 @@
               if (!WidgetItems.data.design.itemListLayout) {
                 WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
+              currentItemListLayout = WidgetItems.data.design.itemListLayout;
             }
             , error = function (err) {
               console.error('Error while getting data', err);
@@ -95,13 +113,8 @@
             WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[1].name;
           }
           saveData(WidgetItems.data, TAG_NAMES.SHOPIFY_INFO);
-          ViewStack.pop();
-          ViewStack.push({
-            template: WidgetItems.data.design.itemListLayout,
-            params: {
-              handle: currentView.params.handle
-            }
-          });
+          $rootScope.$broadcast("ITEM_LIST_LAYOUT_CHANGED", WidgetItems.data.design.itemListLayout);
+          currentItemListLayout = WidgetItems.data.design.itemListLayout;
         };
         var saveData = function (newObj, tag) {
           if (typeof newObj === 'undefined') {
@@ -125,6 +138,10 @@
                     WidgetItems.data.design = {};
                   if (!WidgetItems.data.design.itemListLayout) {
                     WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
+                  }
+                  if (WidgetItems.data.design.itemListLayout && currentItemListLayout && currentItemListLayout != WidgetItems.data.design.itemListLayout) {
+                    $rootScope.$broadcast("ITEM_LIST_LAYOUT_CHANGED", WidgetItems.data.design.itemListLayout, true);
+                    currentItemListLayout = WidgetItems.data.design.itemListLayout;
                   }
                   if (!WidgetItems.data.content.storeName) {
                     WidgetItems.items = [];

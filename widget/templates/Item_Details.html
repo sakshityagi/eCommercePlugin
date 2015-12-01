@@ -1,21 +1,25 @@
-<div class="holder padding-zero has-bottom content slide" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}"
+<div class="holder padding-zero has-bottom"
      ng-controller="WidgetSingleCtrl as WidgetSingle">
   <div class="ecommerce-plugin" ng-if="WidgetSingle.data">
     <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
       <div id="carousel2" ng-if="WidgetSingle.item.images.length"
            build-fire-carousel2=""></div>
-      <div class="plugin-slider has-info-bar-double text-center" ng-if="!WidgetSingle.item.images.length">
+      <div class="plugin-slider has-info-bar-double text-center"
+           ng-if="!WidgetSingle.item.images.length">
         <div class="plugin-slide">
           <img src="assets/images/16x9.png">
         </div>
       </div>
-       <div class="info-bar padding-top-five padding-bottom-five bg-primary">
+      <div class="info-bar padding-top-five padding-bottom-five bg-primary">
         <div class="col-xs-10 pull-left">
           <p class="margin-zero">{{WidgetSingle.item.title}}</p>
 
-          <p class="margin-zero"><span ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.data.settings.currency.symbol ||'$')"></span>&nbsp; {{WidgetSingle.item.variants[0].price}}</p>
+          <p class="margin-zero"><span
+              ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.data.settings.currency.symbol ||'$')"></span>&nbsp;
+            {{WidgetSingle.item.variants[0].price}}</p>
         </div>
-        <div class="col-xs-2 pull-right right-icon" ng-click="WidgetSingle.addToCart(WidgetSingle.item.handle)">
+        <div class="col-xs-2 pull-right right-icon"
+             ng-click="WidgetSingle.addToCart(WidgetSingle.item.handle)">
           <a class="padded-icon pull-right border-radius-three text-center"
              style="background:#fff;">
             <span class="icon icon-cart-plus"></span>
@@ -25,6 +29,12 @@
     </div>
     <div class="padded">
       <p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html)"></p>
+    </div>
+  </div>
+  <div class="bottom fixed-bottom border-top-grey clearfix bottom-zero">
+    <div class="col-xs-12 pull-left text-center">
+      <a class="whiteTheme bg-primary transition-third" href="javascript:void(0);"
+         ng-click="WidgetSingle.goToCart()">Go to Cart</a>
     </div>
   </div>
 </div>

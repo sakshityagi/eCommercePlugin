@@ -21,8 +21,8 @@
         <div class="list-item" ng-repeat="section in WidgetHome.sections">
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
-              <img ng-if="!section.image.src" src="assets/images/1x1.png">
-              <img ng-src="{{section.image.src}}" ng-if="section.image.src">
+              <img ng-if="!section.image.src" src="assets/images/1x1.png" ng-click="WidgetHome.showItems(section.handle)">
+              <img ng-src="{{section.image.src}}" ng-if="section.image.src" ng-click="WidgetHome.showItems(section.handle)">
             </div>
             <div
                 class="list-item-copy text-left padding-left-ten padding-right-ten">
@@ -35,6 +35,12 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="bottom fixed-bottom border-top-grey clearfix bottom-zero">
+    <div class="col-xs-12 pull-left text-center">
+      <a class="whiteTheme bg-primary transition-third" href="javascript:void(0);"
+         ng-click="WidgetHome.goToCart()">Go to Cart</a>
     </div>
   </div>
 </div>

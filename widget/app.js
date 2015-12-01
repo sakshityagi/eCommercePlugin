@@ -26,14 +26,14 @@
         }
       };
     }])
-      .directive("buildFireCarousel3", ["$rootScope", function ($rootScope) {
-        return {
-          restrict: 'A',
-          link: function (scope, elem, attrs) {
-            $rootScope.$broadcast("Carousel3:LOADED");
-          }
-        };
-      }])
+    .directive("buildFireCarousel3", ["$rootScope", function ($rootScope) {
+      return {
+        restrict: 'A',
+        link: function (scope, elem, attrs) {
+          $rootScope.$broadcast("Carousel3:LOADED");
+        }
+      };
+    }])
     .run(['ViewStack', function (ViewStack) {
       buildfire.navigation.onBackButtonClick = function () {
         if (ViewStack.hasViews()) {
@@ -66,8 +66,17 @@
             $rootScope.$on('VIEW_CHANGED', function (e, type, view) {
               if (type === 'PUSH') {
                 var newScope = $rootScope.$new();
-                var _newView = '<div id="' + view.template + '" ng-include="\'' + "templates/" + view.template + ".html" + '\'"></div>';
+                newScope.currentItemListLayout = "templates/" + view.template + ".html";
+                var _newView = '<div  id="' + view.template + '" ><div class="slide content" ng-if="currentItemListLayout" ng-include="currentItemListLayout" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover; background-color:white !important"></div></div>';
                 var parTpl = $compile(_newView)(newScope);
+
+                newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function(evt, layout, needDigest) {
+                  newScope.currentItemListLayout = "templates/" + layout + ".html";
+                  if(needDigest) {
+                    newScope.$digest();
+                  }
+                });
+
                 $(elem).append(parTpl);
                 views++;
 
@@ -95,17 +104,17 @@
 
           }
         };
-      }]).directive('backImg', function(){
-        return function(scope, element, attrs){
-          attrs.$observe('backImg', function(value) {
-            element.css({
-              'background': 'url(' + value +')',
-              'background-size' : 'cover',
-              'background-color': 'white'
-            });
+      }]).directive('backImg', function () {
+      return function (scope, element, attrs) {
+        attrs.$observe('backImg', function (value) {
+          element.css({
+            'background': 'url(' + value + ')',
+            'background-size': 'cover',
+            'background-color': 'white'
           });
-        };
-      }).filter('cropImage', [function () {
+        });
+      };
+    }).filter('cropImage', [function () {
       return function (url, width, height, noDefault) {
         if (noDefault) {
           if (!url)
