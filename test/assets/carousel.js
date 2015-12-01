@@ -29,14 +29,10 @@ buildfire.components.carousel._cropImage = function (url, options) {
 };
 
 buildfire.components.carousel._getDomSelector = function (selector) {
-
     if (selector && selector.nodeType && selector.nodeType === 1) {
         return selector;
-    }
-    else if (typeof (selector) === "string") {
-
+    } else if (typeof (selector) === "string") {
         selector = document.querySelector(selector);
-        console.log("selector...................",selector)
         if (selector) {
             return selector;
         }
@@ -311,7 +307,7 @@ buildfire.components.carousel.view = function (selector, items, layout) {
     this._initDimensions(layout);
     this._loadItems(items, false);
     this.init(selector);
-	window.dispatchEvent(new Event('resize'));
+	//window.dispatchEvent(new CustomEvent('resize'));
 };
 
 // Carousel view methods
