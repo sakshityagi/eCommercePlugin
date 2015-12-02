@@ -11,7 +11,7 @@
         WidgetItems.items = [];
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
-
+        WidgetItems.noItemFound = false;
         WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 
@@ -41,6 +41,7 @@
 
         var getItems = function (storeName, handle) {
           Buildfire.spinner.show();
+          WidgetItems.noItemFound = false;
           var success = function (result) {
               Buildfire.spinner.hide();
               console.log("...........................", result);
@@ -49,6 +50,11 @@
               if (result.length == PAGINATION.itemsCount) {
                 WidgetItems.busy = false;
               }
+                if(result.length)
+                  WidgetItems.noItemFound = false;
+                  else
+                  WidgetItems.noItemFound = true;
+
             }
             , error = function (err) {
               Buildfire.spinner.hide();
