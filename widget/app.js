@@ -81,8 +81,16 @@
                 views++;
 
               } else if (type === 'POP') {
-                $(elem).find('#' + view.template).remove();
-                views--;
+                var _elToRemove = $(elem).find('#' + view.template),
+                    _child = _elToRemove.children("div").eq(0);
+
+                _child.addClass("ng-enter ng-enter-active");
+                _child.one("webkitTransitionEnd transitionend oTransitionEnd", function(e) {
+                  _elToRemove.remove();
+                  views--;
+                });
+
+                //$(elem).find('#' + view.template).remove();
               }
               else if (type === 'POPALL') {
                 console.log(view);
