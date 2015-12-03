@@ -24,3 +24,15 @@
 .holder.has-bottom.has-layout-bottom{
 	padding-bottom:94px !important;
 }
+.bottom.bottom-checkout{
+	background:none !important;
+}
+.bottom.bottom-checkout p{
+	font-size:12px;
+	line-height:19px;
+}
+.bottom.bottom-checkout a.btn{
+	padding:4px;
+	position:relative;
+	top:3px;
+}
