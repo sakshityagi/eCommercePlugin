@@ -1,6 +1,6 @@
 'use strict';
 
-(function (angular) {
+(function (angular, window) {
   angular
     .module('eCommercePluginWidget')
     .controller('WidgetSingleCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'Buildfire', 'ViewStack',
@@ -12,9 +12,12 @@
         //create new instance of buildfire carousel viewer
         WidgetSingle.view = null;
 
-        WidgetSingle.safeHtml = function (html) {
-          if (html)
-            return $sce.trustAsHtml(html);
+        WidgetSingle.safeHtml = function (html, replaceAnchors) {
+          var $html = $sce.trustAsHtml(html) || "";
+          if(replaceAnchors && html) {
+            html = html.replace(/<(a)([^>]+)>/g, "<$1 target='_blank'$2>");
+          }
+          return $sce.trustAsHtml(html);
         };
 
         var currentView = ViewStack.getCurrentView();
@@ -41,9 +44,9 @@
          * Fetch user's data from datastore
          */
 
-        console.log("currentView.params.handle",currentView.params.handle);
-        WidgetSingle.addToCart = function(handle){
-           ViewStack.push({
+        console.log("currentView.params.handle", currentView.params.handle);
+        WidgetSingle.addToCart = function (handle) {
+          ViewStack.push({
             template: 'Add_To_Cart_1',
             params: {
               handle: handle
@@ -51,7 +54,7 @@
           });
         };
 
-        WidgetSingle.goToCart = function(handle){
+        WidgetSingle.goToCart = function (handle) {
           ViewStack.push({
             template: 'Shopping_Cart'
           });
@@ -154,4 +157,4 @@
 
         init();
       }]);
-})(window.angular);
+})(window.angular, window);
