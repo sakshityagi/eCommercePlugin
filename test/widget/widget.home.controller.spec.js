@@ -141,6 +141,8 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
     });
   });
   describe('Carousel:LOADED', function () {
+    var html = '<div id="carousel"></div>';
+    angular.element(document.body).append(html);
     it('should invoke when get Carousel:LOADED', function () {
       WidgetHome.data={
         content:{
@@ -152,9 +154,47 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
           itemListLayout:"testLayout"
         }
       }
-//      $rootScope.$broadcast('Carousel:LOADED');
     });
 
   });
 
-});
+  describe('Carousel:LOADED', function () {
+    var html = '<div id="carousel"></div>';
+    angular.element(document.body).append(html);
+    it('should invoke when get Carousel:LOADED with carousal images', function () {
+      WidgetHome.data={
+        content:{
+          storeName:"helloStore",
+          carouselImages :"'https://www.google.com/images/srpr/logo11w.png'"
+
+        },
+        design:{
+          itemListLayout:"testLayout"
+        }
+      }
+      $rootScope.$broadcast('Carousel:LOADED');
+    });
+
+    it('should invoke when get Carousel:LOADED without carousal images', function () {
+      WidgetHome.data={
+        content:{
+          storeName:"helloStore",
+          carouselImages :""
+
+        },
+        design:{
+          itemListLayout:"testLayout"
+        }
+      }
+      $rootScope.$broadcast('Carousel:LOADED');
+    });
+
+
+  });
+  describe('WidgetHome.goToCart', function () {
+    it('should invoke when WidgetHome.goToCart() called', function () {
+      WidgetHome.goToCart();
+    });
+  });
+
+  });

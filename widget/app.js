@@ -67,7 +67,8 @@
               if (type === 'PUSH') {
                 var newScope = $rootScope.$new();
                 newScope.currentItemListLayout = "templates/" + view.template + ".html";
-                var _newView = '<div  id="' + view.template + '" ><div class="slide content" ng-if="currentItemListLayout" ng-include="currentItemListLayout" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover; background-color:white !important"></div></div>';
+
+                var _newView = '<div  id="' + view.template + '" ><div class="slide content" data-back-img="{{backgroundImage}}" ng-if="currentItemListLayout" ng-include="currentItemListLayout"></div></div>';
                 var parTpl = $compile(_newView)(newScope);
 
                 newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function(evt, layout, needDigest) {
@@ -81,8 +82,16 @@
                 views++;
 
               } else if (type === 'POP') {
-                $(elem).find('#' + view.template).remove();
-                views--;
+                var _elToRemove = $(elem).find('#' + view.template),
+                    _child = _elToRemove.children("div").eq(0);
+
+                _child.addClass("ng-leave ng-leave-active");
+                _child.one("webkitTransitionEnd transitionend oTransitionEnd", function(e) {
+                  _elToRemove.remove();
+                  views--;
+                });
+
+                //$(elem).find('#' + view.template).remove();
               }
               else if (type === 'POPALL') {
                 console.log(view);
@@ -104,17 +113,28 @@
 
           }
         };
-      }]).directive('backImg', function () {
-      return function (scope, element, attrs) {
-        attrs.$observe('backImg', function (value) {
-          element.css({
-            'background': 'url(' + value + ')',
-            'background-size': 'cover',
-            'background-color': 'white'
+      }])
+      .directive('backImg', ["$filter", "$rootScope", function ($filter, $rootScope) {
+        return function (scope, element, attrs) {
+          attrs.$observe('backImg', function (value) {
+            var img='';
+            if(value) {
+              img = $filter("cropImage")(value, $rootScope.deviceWidth, $rootScope.deviceHeight, true);
+              element.attr("style", 'background:url(' + img + ') !important');
+              element.css({
+                'background-size': 'cover'
+              });
+            }
+            else{
+              img = "";
+              element.attr("style", 'background:url(' + img + ')');
+              element.css({
+                'background-size': 'cover'
+              });
+            }
           });
-        });
-      };
-    }).filter('cropImage', [function () {
+        };
+      }]).filter('cropImage', [function () {
       return function (url, width, height, noDefault) {
         if (noDefault) {
           if (!url)

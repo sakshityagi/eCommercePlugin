@@ -335,6 +335,7 @@
         popAllViews: function () {
           $rootScope.$broadcast('VIEW_CHANGED', 'POPALL', views);
           views = [];
+          viewMap = {};
         }
       };
     }])

@@ -8,8 +8,10 @@
 
         var WidgetCheckout = this;
         WidgetCheckout.listeners = {};
-        var currentView = ViewStack.getCurrentView();
-        WidgetCheckout.url = currentView.params.url;
+        WidgetCheckout.currentView = ViewStack.getCurrentView();
+        if(WidgetCheckout.currentView.params) {
+          WidgetCheckout.url = WidgetCheckout.currentView.params.url;
+        }
 
         WidgetCheckout.safeUrl = function (url) {
           if (url)

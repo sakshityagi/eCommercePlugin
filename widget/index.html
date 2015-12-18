@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="eCommercePluginWidget">
 <head>
-
+  <meta charset="UTF-8">
   <!-- CSS -->
   <link rel="stylesheet" href="../../../styles/bootstrap.css">
   <link rel="stylesheet" href="../../../styles/siteIcons.css">
@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="../../../styles/transitionAnimation.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="body-scroll slide no-scroll">
-<div ng-controller="WidgetHomeCtrl as WidgetHome" class="slide content infinite-scroll-parent" back-img="{{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}">
+<body class="no-scroll">
+<div ng-controller="WidgetHomeCtrl as WidgetHome" class="slide content" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover;">
   <div ng-if="WidgetHome.data.design.sectionListLayout" ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
 </div>

@@ -1,6 +1,6 @@
-<div class="holder padding-zero has-bottom"
+<div class="holder padding-zero has-bottom sticky-bottom-menu "
      ng-controller="WidgetSingleCtrl as WidgetSingle">
-  <div class="ecommerce-plugin" ng-if="WidgetSingle.data">
+  <div class="ecommerce-plugin scrollable" ng-if="WidgetSingle.data">
     <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
       <div id="carousel2" ng-if="WidgetSingle.item.images.length"
            build-fire-carousel2=""></div>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="padded">
-      <p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html)"></p>
+      <p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html, true)"></p>
     </div>
   </div>
   <div class="bottom fixed-bottom border-top-grey clearfix bottom-zero">

@@ -1,5 +1,5 @@
 describe('Unit : eCommercePluginContent content Enums', function () {
-  var TAG_NAMES, STATUS_CODE, STATUS_MESSAGES
+  var TAG_NAMES, STATUS_CODE, STATUS_MESSAGES;
 
 
   beforeEach(module('eCommercePluginContent'));

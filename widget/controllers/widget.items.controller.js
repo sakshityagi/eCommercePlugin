@@ -11,17 +11,17 @@
         WidgetItems.items = [];
         WidgetItems.busy = false;
         WidgetItems.pageNumber = 1;
-
-        var currentView = ViewStack.getCurrentView();
+        WidgetItems.noItemFound = false;
+        WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");
           if (WidgetItems.busy) return;
           WidgetItems.busy = true;
-          console.log(WidgetItems.data, currentView.params);
-          if (WidgetItems.data && currentView.params.handle) {
-            getItems(WidgetItems.data.content.storeName, currentView.params.handle);
+
+          if (WidgetItems.data && WidgetItems.currentView.params.handle) {
+            getItems(WidgetItems.data.content.storeName, WidgetItems.currentView.params.handle);
           }
           else {
             WidgetItems.items = [];
@@ -41,6 +41,7 @@
 
         var getItems = function (storeName, handle) {
           Buildfire.spinner.show();
+          WidgetItems.noItemFound = false;
           var success = function (result) {
               Buildfire.spinner.hide();
               console.log("...........................", result);
@@ -49,6 +50,11 @@
               if (result.length == PAGINATION.itemsCount) {
                 WidgetItems.busy = false;
               }
+                if(result.length)
+                  WidgetItems.noItemFound = false;
+                  else
+                  WidgetItems.noItemFound = true;
+
             }
             , error = function (err) {
               Buildfire.spinner.hide();

@@ -1,5 +1,5 @@
 <div class="holder padding-zero has-bottom has-layout-bottom sticky-bottom-menu clearfix" ng-controller="WidgetItemsCtrl as WidgetItems">
-    <div class="ecommerce-plugin layout1" ng-if="WidgetItems.data">
+    <div class="ecommerce-plugin layout1 infinite-scroll-parent scrollable" ng-if="WidgetItems.data">
     <div class="margin-top-ten">
       <div class="media-layout" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
@@ -28,7 +28,7 @@
 			  </p>
             </div>
           </div>
-          <div class="no-event-found padded" ng-if="!WidgetItems.items.length">
+          <div class="no-event-found padded" ng-if="WidgetItems.noItemFound ">
             <div class="well text-center">No items found.</div>
           </div>
         </div>
