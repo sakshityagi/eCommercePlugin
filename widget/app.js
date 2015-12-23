@@ -144,9 +144,15 @@
         link: function(scope, elem, attrs) {
 
           scope.clicked = function(e) {
-            var target = $(e.target).parents("a").eq(0).attr("href");
+            var _el = $(e.target),
+              anchor = _el;
+            if(_el.prop("tagName").toLowerCase() === 'a') {
+              anchor = _el.eq(0).attr("href");
+            } else {
+              anchor = _el.parents("a").eq(0).attr("href");
+            }
             e.preventDefault();
-            scope.onClick && scope.onClick({href: target || null});
+            scope.onClick && scope.onClick({href: anchor || null});
           };
 
           var html = scope.html.replace(/<(a)([^>]+)>/g, "<$1 ng-click='clicked($event)'$2>");
