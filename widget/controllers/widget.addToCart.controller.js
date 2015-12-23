@@ -105,18 +105,20 @@
         };
 
         WidgetAddToCart.proceedToCart = function (handle) {
-          console.log("****************", WidgetAddToCart.currentAddedItemInCart);
-          $rootScope.addedToCart = {
-            variantId: WidgetAddToCart.currentAddedItemInCart.Variant.id,
-            title: WidgetAddToCart.currentAddedItemInCart.Variant.title,
-            quantity: WidgetAddToCart.quantity
+          var success = function (result) {
+            console.log("****************************Success************", result);
+            ViewStack.push({
+              template: 'Shopping_Cart'
+            });
           };
-          ViewStack.push({
-            template: 'Add_To_Cart_2',
-            params: {
-              handle: handle
-            }
-          });
+
+          var error = function (error) {
+            console.log("****************************Error************", error);
+          };
+          ECommerceSDK.addItemInCart(WidgetAddToCart.data.content.storeName,
+            WidgetAddToCart.currentAddedItemInCart.Variant.id,
+            WidgetAddToCart.quantity)
+            .then(success, error);
         };
 
         WidgetAddToCart.cancelClick = function () {
