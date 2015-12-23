@@ -1,6 +1,6 @@
 'use strict';
 
-(function (angular, window) {
+(function (angular, buildfire) {
   angular
     .module('eCommercePluginWidget')
     .controller('WidgetSingleCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'Buildfire', 'ViewStack',
@@ -12,12 +12,14 @@
         //create new instance of buildfire carousel viewer
         WidgetSingle.view = null;
 
-        WidgetSingle.safeHtml = function (html, replaceAnchors) {
-          var $html = $sce.trustAsHtml(html) || "";
-          if(replaceAnchors && html) {
-            html = html.replace(/<(a)([^>]+)>/g, "<$1 target='_blank'$2>");
+        WidgetSingle.safeHtml = function (html) {
+            return $sce.trustAsHtml(html) || "";
+        };
+
+        WidgetSingle.test = function (target) {
+          if(target) {
+            buildfire.navigation.openWindow(target);
           }
-          return $sce.trustAsHtml(html);
         };
 
         var currentView = ViewStack.getCurrentView();
@@ -157,4 +159,4 @@
 
         init();
       }]);
-})(window.angular, window);
+})(window.angular, window.buildfire);
