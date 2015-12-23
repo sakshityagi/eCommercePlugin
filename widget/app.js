@@ -114,7 +114,7 @@
           }
         };
       }])
-      .directive('backImg', ["$filter", "$rootScope", function ($filter, $rootScope) {
+    .directive('backImg', ["$filter", "$rootScope", function ($filter, $rootScope) {
         return function (scope, element, attrs) {
           attrs.$observe('backImg', function (value) {
             var img='';
@@ -134,7 +134,33 @@
             }
           });
         };
-      }]).filter('cropImage', [function () {
+      }])
+    .directive("customBindHtml", ["$compile", function($compile) {
+      return {
+        scope: {
+          html: '=',
+          onClick: '&'
+        },
+        link: function(scope, elem, attrs) {
+
+          scope.clicked = function(e) {
+            var _el = $(e.target),
+              anchor = _el;
+            if(_el.prop("tagName").toLowerCase() === 'a') {
+              anchor = _el.eq(0).attr("href");
+            } else {
+              anchor = _el.parents("a").eq(0).attr("href");
+            }
+            e.preventDefault();
+            scope.onClick && scope.onClick({href: anchor || null});
+          };
+
+          var html = scope.html.replace(/<(a)([^>]+)>/g, "<$1 ng-click='clicked($event)'$2>");
+          $(elem).append($compile(html)(scope));
+        }
+      }
+    }])
+    .filter('cropImage', [function () {
       return function (url, width, height, noDefault) {
         if (noDefault) {
           if (!url)

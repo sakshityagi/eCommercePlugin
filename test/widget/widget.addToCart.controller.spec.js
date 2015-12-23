@@ -1,4 +1,4 @@
-describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', function () {
+describe('Unit : eCommercePluginWidget Plugin widget.addToCart.controller.js', function () {
     var WidgetAddToCart, scope, $rootScope, $controller, Buildfire, ActionItems, TAG_NAMES, STATUS_CODE, LAYOUTS, STATUS_MESSAGES, CONTENT_TYPE, q, ViewStack, $sce;
     beforeEach(module('eCommercePluginWidget'));
     var editor;
@@ -54,8 +54,8 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
 
 
 
-    describe('Call WidgetCheckout.safeHtml', function () {
-        it('should invoke when WidgetCheckout.safeHtml() called', function () {
+    describe('Call WidgetAddToCart.safeHtml', function () {
+        it('should invoke when WidgetAddToCart.safeHtml() called', function () {
             var url= "https://PERHire.myshopify.com/cart";
             WidgetAddToCart.safeHtml(url);
             WidgetAddToCart.currentAddedItemInCart={
@@ -63,8 +63,19 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
                     id:"01"
                 }
             }
+            WidgetAddToCart.data={
+                content:{
+                    storeName:"helloStore",
+                    carouselImages :"'https://www.google.com/images/srpr/logo11w.png'"
+
+                },
+                design:{
+                    itemListLayout:"testLayout"
+                }
+            }
+            ViewStack.push(WidgetAddToCart.data.design.itemListLayout);
             WidgetAddToCart.proceedToCart();
-            WidgetAddToCart.cancelClick();
+           WidgetAddToCart.cancelClick();
           });
     });
 

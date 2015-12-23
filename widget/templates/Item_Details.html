@@ -28,7 +28,10 @@
       </div>
     </div>
     <div class="padded">
-      <p ng-bind-html="WidgetSingle.safeHtml(WidgetSingle.item.body_html, true)"></p>
+      <p data-ng-if="WidgetSingle.item.body_html"
+         custom-bind-html=""
+         data-html="WidgetSingle.item.body_html"
+         data-on-click="WidgetSingle.test(href)"></p>
     </div>
   </div>
   <div class="bottom fixed-bottom border-top-grey clearfix bottom-zero">
