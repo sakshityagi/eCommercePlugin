@@ -7,15 +7,21 @@
           <div class="list-item-media text-left overflow-hidden">
             <div class="list-media-holder square-icon pull-left">
               <img ng-hide="item.image" src="assets/images/1x1.png">
-              <img ng-show="item.image" ng-src="{{item.image|getImageUrl:70:70}}">
+              <img ng-show="item.image"
+                   ng-src="{{item.image|getImageUrl:70:70}}">
             </div>
-            <div class="list-item-copy text-left padding-left-ten padding-right-ten">
+            <div
+                class="list-item-copy text-left padding-left-ten padding-right-ten">
               <p class="ellipsis margin-zero">{{item.product_title}}</p>
+
               <p class="ellipsis margin-zero">Qty:
                 {{item.quantity}}<span ng-if="item.variant_title">, </span>
                 {{item.variant_title}}</p>
-              <a class="text-primary" ng-click="WidgetCart.updateCart(item)">Edit Item</a>
-              <a class="text-danger margin-left-fifteen" href="javascript:void(0);" ng-click="WidgetCart.removeItemFromCart(item)">Delete</a>
+              <a class="text-primary" ng-click="WidgetCart.updateCart(item)">Edit
+                Item</a>
+              <a class="text-danger margin-left-fifteen"
+                 href="javascript:void(0);"
+                 ng-click="WidgetCart.removeItemFromCart(item)">Delete</a>
             </div>
           </div>
         </div>
@@ -25,20 +31,25 @@
       <div class="well text-center">Empty Cart.</div>
     </div>
   </div>
-  <div class="bottom fixed-bottom bottom-checkout clearfix bottom-zero" style="z-index: 1006">
+  <div class="bottom fixed-bottom bottom-checkout clearfix bottom-zero"
+       style="z-index: 1006">
     <div class="col-xs-4 pull-left text-center">
       <p class="margin-zero">Total Products</p>
+
       <p class="margin-zero">{{cart.item_count || 0}}</p>
     </div>
     <div class="col-xs-4 pull-left text-center">
       <p class="margin-zero">Total Amounts</p>
+
       <p class="margin-zero">
-		<span ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>
-		&nbsp;{{cart.total_price || 0}}
-		</p>
+        <span
+            ng-bind-html="WidgetCart.safeHtml(WidgetCart.data.settings.currency.symbol ||'$')"></span>
+        &nbsp;{{cart.total_price || 0 | moneyWithoutTrailingZeros}}
+      </p>
     </div>
     <div class="col-xs-4 pull-left text-center padding-right-five">
-      <a class="btn btn-primary" href="javascript:void(0);" ng-click="WidgetCart.checkoutCart()">Continue</a>
+      <a class="btn btn-primary" href="javascript:void(0);"
+         ng-click="WidgetCart.checkoutCart()">Continue</a>
     </div>
   </div>
 </div>
