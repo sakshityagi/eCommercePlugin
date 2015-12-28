@@ -71,9 +71,9 @@
                 var _newView = '<div  id="' + view.template + '" ><div class="slide content" data-back-img="{{backgroundImage}}" ng-if="currentItemListLayout" ng-include="currentItemListLayout"></div></div>';
                 var parTpl = $compile(_newView)(newScope);
 
-                newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function(evt, layout, needDigest) {
+                newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function (evt, layout, needDigest) {
                   newScope.currentItemListLayout = "templates/" + layout + ".html";
-                  if(needDigest) {
+                  if (needDigest) {
                     newScope.$digest();
                   }
                 });
@@ -83,10 +83,10 @@
 
               } else if (type === 'POP') {
                 var _elToRemove = $(elem).find('#' + view.template),
-                    _child = _elToRemove.children("div").eq(0);
+                  _child = _elToRemove.children("div").eq(0);
 
                 _child.addClass("ng-leave ng-leave-active");
-                _child.one("webkitTransitionEnd transitionend oTransitionEnd", function(e) {
+                _child.one("webkitTransitionEnd transitionend oTransitionEnd", function (e) {
                   _elToRemove.remove();
                   views--;
                 });
@@ -115,38 +115,38 @@
         };
       }])
     .directive('backImg', ["$filter", "$rootScope", function ($filter, $rootScope) {
-        return function (scope, element, attrs) {
-          attrs.$observe('backImg', function (value) {
-            var img='';
-            if(value) {
-              img = $filter("cropImage")(value, $rootScope.deviceWidth, $rootScope.deviceHeight, true);
-              element.attr("style", 'background:url(' + img + ') !important');
-              element.css({
-                'background-size': 'cover'
-              });
-            }
-            else{
-              img = "";
-              element.attr("style", 'background:url(' + img + ')');
-              element.css({
-                'background-size': 'cover'
-              });
-            }
-          });
-        };
-      }])
-    .directive("customBindHtml", ["$compile", function($compile) {
+      return function (scope, element, attrs) {
+        attrs.$observe('backImg', function (value) {
+          var img = '';
+          if (value) {
+            img = $filter("cropImage")(value, $rootScope.deviceWidth, $rootScope.deviceHeight, true);
+            element.attr("style", 'background:url(' + img + ') !important');
+            element.css({
+              'background-size': 'cover'
+            });
+          }
+          else {
+            img = "";
+            element.attr("style", 'background:url(' + img + ')');
+            element.css({
+              'background-size': 'cover'
+            });
+          }
+        });
+      };
+    }])
+    .directive("customBindHtml", ["$compile", function ($compile) {
       return {
         scope: {
           html: '=',
           onClick: '&'
         },
-        link: function(scope, elem, attrs) {
+        link: function (scope, elem, attrs) {
 
-          scope.clicked = function(e) {
+          scope.clicked = function (e) {
             var _el = $(e.target),
               anchor = _el;
-            if(_el.prop("tagName").toLowerCase() === 'a') {
+            if (_el.prop("tagName").toLowerCase() === 'a') {
               anchor = _el.eq(0).attr("href");
             } else {
               anchor = _el.parents("a").eq(0).attr("href");
@@ -170,6 +170,14 @@
           width: width,
           height: height
         });
+      };
+    }])
+    .filter('moneyWithoutTrailingZeros', [function () {
+      return function (money) {
+        if (money)
+          return (money / 100);
+        else
+          return money;
       };
     }]);
 })(window.angular, window.buildfire);
