@@ -34,15 +34,7 @@
         }
       };
     }])
-    .run(['ViewStack', function (ViewStack) {
-      buildfire.navigation.onBackButtonClick = function () {
-        if (ViewStack.hasViews()) {
-          ViewStack.pop();
-        } else {
-          buildfire.navigation.navigateHome();
-        }
-      };
-    }]).filter('getImageUrl', ['Buildfire', function (Buildfire) {
+    .filter('getImageUrl', ['Buildfire', function (Buildfire) {
       return function (url, width, height, type) {
         if (type == 'resize')
           return Buildfire.imageLib.resizeImage(url, {
@@ -160,6 +152,21 @@
         }
       }
     }])
+    .directive("loadImage", [function () {
+      return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+          element.attr("src", "assets/images/" + attrs.loadImage + ".png");
+
+          var elem = $("<img>");
+          elem[0].onload = function () {
+            element.attr("src", attrs.finalSrc);
+            elem.remove();
+          };
+          elem.attr("src", attrs.finalSrc);
+        }
+      };
+    }])
     .filter('cropImage', [function () {
       return function (url, width, height, noDefault) {
         if (noDefault) {
@@ -178,6 +185,15 @@
           return (money / 100);
         else
           return money;
+      };
+    }])
+    .run(['ViewStack', function (ViewStack) {
+      buildfire.navigation.onBackButtonClick = function () {
+        if (ViewStack.hasViews()) {
+          ViewStack.pop();
+        } else {
+          buildfire.navigation.navigateHome();
+        }
       };
     }]);
 })(window.angular, window.buildfire);
