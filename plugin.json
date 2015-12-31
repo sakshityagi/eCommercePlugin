@@ -1,7 +1,7 @@
 {
-  "author": "Buildfire",
+  "author": "BuildFire",
   "pluginName": "ECommerce",
-  "pluginDescription": "Buildfire plugin to enable people that utilizes (or desires to utilize) an online ecommerce solution such as Magento or Shopify to “go mobile” by providing the same online ecommerce functionality and customer shopping experience on their Buildfire App",
+  "pluginDescription": "Turn your Shopify store into a mobile app by simply entering your store name. Boost sales by getting your store right into your users' hands.",
   "supportEmail": "support@buildfire.com",
   "pluginIcon": "icon.png",
   "control": {
