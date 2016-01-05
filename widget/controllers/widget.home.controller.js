@@ -37,7 +37,9 @@
             ViewStack.push({
               template: WidgetHome.data.design.itemListLayout,
               params: {
-                handle: handle
+                handle: handle,
+                controller: "WidgetItemsCtrl as WidgetItems",
+                shouldUpdateTemplate : true
               }
             });
         };

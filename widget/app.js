@@ -61,15 +61,18 @@
                 newScope.currentItemListLayout = "templates/" + view.template + ".html";
 
                 var _newView = '<div  id="' + view.template + '" ><div class="slide content" data-back-img="{{backgroundImage}}" ng-if="currentItemListLayout" ng-include="currentItemListLayout"></div></div>';
+                if (view.params && view.params.controller) {
+                  _newView = '<div id="' + view.template + '" ><div class="slide content" data-back-img="{{backgroundImage}}" ng-if="currentItemListLayout" ng-include="currentItemListLayout" ng-controller="' + view.params.controller + '" ></div></div>';
+                }
                 var parTpl = $compile(_newView)(newScope);
-
-                newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function (evt, layout, needDigest) {
-                  newScope.currentItemListLayout = "templates/" + layout + ".html";
-                  if (needDigest) {
-                    newScope.$digest();
-                  }
-                });
-
+                if (view.params && view.params.shouldUpdateTemplate) {
+                  newScope.$on("ITEM_LIST_LAYOUT_CHANGED", function (evt, layout, needDigest) {
+                    newScope.currentItemListLayout = "templates/" + layout + ".html";
+                    if (needDigest) {
+                      newScope.$digest();
+                    }
+                  });
+                }
                 $(elem).append(parTpl);
                 views++;
 
