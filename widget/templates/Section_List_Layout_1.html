@@ -2,11 +2,6 @@
   <div class="ecommerce-plugin scrollable layout3 infinite-scroll-parent">
     <div class="media-center-banner plugin-banner clearfix" ng-if="WidgetHome.data">
       <div id="carousel" ng-if="WidgetHome.data.content.carouselImages.length" build-fire-carousel=""></div>
-      <div class="plugin-slider text-center" ng-if="!WidgetHome.data.content.carouselImages.length">
-        <div class="plugin-slide">
-          <img src="assets/images/16x9.png">
-        </div>
-      </div>
     </div>
     <div class="padded padding-bottom-zero" ng-if="WidgetHome.showDescription(WidgetHome.data.content.description)">
       <p ng-bind-html='WidgetHome.safeHtml(WidgetHome.data.content.description)'></p>
