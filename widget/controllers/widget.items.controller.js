@@ -50,11 +50,7 @@
               if (result.length == PAGINATION.itemsCount) {
                 WidgetItems.busy = false;
               }
-                if(result.length)
-                  WidgetItems.noItemFound = false;
-                  else
-                  WidgetItems.noItemFound = true;
-
+              WidgetItems.noItemFound = !result.length;
             }
             , error = function (err) {
               Buildfire.spinner.hide();
@@ -150,6 +146,7 @@
                     currentItemListLayout = WidgetItems.data.design.itemListLayout;
                   }
                   if (!WidgetItems.data.content.storeName) {
+                    console.log(".................._____");
                     WidgetItems.items = [];
                     currentStoreName = "";
                     WidgetItems.offset = 0;
@@ -158,6 +155,7 @@
                   }
 
                   if (WidgetItems.data.content.storeName && currentStoreName != WidgetItems.data.content.storeName) {
+                    console.log("..................>>>>>>>>");
                     WidgetItems.items = [];
                     WidgetItems.busy = false;
                     WidgetItems.pageNumber = 1;
