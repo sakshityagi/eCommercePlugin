@@ -49,8 +49,9 @@ eCommerceSDK.api = {
         console.error(e.message);
     }
   }
-  , post: function (id, accountName, method, params, callback, errorCallback) {
+  , post: function (id, accountName, method, params, callback, errorCallback, doCallbackDelay) {
     var serverUrl = this.server.replace("{0}", accountName) + method;
+    var hasResponded = false;
 
     $('#iframeECommerceShopify').remove();
     $('#formECommerceShopify').remove();
@@ -89,11 +90,20 @@ eCommerceSDK.api = {
     f.appendChild(r);
     f.submit();
 
+    setTimeout(function() {
+      if(doCallbackDelay && !hasResponded) {
+        hasResponded = true;
+        if (callback)
+          return callback();
+      }
+    }, 3000);
+
     iframe.onload = function () {
       $(iframe).remove();
       $(f).remove();
+      hasResponded = true;
       if (callback)
-        callback();
+        return callback();
     };
 
     iframe.onerror = function () {
@@ -269,9 +279,8 @@ eCommerceSDK.account.prototype = {
       if (callback) {
         callback(result);
       }
-
       self.getCart(null, null);
-    });
+    }, null, true);
   },
 
   //// ---------------------------------------------------------
@@ -290,7 +299,7 @@ eCommerceSDK.account.prototype = {
       }
 
       self.getCart(null, null);
-    });
+    }, null, true);
   },
 
   //// ---------------------------------------------------------
@@ -308,7 +317,7 @@ eCommerceSDK.account.prototype = {
       }
 
       self.getCart(null, null);
-    });
+    }, null, true);
   },
 
   // ---------------------------------------------------------
