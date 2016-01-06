@@ -37,6 +37,9 @@
 	top:3px;
 }
 
-.border-grey{
-	border:1px solid #303030 !important;
+.media-layout .media-item .media-copy div{
+	box-shadow:0 0 0 1px #ccc inset;
+}
+.backgroundColorTheme{
+	box-shadow:0 0 0 1px #ccc inset;
 }
