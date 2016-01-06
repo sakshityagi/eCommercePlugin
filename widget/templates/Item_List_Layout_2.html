@@ -3,7 +3,7 @@
     <div class="margin-top-ten">
       <div class="media-layout" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
-          <div class="media-item col-xs-6 padding-zero" ng-repeat="item in WidgetItems.items">
+          <div class="media-item col-xs-6 padding-zero " ng-repeat="item in WidgetItems.items">
             <div class="media-holder">
               <div class="media-img-holder">
                 <img ng-hide="item.images[0].src" src="assets/images/1x1.png" ng-click="WidgetItems.showItem(item.handle)">
@@ -12,8 +12,8 @@
               </div>
               <div class="info-bar bg-primary padding-left-ten text-left padding-right-ten">
                 <div class="col-xs-8 padding-zero pull-left">
-                  <p class="ellipsis margin-bottom-zero margin-top-five">
-                      <span ng-bind-html="WidgetItems.convertHtml(WidgetItems.data.settings.currency.symbol||'$')"></span>&nbsp;{{item.variants[0].price}}
+                  <p class="ellipsis margin-bottom-zero margin-top-five whiteTheme">
+                      <span class="whiteTheme" ng-bind-html="WidgetItems.convertHtml(WidgetItems.data.settings.currency.symbol||'$')"></span>&nbsp;{{item.variants[0].price}}
                   </p>
                 </div>
                 <div class="col-xs-4 padding-zero pull-right">
@@ -23,7 +23,7 @@
                 </div>
               </div>
             </div>
-            <div class="media-copy default-background">
+            <div class="media-copy default-background backgroundColorTheme">
               <p class="ellipsis text-primary margin-zero">
 				<a href="javascript:void(0);" ng-click="WidgetItems.showItem(item.handle)">{{item.title}}</a>
 			  </p>

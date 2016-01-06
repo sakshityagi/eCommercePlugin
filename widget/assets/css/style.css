@@ -22,7 +22,7 @@
 	right:10px;
 }
 .holder.has-bottom.has-layout-bottom{
-	padding-bottom:94px !important;
+	padding-bottom:35px !important;
 }
 .bottom.bottom-checkout{
 	background:none !important;
@@ -35,4 +35,11 @@
 	padding:4px;
 	position:relative;
 	top:3px;
+}
+
+.media-layout .media-item .media-copy div{
+	box-shadow:0 0 0 1px #ccc inset;
+}
+.backgroundColorTheme{
+	box-shadow:0 0 0 1px #ccc inset;
 }
