@@ -3,7 +3,7 @@
     <div class="margin-top-ten">
       <div class="media-layout" ng-if="WidgetItems.items">
         <div infinite-scroll="WidgetItems.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetItems.busy">
-          <div class="media-item col-xs-6 padding-zero border-grey" ng-repeat="item in WidgetItems.items">
+          <div class="media-item col-xs-6 padding-zero " ng-repeat="item in WidgetItems.items">
             <div class="media-holder">
               <div class="media-img-holder">
                 <img ng-hide="item.images[0].src" src="assets/images/1x1.png" ng-click="WidgetItems.showItem(item.handle)">
