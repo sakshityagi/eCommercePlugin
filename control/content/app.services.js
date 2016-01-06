@@ -103,23 +103,6 @@
               }
             });
             return deferred.promise;
-          },
-          deleteById: function (_id, _tagName) {
-            var deferred = $q.defer();
-            if (typeof _id == 'undefined') {
-              return deferred.reject(new Error({
-                code: STATUS_CODE.UNDEFINED_ID,
-                message: STATUS_MESSAGES.UNDEFINED_ID
-              }));
-            }
-            Buildfire.datastore.delete(_id, _tagName, function (err, result) {
-              if (err) {
-                return deferred.reject(err);
-              } else if (result) {
-                return deferred.resolve(result);
-              }
-            });
-            return deferred.promise;
           }
         }
       }])
