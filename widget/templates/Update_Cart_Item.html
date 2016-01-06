@@ -9,7 +9,7 @@
         </div>
         <div class="main col-xs-9 pull-right">
           <input type="number" class="form-control" placeholder="1" min="1"
-                 ng-model="cartItemToUpdate.quantity">
+                 ng-model="cartItemToUpdate.quantity" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         </div>
       </div>
       <hr class="none">
