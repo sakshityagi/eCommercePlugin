@@ -76,6 +76,17 @@ describe('Unit : eCommercePluginDesign design.home.controller.js', function () {
             DesignHome.data.design.itemListLayout = layout1;
              DesignHome.changeItemListLayout();
         });
+
+        it('it should pass if DesignHome.saveDataWithDelay is called', function () {
+            var newObj = {};
+            DesignHome.saveDataWithDelay(newObj)
+        });
+
+        it('it should pass if DesignHome.saveData is called', function () {
+            var newObj = {};
+            DesignHome.saveData(newObj,TAG_NAMES.SHOPIFY_INFO )
+        });
+
     });
 })
 ;
