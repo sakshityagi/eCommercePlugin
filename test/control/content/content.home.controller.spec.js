@@ -97,5 +97,12 @@ describe('Unit : eCommerce Plugin content.home.controller.js', function () {
         });
 
     });
+
+    describe('Units: ContentHome.gotToShopify', function () {
+        it('it should pass if  ContentHome.gotToShopify called', function () {
+            ContentHome.gotToShopify();
+        });
+
+    });
 })
 ;

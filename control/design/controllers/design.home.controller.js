@@ -86,7 +86,7 @@
         /*
          * Call the datastore to save the data object
          */
-        var saveData = function (newObj, tag) {
+        DesignHome.saveData = function (newObj, tag) {
           if (typeof newObj === 'undefined') {
             return;
           }
@@ -105,7 +105,7 @@
          * */
         var tmrDelay = null;
 
-        var saveDataWithDelay = function (newObj) {
+        DesignHome.saveDataWithDelay = function (newObj) {
           if (newObj) {
             if (isUnchanged(newObj)) {
               return;
@@ -114,7 +114,7 @@
               clearTimeout(tmrDelay);
             }
             tmrDelay = setTimeout(function () {
-              saveData(JSON.parse(angular.toJson(newObj)), TAG_NAMES.SHOPIFY_INFO);
+              DesignHome.saveData(JSON.parse(angular.toJson(newObj)), TAG_NAMES.SHOPIFY_INFO);
             }, 500);
           }
         };
@@ -124,7 +124,7 @@
          * */
         $scope.$watch(function () {
           return DesignHome.data;
-        }, saveDataWithDelay, true);
+        }, DesignHome.saveDataWithDelay, true);
 
         updateMasterItem(_data);
 
