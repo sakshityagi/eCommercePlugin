@@ -173,6 +173,10 @@
             }, 500);
           }
         };
+
+        ContentHome.gotToShopify = function(){
+           buildfire.navigation.openWindow("https://www.shopify.in/?ref=buildfire")
+        }
         /*
          * watch for changes in data and trigger the saveDataWithDelay function on change
          * */
