@@ -175,7 +175,8 @@
         };
 
         ContentHome.gotToShopify = function(){
-           buildfire.navigation.openWindow("https://www.shopify.in/?ref=buildfire")
+          // buildfire.navigation.openWindow("https://www.shopify.in/?ref=buildfire")
+          window.open('https://www.shopify.in/?ref=buildfire', '_blank');
         }
         /*
          * watch for changes in data and trigger the saveDataWithDelay function on change
