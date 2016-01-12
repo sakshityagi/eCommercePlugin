@@ -24,28 +24,28 @@ describe('Unit : eCommercePluginContent content services', function () {
           }
         });
         this.datastore.getById.and.callFake(function (id, _tagName, callback) {
-          if (id, _tagName) {
+          if (id && _tagName) {
             callback(null, 'Success');
           } else {
             callback('Error', null);
           }
         });
         this.datastore.insert.and.callFake(function (item, _tagName, test, callback) {
-          if (item, _tagName) {
+          if (item && _tagName) {
             callback(null, 'Success');
           } else {
             callback('Error', null);
           }
         });
         this.datastore.update.and.callFake(function (id, _tagName, test, callback) {
-          if (id, _tagName) {
+          if (id && _tagName) {
             callback(null, 'Success');
           } else {
             callback('Error', null);
           }
         });
         this.datastore.save.and.callFake(function (item, _tagName, callback) {
-          if (item, _tagName) {
+          if (item && _tagName) {
             callback(null, 'Success');
           } else {
             callback('Error', null);
@@ -63,7 +63,7 @@ describe('Unit : eCommercePluginContent content services', function () {
       Buildfire = {
         datastore: {}
       };
-      Buildfire.datastore = jasmine.createSpyObj('Buildfire.datastore', ['get','insert','update', 'save', 'delete']);
+      Buildfire.datastore = jasmine.createSpyObj('Buildfire.datastore', ['get', 'insert', 'update', 'save', 'delete']);
     }));
 
     it('DataStore should exist and be an object', function () {
@@ -86,24 +86,24 @@ describe('Unit : eCommercePluginContent content services', function () {
     });
     it('DataStore.get should return error', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
       DataStore.get(null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Error');
     });
     it('DataStore.get should return success', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
       DataStore.get(TAG_NAMES.SHOPIFY_INFO).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Success');
@@ -111,101 +111,101 @@ describe('Unit : eCommercePluginContent content services', function () {
 
     it('DataStore.getById should return error', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.getById( null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.getById(null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Error');
     });
 
     it('DataStore.getById should return success', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
       DataStore.getById(123, TAG_NAMES.SHOPIFY_INFO).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Success');
     });
     it('DataStore.insert should return error', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.insert( null,null, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.insert(null, null, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Error');
     });
 
     it('DataStore.insert should return success', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.insert( 123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.insert(123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Success');
     });
     it('DataStore.update should return error', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.update( null,null, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.update(null, null, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Error');
     });
 
     it('DataStore.update should return success', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.update( 123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.update(123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Success');
     });
     it('DataStore.save should return error', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.save( null,null, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.save(null, null, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Error');
     });
 
     it('DataStore.save should return success', function () {
       var result = ''
-          , success = function (response) {
-            result = response;
-          }
-          , error = function (err) {
-            result = err;
-          };
-      DataStore.save( 123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
+        , success = function (response) {
+          result = response;
+        }
+        , error = function (err) {
+          result = err;
+        };
+      DataStore.save(123, TAG_NAMES.SHOPIFY_INFO, null).then(success, error);
       $rootScope.$digest();
       expect(result).toEqual('Success');
     });
