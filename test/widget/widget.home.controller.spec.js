@@ -27,7 +27,7 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
         }
       },
       imagelib: {
-        cropImage: function(url,setting){
+        cropImage: function (url, setting) {
 
         }
       }
@@ -59,18 +59,18 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
     });
   });
   describe('WidgetHome.cropImage()', function () {
-  it('should invoke when get WidgetHome.cropImage() method called', function () {
-    var img = 'https://www.google.com/images/srpr/logo11w.png';
-    var setting = {
-      height: 500,
-      width: 500
-    };
+    it('should invoke when get WidgetHome.cropImage() method called', function () {
+      var img = 'https://www.google.com/images/srpr/logo11w.png';
+      var setting = {
+        height: 500,
+        width: 500
+      };
 
-    var options = {};
-    options.height = setting.height;
-    options.width = setting.width;
-    WidgetHome.cropImage(img,setting);
-  });
+      var options = {};
+      options.height = setting.height;
+      options.width = setting.width;
+      WidgetHome.cropImage(img, setting);
+    });
 
     it('should invoke when URL is null for WidgetHome.cropImage() method called', function () {
       var img = null;
@@ -82,61 +82,61 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
       var options = {};
       options.height = setting.height;
       options.width = setting.width;
-      WidgetHome.cropImage(img,setting);
+      WidgetHome.cropImage(img, setting);
     });
   });
 
   describe('WidgetHome.safeHtml(html)', function () {
     it('should invoke when WidgetHome.safeHtml() method called', function () {
-      var html = '<div>HiTest</div>'
+      var html = '<div>HiTest</div>';
       WidgetHome.safeHtml(html);
     });
   });
 
   describe('WidgetHome.showDescription(description)', function () {
     it('should invoke when WidgetHome.showDescription() method called', function () {
-      var description = '<div>HiTest</div>'
+      var description = '<div>HiTest</div>';
       WidgetHome.showDescription(description);
     });
   });
 
   describe(' WidgetHome.loadMore()', function () {
     it('should invoke when  WidgetHome.loadMore() method called and store name will be helloStore', function () {
-      WidgetHome.data={
-        content:{
-          storeName:"helloStore"
+      WidgetHome.data = {
+        content: {
+          storeName: "helloStore"
         }
-      }
-       WidgetHome.busy=true;
-       WidgetHome.loadMore();
-      WidgetHome.busy=false;
+      };
+      WidgetHome.busy = true;
+      WidgetHome.loadMore();
+      WidgetHome.busy = false;
       WidgetHome.loadMore();
     });
 
     it('should invoke when  WidgetHome.loadMore() method called and store name will be null', function () {
-      WidgetHome.data={
-        content:{
-          storeName:null
+      WidgetHome.data = {
+        content: {
+          storeName: null
         }
-      }
-      WidgetHome.busy=true;
+      };
+      WidgetHome.busy = true;
       WidgetHome.loadMore();
-      WidgetHome.busy=false;
+      WidgetHome.busy = false;
       WidgetHome.loadMore();
     });
   });
 
   describe(' WidgetHome.showItems(handle)', function () {
     it('should invoke when  WidgetHome.showItems() method called ', function () {
-      var handle='testHandle';
-      WidgetHome.data={
-        content:{
-          storeName:"helloStore"
+      var handle = 'testHandle';
+      WidgetHome.data = {
+        content: {
+          storeName: "helloStore"
         },
-        design:{
-          itemListLayout:"testLayout"
+        design: {
+          itemListLayout: "testLayout"
         }
-      }
+      };
       WidgetHome.showItems(handle)
     });
   });
@@ -144,14 +144,14 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
     var html = '<div id="carousel"></div>';
     angular.element(document.body).append(html);
     it('should invoke when get Carousel:LOADED', function () {
-      WidgetHome.data={
-        content:{
-          storeName:"helloStore",
-          carouselImages :"'https://www.google.com/images/srpr/logo11w.png'"
+      WidgetHome.data = {
+        content: {
+          storeName: "helloStore",
+          carouselImages: "'https://www.google.com/images/srpr/logo11w.png'"
 
         },
-        design:{
-          itemListLayout:"testLayout"
+        design: {
+          itemListLayout: "testLayout"
         }
       }
     });
@@ -162,30 +162,30 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
     var html = '<div id="carousel"></div>';
     angular.element(document.body).append(html);
     it('should invoke when get Carousel:LOADED with carousal images', function () {
-      WidgetHome.data={
-        content:{
-          storeName:"helloStore",
-          carouselImages :"'https://www.google.com/images/srpr/logo11w.png'"
+      WidgetHome.data = {
+        content: {
+          storeName: "helloStore",
+          carouselImages: "'https://www.google.com/images/srpr/logo11w.png'"
 
         },
-        design:{
-          itemListLayout:"testLayout"
+        design: {
+          itemListLayout: "testLayout"
         }
-      }
+      };
       $rootScope.$broadcast('Carousel:LOADED');
     });
 
     it('should invoke when get Carousel:LOADED without carousal images', function () {
-      WidgetHome.data={
-        content:{
-          storeName:"helloStore",
-          carouselImages :""
+      WidgetHome.data = {
+        content: {
+          storeName: "helloStore",
+          carouselImages: ""
 
         },
-        design:{
-          itemListLayout:"testLayout"
+        design: {
+          itemListLayout: "testLayout"
         }
-      }
+      };
       $rootScope.$broadcast('Carousel:LOADED');
     });
 
@@ -197,4 +197,4 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
     });
   });
 
-  });
+});
