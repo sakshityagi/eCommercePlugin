@@ -19,7 +19,7 @@
         };
         var ContentHome = this;
         ContentHome.masterData = null;
-        ContentHome.data = angular.copy(_data);
+        //ContentHome.data = angular.copy(_data);
         ContentHome.bodyWYSIWYGOptions = {
           plugins: 'advlist autolink link image lists charmap print preview',
           skin: 'lightgray',
@@ -118,15 +118,18 @@
           var success = function (result) {
               console.info('init success result:', result);
               ContentHome.data = result.data;
-              if (!ContentHome.data.content)
-                ContentHome.data.content = {};
-              if (!ContentHome.data.content.carouselImages)
-                editor.loadItems([]);
-              else
-                editor.loadItems(ContentHome.data.content.carouselImages);
-              if (ContentHome.data.content.storeName)
-                ContentHome.storeName = ContentHome.data.content.storeName;
-
+              if (!ContentHome.data) {
+                ContentHome.data = angular.copy(_data);
+              } else {
+                if (!ContentHome.data.content)
+                  ContentHome.data.content = {};
+                if (!ContentHome.data.content.carouselImages)
+                  editor.loadItems([]);
+                else
+                  editor.loadItems(ContentHome.data.content.carouselImages);
+                if (ContentHome.data.content.storeName)
+                  ContentHome.storeName = ContentHome.data.content.storeName;
+              }
               updateMasterItem(ContentHome.data);
               if (tmrDelay)clearTimeout(tmrDelay);
             }
@@ -174,10 +177,10 @@
           }
         };
 
-        ContentHome.gotToShopify = function(){
+        ContentHome.gotToShopify = function () {
           // buildfire.navigation.openWindow("https://www.shopify.in/?ref=buildfire")
           window.open('https://www.shopify.in/?ref=buildfire', '_blank');
-        }
+        };
         /*
          * watch for changes in data and trigger the saveDataWithDelay function on change
          * */
