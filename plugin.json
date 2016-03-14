@@ -3,6 +3,7 @@
   "pluginName": "ECommerce",
   "pluginDescription": "Turn your Shopify store into a mobile app by simply entering your store name. Boost sales by getting your store right into your users' hands.",
   "supportEmail": "support@buildfire.com",
+  "supportSite": "http://support.appdocumentation.com/knowledge-base/shopify-ecommerce-plugin-tutorial/",
   "pluginIcon": "icon.png",
   "control": {
     "content": {
