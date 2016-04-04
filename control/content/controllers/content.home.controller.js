@@ -7,9 +7,9 @@
       function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout, LAYOUTS, ECommerceSDK) {
         var _data = {
           "content": {
-            "carouselImages": [],
-            "description": '<p>&nbsp;<br></p>',
-            "storeName": ""
+            "carouselImages": [{action : "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/75e23320-fa59-11e5-a163-758fec3c9ebe.jpg", title: "image"}, {action: "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/71178bb0-fa59-11e5-998e-3b8027919dcb.jpg", title: "image"}, {action: "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/7a706dd0-fa59-11e5-a163-758fec3c9ebe.jpg", title: "image"}],
+            "description": '<p>Good As Gold stocks the best fashion and streetwear brands from around the globe</p>',
+            "storeName": "GoodAsGold"
           },
           "design": {
             "sectionListLayout": LAYOUTS.sectionListLayout[0].name,
@@ -18,7 +18,7 @@
           }
         };
         var ContentHome = this;
-        ContentHome.masterData = null;
+        ContentHome.masterData = angular.copy(_data);
         //ContentHome.data = angular.copy(_data);
         ContentHome.bodyWYSIWYGOptions = {
           plugins: 'advlist autolink link image lists charmap print preview',
@@ -117,10 +117,12 @@
         var init = function () {
           var success = function (result) {
               console.info('init success result:', result);
-              ContentHome.data = result.data;
-              if (!ContentHome.data) {
+              if (!result.id) {
                 ContentHome.data = angular.copy(_data);
+                editor.loadItems(_data.content.carouselImages);
+                ContentHome.storeName = ContentHome.data.content.storeName;
               } else {
+                ContentHome.data = result.data;
                 if (!ContentHome.data.content)
                   ContentHome.data.content = {};
                 if (!ContentHome.data.content.carouselImages)
