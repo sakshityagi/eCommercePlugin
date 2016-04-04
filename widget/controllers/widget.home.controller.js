@@ -107,7 +107,11 @@
               if (!WidgetHome.data.design.itemListLayout) {
                 WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-              console.log("WidgetHome.data.design.backgroundImage", WidgetHome.data.design.itemDetailsBgImage)
+              if(!result.id) {
+                  WidgetHome.data.content.storeName = "GoodAsGold";
+                  WidgetHome.data.content.carouselImages = [{action : "noAction", iconUrl: "http://widewallpaper.info/wp-content/uploads/2015/11/nature-in-hd-hd-1080p.jpg", title: "image"}, {action: "noAction", iconUrl: "http://widewallpaper.info/wp-content/uploads/2015/11/Nature-HD-Wallpaper-1080p.jpg", title: "image"}, {action: "noAction", iconUrl: "http://www.prohdwallpaper.com/wp-content/uploads/2016/03/nature_hd_background_-_prohdwallpaper.jpg", title: "image"}];
+              }
+              console.log("WidgetHome.data.design.backgroundImage", WidgetHome.data.design.itemDetailsBgImage);
               if (!WidgetHome.data.design.itemDetailsBgImage) {
                 $rootScope.backgroundImage = "";
               } else {

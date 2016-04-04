@@ -7,9 +7,9 @@
       function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout, LAYOUTS, ECommerceSDK) {
         var _data = {
           "content": {
-            "carouselImages": [],
-            "description": '<p>&nbsp;<br></p>',
-            "storeName": ""
+            "carouselImages": [{action : "noAction", iconUrl: "http://widewallpaper.info/wp-content/uploads/2015/11/nature-in-hd-hd-1080p.jpg", title: "image"}, {action: "noAction", iconUrl: "http://widewallpaper.info/wp-content/uploads/2015/11/Nature-HD-Wallpaper-1080p.jpg", title: "image"}, {action: "noAction", iconUrl: "http://www.prohdwallpaper.com/wp-content/uploads/2016/03/nature_hd_background_-_prohdwallpaper.jpg", title: "image"}],
+            "description": '<p>Good As Gold stocks the best fashion and streetwear brands from around the globe</p>',
+            "storeName": "GoodAsGold"
           },
           "design": {
             "sectionListLayout": LAYOUTS.sectionListLayout[0].name,
@@ -18,7 +18,7 @@
           }
         };
         var ContentHome = this;
-        ContentHome.masterData = null;
+        ContentHome.masterData = angular.copy(_data);
         //ContentHome.data = angular.copy(_data);
         ContentHome.bodyWYSIWYGOptions = {
           plugins: 'advlist autolink link image lists charmap print preview',
@@ -117,10 +117,12 @@
         var init = function () {
           var success = function (result) {
               console.info('init success result:', result);
-              ContentHome.data = result.data;
-              if (!ContentHome.data) {
+              if (!result.id) {
                 ContentHome.data = angular.copy(_data);
+                editor.loadItems(_data.content.carouselImages);
+                ContentHome.storeName = ContentHome.data.content.storeName;
               } else {
+                ContentHome.data = result.data;
                 if (!ContentHome.data.content)
                   ContentHome.data.content = {};
                 if (!ContentHome.data.content.carouselImages)
