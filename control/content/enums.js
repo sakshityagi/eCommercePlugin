@@ -3,7 +3,8 @@
 (function (angular) {
   angular.module('eCommercePluginContent')
     .constant('TAG_NAMES', {
-      SHOPIFY_INFO: 'shopifyInfo'
+      SHOPIFY_INFO: 'shopifyInfo',
+      DEFAULT_STORE_NAME: 'GoodAsGold'
     })
     .constant('STATUS_CODE', {
       INSERTED: 'inserted',

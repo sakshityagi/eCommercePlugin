@@ -7,9 +7,9 @@
       function ($scope, Buildfire, DataStore, TAG_NAMES, STATUS_CODE, $timeout, LAYOUTS, ECommerceSDK) {
         var _data = {
           "content": {
-            "carouselImages": [{action : "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/75e23320-fa59-11e5-a163-758fec3c9ebe.jpg", title: "image"}, {action: "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/71178bb0-fa59-11e5-998e-3b8027919dcb.jpg", title: "image"}, {action: "noAction", iconUrl: "http://buildfire.imgix.net/b55ee984-a8e8-11e5-88d3-124798dea82d/7a706dd0-fa59-11e5-a163-758fec3c9ebe.jpg", title: "image"}],
-            "description": '<p>Good As Gold stocks the best fashion and streetwear brands from around the globe</p>',
-            "storeName": "GoodAsGold"
+            "carouselImages": [],
+            "description": "",
+            "storeName": TAG_NAMES.DEFAULT_STORE_NAME
           },
           "design": {
             "sectionListLayout": LAYOUTS.sectionListLayout[0].name,
@@ -119,7 +119,6 @@
               console.info('init success result:', result);
               if (!result.id) {
                 ContentHome.data = angular.copy(_data);
-                editor.loadItems(_data.content.carouselImages);
                 ContentHome.storeName = ContentHome.data.content.storeName;
               } else {
                 ContentHome.data = result.data;
