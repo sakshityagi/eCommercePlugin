@@ -99,6 +99,9 @@
               if (!WidgetItems.data.design.itemListLayout) {
                 WidgetItems.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
+              if(!result.id) {
+                  WidgetItems.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
+              }
               currentItemListLayout = WidgetItems.data.design.itemListLayout;
             }
             , error = function (err) {

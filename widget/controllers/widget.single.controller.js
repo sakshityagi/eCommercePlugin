@@ -78,6 +78,9 @@
               }
               if (WidgetSingle.data.settings.currency)
                 currentCurrency = WidgetSingle.data.settings.currency;
+              if(!result.id) {
+                  WidgetSingle.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
+              }
               if (WidgetSingle.data.content.storeName && currentView.params.handle)
                 getProduct(WidgetSingle.data.content.storeName, currentView.params.handle);
             }

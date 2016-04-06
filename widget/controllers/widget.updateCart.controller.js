@@ -64,6 +64,9 @@
               if (!WidgetUpdateCart.data.design.itemListLayout) {
                 WidgetUpdateCart.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
+              if(!result.id) {
+                  WidgetUpdateCart.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
+              }
               if (WidgetUpdateCart.data.content.storeName && currentView.params.handle)
                 getProduct(WidgetUpdateCart.data.content.storeName, currentView.params.handle);
             }
