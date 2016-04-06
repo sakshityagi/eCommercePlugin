@@ -7,7 +7,7 @@
             <div class="list-item-media text-left overflow-hidden">
               <div class="list-media-holder square-icon pull-left">
                 <img ng-hide="item.images[0].src"
-                     src="assets/.images/1x1.png" ng-click="WidgetItems.showItem(item.handle)">
+                     src="../../../styles/media/holder-1x1.png" ng-click="WidgetItems.showItem(item.handle)">
                 <img ng-show="item.images[0].src" load-image="1x1"
                      data-final-src="{{item.images[0].src|getImageUrl:60:60}}" ng-click="WidgetItems.showItem(item.handle)">
               </div>

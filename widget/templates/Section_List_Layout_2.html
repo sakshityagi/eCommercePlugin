@@ -16,10 +16,10 @@
         <div class="media-item col-sm-6 padding-zero"
              ng-repeat="section in WidgetHome.sections">
           <div class="media-holder border-radius-three overflow-hidden">
-            <div class="media-img-holder">
+            <div class="media-img-holder" style="min-height: 194px;">
               <img ng-if="!section.image.src"
-                   src="assets/.images/239x100.png" ng-click="WidgetHome.showItems(section.handle)">
-              <img load-image="239x100"
+                   src="../../../styles/media/holder-239x1.png" ng-click="WidgetHome.showItems(section.handle)">
+              <img load-image="239x1"
                    data-final-src="{{section.image.src | getImageUrl : 640 : 380}}"
                    ng-if="section.image.src" ng-click="WidgetHome.showItems(section.handle)">
             </div>
