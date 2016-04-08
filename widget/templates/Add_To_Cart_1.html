@@ -1,13 +1,13 @@
 <div class="holder padding-zero has-bottom z-index-4" ng-controller="WidgetAddToCartCtrl as WidgetAddToCart">
 	<div class="ecommerce-plugin ">
 		<div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-			<div id="carousel3" ng-if="WidgetAddToCart.item.images.length" build-fire-carousel3=""></div>
+			<div ng-style="WidgetAddToCart.item.images.length > 0 ? {'min-height': (9 * deviceWidth / 16) + 'px' } : {}" id="carousel3" ng-if="WidgetAddToCart.item.images.length" build-fire-carousel3=""></div>
 			<div class="plugin-slider has-info-bar-double text-center" ng-if="!WidgetAddToCart.item.images.length">
 				<div class="plugin-slide">
 					<img src="../../../styles/media/holder-16x9.png">
 				</div>
 			</div>
-			<div class="info-bar padding-top-five padding-bottom-five bg-primary">
+			<div ng-show="WidgetAddToCart.item" class="info-bar padding-top-five padding-bottom-five bg-primary">
 				<div class="col-xs-10 pull-left">
 					<p class="margin-zero whiteTheme">{{WidgetAddToCart.item.title}}</p>
 					<p class="margin-zero whiteTheme">	 <span class="whiteTheme" ng-bind-html="WidgetAddToCart.safeHtml(WidgetAddToCart.data.settings.currency.symbol||'$')"></span>&nbsp; {{WidgetAddToCart.currentAddedItemInCart.Variant.price||WidgetAddToCart.item.variants[0].price}}

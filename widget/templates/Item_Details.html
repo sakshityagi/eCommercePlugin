@@ -2,7 +2,7 @@
      ng-controller="WidgetSingleCtrl as WidgetSingle">
   <div class="ecommerce-plugin scrollable" ng-if="WidgetSingle.data">
     <div class="media-center-banner plugin-banner clearfix border-bottom-grey">
-      <div id="carousel2" ng-if="WidgetSingle.item.images.length"
+      <div ng-style="WidgetSingle.item.images.length > 0 ? {'min-height': (9 * deviceWidth / 16) + 'px' } : {}"  id="carousel2" ng-if="WidgetSingle.item.images.length"
            build-fire-carousel2=""></div>
       <div class="plugin-slider has-info-bar-double text-center"
            ng-if="!WidgetSingle.item.images.length">
@@ -10,7 +10,7 @@
           <img src="../../../styles/media/holder-16x9.png">
         </div>
       </div>
-      <div class="info-bar padding-top-five padding-bottom-five bg-primary">
+      <div ng-show="WidgetSingle.item" class="info-bar padding-top-five padding-bottom-five bg-primary">
         <div class="col-xs-10 pull-left">
           <p class="margin-zero whiteTheme">{{WidgetSingle.item.title}}</p>
 
