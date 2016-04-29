@@ -131,7 +131,7 @@
         };
 
         WidgetUpdateCart.cancelClick = function () {
-          ViewStack.pop();
+          buildfire.history.pop();
         };
 
         WidgetUpdateCart.goToCart = function () {
@@ -160,9 +160,10 @@
               getCart(WidgetUpdateCart.data.content.storeName);
             }
 
-            ViewStack.push({
+            /*ViewStack.push({
               template: 'Shopping_Cart'
-            });
+            });*/
+            buildfire.history.pop();
           };
 
           var error = function (error) {
