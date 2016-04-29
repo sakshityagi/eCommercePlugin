@@ -13,6 +13,20 @@
         };
         var currentView = ViewStack.getCurrentView();
         var currentStoreName = "";
+        var breadCrumbFlag = true;
+
+          buildfire.history.get('pluginBreadcrumbsOnly', function (err, result) {
+              if(result && result.length) {
+                  result.forEach(function(breadCrumb) {
+                      if(breadCrumb.label == 'UpdateCart') {
+                          breadCrumbFlag = false;
+                      }
+                  });
+              }
+              if(breadCrumbFlag) {
+                  buildfire.history.push('UpdateCart', { elementToShow: 'UpdateCart' });
+              }
+          });
 
         WidgetUpdateCart.safeHtml = function (html) {
           if (html)

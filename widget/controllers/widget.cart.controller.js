@@ -10,6 +10,21 @@
         WidgetCart.listeners = {};
         var currentView = ViewStack.getCurrentView();
         var currentStoreName = "";
+        var breadCrumbFlag = true;
+
+          buildfire.history.get('pluginBreadcrumbsOnly', function (err, result) {
+              if(result && result.length) {
+                  result.forEach(function(breadCrumb) {
+                      if(breadCrumb.label == 'Cart') {
+                          breadCrumbFlag = false;
+                      }
+                  });
+              }
+              if(breadCrumbFlag) {
+                  buildfire.history.push('Cart', { elementToShow: 'Cart' });
+              }
+          });
+
         $rootScope.cartItemToUpdate = {};
         WidgetCart.safeHtml = function (html) {
           if (html)

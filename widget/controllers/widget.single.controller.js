@@ -11,6 +11,20 @@
         WidgetSingle.item = null;
         //create new instance of buildfire carousel viewer
         WidgetSingle.view = null;
+        var breadCrumbFlag = true;
+
+          buildfire.history.get('pluginBreadcrumbsOnly', function (err, result) {
+              if(result && result.length) {
+                  result.forEach(function(breadCrumb) {
+                      if(breadCrumb.label == 'Item') {
+                          breadCrumbFlag = false;
+                      }
+                  });
+              }
+              if(breadCrumbFlag) {
+                  buildfire.history.push('Item', { elementToShow: 'Item' });
+              }
+          });
 
         WidgetSingle.safeHtml = function (html) {
             return $sce.trustAsHtml(html) || "";

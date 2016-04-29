@@ -14,6 +14,20 @@
         WidgetItems.noItemFound = false;
         WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
+        var breadCrumbFlag = true;
+
+          buildfire.history.get('pluginBreadcrumbsOnly', function (err, result) {
+              if(result && result.length) {
+                  result.forEach(function(breadCrumb) {
+                      if(breadCrumb.label == 'AllItems') {
+                          breadCrumbFlag = false;
+                      }
+                  });
+              }
+              if(breadCrumbFlag) {
+                  buildfire.history.push('AllItems', { elementToShow: 'AllItems' });
+              }
+          });
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");

@@ -7,11 +7,25 @@
       function ($scope, DataStore, TAG_NAMES, ECommerceSDK, $sce, LAYOUTS, $rootScope, PAGINATION, Buildfire, ViewStack) {
 
         var WidgetAddToCart = this;
+        var breadCrumbFlag = true;
         WidgetAddToCart.listeners = {};
         WidgetAddToCart.quantity = 1;
         WidgetAddToCart.currentAddedItemInCart = {
           Variant: null
         };
+
+          buildfire.history.get('pluginBreadcrumbsOnly', function (err, result) {
+              if(result && result.length) {
+                  result.forEach(function(breadCrumb) {
+                      if(breadCrumb.label == 'AddToCart') {
+                          breadCrumbFlag = false;
+                      }
+                  });
+              }
+              if(breadCrumbFlag) {
+                  buildfire.history.push('AddToCart', { elementToShow: 'AddToCart' });
+              }
+          });
 
         $rootScope.addedToCart = null;
         var currentView = ViewStack.getCurrentView();
@@ -125,7 +139,7 @@
         };
 
         WidgetAddToCart.cancelClick = function () {
-          ViewStack.pop();
+          buildfire.history.pop();
         };
 
         WidgetAddToCart.goToCart = function () {
