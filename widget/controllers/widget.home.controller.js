@@ -36,7 +36,7 @@
           return _retVal;
         };
         $rootScope.deviceHeight = window.innerHeight;
-        $rootScope.deviceWidth = window.innerWidth;
+        $rootScope.deviceWidth = window.innerWidth || 320;
         $rootScope.backgroundImage = "";
         WidgetHome.loadMore = function () {
           if (WidgetHome.busy) return;
