@@ -27,6 +27,8 @@
             }
             if ($rootScope.cart.total_price) {
               $rootScope.cart.total_price = $rootScope.cart.total_price - (item.quantity * item.price);
+              if ($rootScope.cart.total_price < 0)
+                $rootScope.cart.total_price = 0;
             }
           };
 
@@ -66,8 +68,8 @@
               if (!WidgetCart.data.design.itemListLayout) {
                 WidgetCart.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-              if(!result.id) {
-                  WidgetCart.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
+              if (!result.id) {
+                WidgetCart.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
               }
               if (WidgetCart.data.content.storeName)
                 getCart(WidgetCart.data.content.storeName);
@@ -107,12 +109,12 @@
          */
         DataStore.onUpdate().then(null, null, onUpdateCallback);
 
-        WidgetCart.updateCart = function(item){
-          $rootScope.cartItemToUpdate={
-            variantId : item.variant_id,
+        WidgetCart.updateCart = function (item) {
+          $rootScope.cartItemToUpdate = {
+            variantId: item.variant_id,
             variant: item.variant_title,
-            quantity:item.quantity,
-            data:item
+            quantity: item.quantity,
+            data: item
           };
           ViewStack.push({
             template: 'Update_Cart_Item',
