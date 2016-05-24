@@ -129,12 +129,16 @@
           var success = function (result) {
               Buildfire.spinner.hide();
               console.log("#########################################", result);
-              ViewStack.push({
+              /*ViewStack.push({
                 template: 'Checkout',
                 params: {
                   url: result
                 }
-              });
+              });*/
+
+              if (result)
+                buildfire.navigation.openWindow(result, "_system");
+
             }
             , error = function (err) {
               Buildfire.spinner.hide();
