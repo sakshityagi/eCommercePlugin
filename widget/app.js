@@ -34,7 +34,7 @@
         }
       };
     }])
-    .filter('getImageUrl', ['Buildfire', function (Buildfire) {
+    /*.filter('getImageUrl', ['Buildfire', function (Buildfire) {
       return function (url, width, height, type) {
         if (type == 'resize')
           return Buildfire.imageLib.resizeImage(url, {
@@ -47,7 +47,7 @@
             height: height
           });
       }
-    }])
+    }])*/
     .directive("viewSwitcher", ["ViewStack", "$rootScope", '$compile', "$templateCache",
       function (ViewStack, $rootScope, $compile, $templateCache) {
         return {
@@ -109,16 +109,27 @@
           }
         };
       }])
-    .directive('backImg', ["$filter", "$rootScope", function ($filter, $rootScope) {
+    .directive('backImg', ["$rootScope", function ($rootScope) {
       return function (scope, element, attrs) {
         attrs.$observe('backImg', function (value) {
           var img = '';
           if (value) {
-            img = $filter("cropImage")(value, $rootScope.deviceWidth, $rootScope.deviceHeight, true);
-            element.attr("style", 'background:url(' + img + ') !important');
-            element.css({
-              'background-size': 'cover'
+            buildfire.imageLib.local.cropImage(value, {
+              width: $rootScope.deviceWidth,
+              height: $rootScope.deviceHeight
+            }, function (err, imgUrl) {
+              if (imgUrl) {
+                img = imgUrl;
+                element.attr("style", 'background:url(' + img + ') !important');
+              } else {
+                img = '';
+                element.attr("style", 'background-color:white');
+              }
+              element.css({
+                'background-size': 'cover'
+              });
             });
+            // img = $filter("cropImage")(value, $rootScope.deviceWidth, $rootScope.deviceHeight, true);
           }
           else {
             img = "";
@@ -155,31 +166,40 @@
         }
       }
     }])
-    .directive("loadImage", [function () {
+    .directive("loadImage", ['Buildfire', function (Buildfire) {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
-            element.attr("src", "../../../styles/media/holder-" + attrs.loadImage + ".gif");
+          element.attr("src", "../../../styles/media/holder-" + attrs.loadImage + ".gif");
 
-          var elem = $("<img>");
-          elem[0].onload = function () {
-            element.attr("src", attrs.finalSrc);
-            elem.remove();
-          };
-          elem.attr("src", attrs.finalSrc);
+          var _img = attrs.finalSrc;
+          if (attrs.cropType == 'resize') {
+            Buildfire.imageLib.local.resizeImage(_img, {
+              width: attrs.cropWidth,
+              height: attrs.cropHeight
+            }, function (err, imgUrl) {
+              _img = imgUrl;
+              replaceImg(_img);
+            });
+          } else {
+            Buildfire.imageLib.local.cropImage(_img, {
+              width: attrs.cropWidth,
+              height: attrs.cropHeight
+            }, function (err, imgUrl) {
+              _img = imgUrl;
+              replaceImg(_img);
+            });
+          }
+
+          function replaceImg(finalSrc) {
+            var elem = $("<img>");
+            elem[0].onload = function () {
+              element.attr("src", finalSrc);
+              elem.remove();
+            };
+            elem.attr("src", finalSrc);
+          }
         }
-      };
-    }])
-    .filter('cropImage', [function () {
-      return function (url, width, height, noDefault) {
-        if (noDefault) {
-          if (!url)
-            return '';
-        }
-        return buildfire.imageLib.cropImage(url, {
-          width: width,
-          height: height
-        });
       };
     }])
     .filter('moneyWithoutTrailingZeros', [function () {

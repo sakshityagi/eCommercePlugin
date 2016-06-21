@@ -206,22 +206,6 @@
           }
         });
 
-        /*crop image on the basis of width heights*/
-        WidgetHome.cropImage = function (url, settings) {
-          var options = {};
-          if (!url) {
-            return "";
-          }
-          else {
-            if (settings.height) {
-              options.height = settings.height;
-            }
-            if (settings.width) {
-              options.width = settings.width;
-            }
-            return buildfire.imageLib.cropImage(url, options);
-          }
-        };
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
         });

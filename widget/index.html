@@ -10,6 +10,7 @@
 
   <!-- JS -->
   <script src="../../../scripts/jquery/jquery-1.11.2.min.js"></script>
+  <script src="../../../scripts/smartcrop.js"></script>
   <script src="../../../scripts/buildfire.js"></script>
   <script src="../../../scripts/owlCarousel/owlCarousel.js"></script>
   <script src="../../../scripts/buildfire/components/carousel/carousel.js"></script>
@@ -33,7 +34,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="no-scroll">
-<div ng-controller="WidgetHomeCtrl as WidgetHome" class="slide content" data-ng-attr-style="background:url({{ backgroundImage | cropImage:deviceWidth:deviceHeight:true}}) !important; background-size:cover !important;">
+<div ng-controller="WidgetHomeCtrl as WidgetHome" class="slide content" data-back-img="{{backgroundImage}}">
   <div ng-if="WidgetHome.data.design.sectionListLayout" ng-include="'templates/' + WidgetHome.data.design.sectionListLayout + '.html'">
   </div>
 </div>

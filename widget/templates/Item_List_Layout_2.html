@@ -8,8 +8,8 @@
               <div class="media-img-holder" style="min-height: 148px;">
                 <img ng-hide="item.images[0].src"
                      src="../../../styles/media/holder-1x1.png" ng-click="WidgetItems.showItem(item.handle)">
-                <img ng-show="item.images[0].src" load-image="1x1"
-                     data-final-src="{{item.images[0].src|getImageUrl:400:400}}" ng-click="WidgetItems.showItem(item.handle)">
+                <img ng-show="item.images[0].src" load-image="1x1" crop-width="400" crop-height="400" crop-type="crop"
+                     data-final-src="{{item.images[0].src}}" ng-click="WidgetItems.showItem(item.handle)">
               </div>
               <div class="info-bar bg-primary padding-left-ten text-left padding-right-ten">
                 <div class="col-xs-8 padding-zero pull-left">

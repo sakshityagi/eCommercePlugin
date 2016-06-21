@@ -8,8 +8,8 @@
               <div class="list-media-holder square-icon pull-left">
                 <img ng-hide="item.images[0].src"
                      src="../../../styles/media/holder-1x1.png" ng-click="WidgetItems.showItem(item.handle)">
-                <img ng-show="item.images[0].src" load-image="1x1"
-                     data-final-src="{{item.images[0].src|getImageUrl:60:60}}" ng-click="WidgetItems.showItem(item.handle)">
+                <img ng-show="item.images[0].src" load-image="1x1" crop-width="60" crop-height="60" crop-type="crop"
+                     data-final-src="{{item.images[0].src}}" ng-click="WidgetItems.showItem(item.handle)">
               </div>
               <div class="list-item-copy text-left padding-left-ten padding-right-ten">
                 <p class="ellipsis margin-bottom-zero margin-top-five text-primary">
