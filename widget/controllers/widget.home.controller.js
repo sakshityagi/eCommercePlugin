@@ -1,6 +1,6 @@
 'use strict';
 
-(function (angular) {
+(function (angular, buildfire) {
   angular
     .module('eCommercePluginWidget')
     .controller('WidgetHomeCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
@@ -13,17 +13,38 @@
         //create new instance of buildfire carousel viewer
         WidgetHome.view = null;
         WidgetHome.safeHtml = function (html) {
-            if (html) {
-                var $html = $('<div />', {html: html});
-                $html.find('iframe').each(function (index, element) {
-                    var src = element.src;
-                    console.log('element is: ', src, src.indexOf('http'));
-                    src = src && src.indexOf('file://') != -1 ? src.replace('file://', 'http://') : src;
-                    element.src = src && src.indexOf('http') != -1 ? src : 'http:' + src;
-                });
-                return $sce.trustAsHtml($html.html());
-            }
+          if (html) {
+            var $html = $('<div />', {html: html});
+            $html.find('iframe').each(function (index, element) {
+              var src = element.src;
+              console.log('element is: ', src, src.indexOf('http'));
+              src = src && src.indexOf('file://') != -1 ? src.replace('file://', 'http://') : src;
+              element.src = src && src.indexOf('http') != -1 ? src : 'http:' + src;
+            });
+            return $sce.trustAsHtml($html.html());
+          }
         };
+
+        //Refresh list of items on pulling the tile bar
+
+        buildfire.datastore.onRefresh(function () {
+          init(function (err) {
+            if (!err) {
+              if (!WidgetHome.view) {
+                WidgetHome.view = new Buildfire.components.carousel.view("#carousel", []);
+              }
+              if (WidgetHome.data.content && WidgetHome.data.content.carouselImages) {
+                WidgetHome.view.loadItems(WidgetHome.data.content.carouselImages);
+              } else {
+                WidgetHome.view.loadItems([]);
+              }
+              WidgetHome.sections = [];
+              WidgetHome.busy = false;
+              WidgetHome.pageNumber = 1;
+              WidgetHome.loadMore();
+            }
+          });
+        });
 
         WidgetHome.showDescription = function (description) {
           var _retVal = false;
@@ -54,7 +75,7 @@
               params: {
                 handle: handle,
                 controller: "WidgetItemsCtrl as WidgetItems",
-                shouldUpdateTemplate : true
+                shouldUpdateTemplate: true
               }
             });
         };
@@ -89,7 +110,7 @@
          * Fetch user's data from datastore
          */
 
-        var init = function () {
+        var init = function (cb) {
           var success = function (result) {
               WidgetHome.data = result.data;
               if (!WidgetHome.data.design)
@@ -107,8 +128,8 @@
               if (!WidgetHome.data.design.itemListLayout) {
                 WidgetHome.data.design.itemListLayout = LAYOUTS.itemListLayout[0].name;
               }
-              if(!result.id) {
-                  WidgetHome.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
+              if (!result.id) {
+                WidgetHome.data.content.storeName = TAG_NAMES.DEFAULT_STORE_NAME;
               }
               console.log("WidgetHome.data.design.backgroundImage", WidgetHome.data.design.itemDetailsBgImage);
               if (!WidgetHome.data.design.itemDetailsBgImage) {
@@ -116,9 +137,11 @@
               } else {
                 $rootScope.backgroundImage = WidgetHome.data.design.itemDetailsBgImage;
               }
+              cb();
             }
             , error = function (err) {
               console.error('Error while getting data', err);
+              cb(err);
             };
           DataStore.get(TAG_NAMES.SHOPIFY_INFO).then(success, error);
         };
@@ -214,8 +237,31 @@
           if (type === 'POP') {
             DataStore.onUpdate().then(null, null, onUpdateCallback);
           }
+          console.log("????????????????",ViewStack.hasViews());
+          if (!ViewStack.hasViews()) {
+            console.log("?????????????vvvvvvvvvvv");
+            // bind on refresh again
+            buildfire.datastore.onRefresh(function () {
+              init(function (err) {
+                if (!err) {
+                  if (!WidgetHome.view) {
+                    WidgetHome.view = new Buildfire.components.carousel.view("#carousel", []);
+                  }
+                  if (WidgetHome.data.content && WidgetHome.data.content.carouselImages) {
+                    WidgetHome.view.loadItems(WidgetHome.data.content.carouselImages);
+                  } else {
+                    WidgetHome.view.loadItems([]);
+                  }
+                  WidgetHome.sections = [];
+                  WidgetHome.busy = false;
+                  WidgetHome.pageNumber = 1;
+                  WidgetHome.loadMore();
+                }
+              });
+            });
+          }
         });
 
-        init();
+        init(function(){});
       }]);
-})(window.angular);
+})(window.angular, window.buildfire);

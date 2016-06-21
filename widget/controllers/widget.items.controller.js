@@ -1,6 +1,6 @@
 'use strict';
 
-(function (angular) {
+(function (angular,buildfire) {
   angular
     .module('eCommercePluginWidget')
     .controller('WidgetItemsCtrl', ['$scope', 'DataStore', 'TAG_NAMES', 'ECommerceSDK', '$sce', 'LAYOUTS', '$rootScope', 'PAGINATION', 'Buildfire', 'ViewStack',
@@ -14,6 +14,10 @@
         WidgetItems.noItemFound = false;
         WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
+
+        // disable pull to refresh for other pages
+
+        buildfire.datastore.disableRefresh();
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");
@@ -200,4 +204,4 @@
 
         init();
       }]);
-})(window.angular);
+})(window.angular, window.buildfire);
