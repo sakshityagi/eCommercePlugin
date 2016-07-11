@@ -125,6 +125,8 @@
         };
 
         WidgetCart.checkoutCart = function () {
+          var queryString = '',
+              url = '';
           Buildfire.spinner.show();
           var success = function (result) {
               Buildfire.spinner.hide();
@@ -136,8 +138,15 @@
                 }
               });*/
 
-              if (result)
-                buildfire.navigation.openWindow(result, "_system");
+              if (result) {
+                  if($rootScope.cart && $rootScope.cart.items && $rootScope.cart.items.length) {
+                      $rootScope.cart.items.forEach(function (item) {
+                          queryString += queryString ? ',' + item.id + ':' + item.quantity : item.id + ':' + item.quantity;
+                      });
+                  }
+                  url = queryString ? result + '/' + queryString : result;
+                  buildfire.navigation.openWindow(url, "_system");
+              }
 
             }
             , error = function (err) {
