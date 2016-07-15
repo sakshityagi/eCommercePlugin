@@ -16,9 +16,10 @@
             return $sce.trustAsHtml(html);
         };
 
-        // disable pull to refresh for other pages
+        //Refresh list of items on pulling the tile bar
+        buildfire.datastore.onRefresh(function () {
 
-        buildfire.datastore.disableRefresh();
+        });
 
         WidgetCart.removeItemFromCart = function (item) {
           var success = function (result) {

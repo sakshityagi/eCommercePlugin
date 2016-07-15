@@ -15,9 +15,10 @@
         WidgetItems.currentView = ViewStack.getCurrentView();
         var currentItemListLayout = "";
 
-        // disable pull to refresh for other pages
+        //Refresh list of items on pulling the tile bar
+        buildfire.datastore.onRefresh(function () {
 
-        buildfire.datastore.disableRefresh();
+        });
 
         WidgetItems.loadMore = function () {
           console.log("loading some more...");
