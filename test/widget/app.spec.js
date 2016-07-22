@@ -189,7 +189,7 @@ describe('Unit: eCommercePluginWidget widget app', function () {
             });
         });
 
-        it('should Crop the Image', function () {
+        xit('should Crop the Image', function () {
             // Arrange.
             var url = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150', result;
             var updatedUrl = 'http://s7obnu.cloudimage.io/s/crop/250x250/https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150';
@@ -199,7 +199,7 @@ describe('Unit: eCommercePluginWidget widget app', function () {
             // Assert.
             expect(result).toEqual(updatedUrl);
         });
-        it('should Crop the Image when url', function () {
+        xit('should Crop the Image when url', function () {
             // Arrange.
             var url = 'http://s7obnu.cloudimage.io/s/resizenp/250x250', result,
                 updatedUrl = 'http://s7obnu.cloudimage.io/s/resizenp/250x250/http://s7obnu.cloudimage.io/s/resizenp/250x250';
@@ -294,7 +294,7 @@ describe('Unit: eCommercePluginWidget widget app', function () {
             $scope = _$rootScope_.$new();
         }));
         beforeEach(function () {
-            backImg = $compile('<div load-image="value"></div>')($scope);
+            backImg = $compile('<div load-image="1x1" crop-width="60" crop-height="60" crop-type="crop" data-final-src="testImageUrl"></div>')($scope);
             // $rootScope.$broadcast('VIEW_CHANGED');
             $rootScope.$digest();
         });

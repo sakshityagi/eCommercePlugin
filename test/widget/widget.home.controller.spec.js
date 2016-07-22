@@ -58,7 +58,7 @@ describe('Unit : eCommercePluginWidget Plugin widget.home.controller.js', functi
       $rootScope.$broadcast('$destroy');
     });
   });
-  describe('WidgetHome.cropImage()', function () {
+  xdescribe('WidgetHome.cropImage()', function () {
     it('should invoke when get WidgetHome.cropImage() method called', function () {
       var img = 'https://www.google.com/images/srpr/logo11w.png';
       var setting = {
